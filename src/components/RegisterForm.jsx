@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export default function LoginForm({onLogin}) {
+export default function RegisterForm({onRegister}) {
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
@@ -24,7 +24,7 @@ export default function LoginForm({onLogin}) {
   const submitForm = (e) => {
     e.preventDefault();
 
-    const fetchLogin = async () => {
+    const fetchRegister = async () => {
       const options = {
         method: "POST",
         url: "https://ca2-med-api.vercel.app/register",
@@ -35,13 +35,13 @@ export default function LoginForm({onLogin}) {
         let response = await axios.request(options);
         console.log(response.data);
 
-        onLogin(true, response.data.token);
+        onRegister(true, response.data.token);
       } catch (err) {
         console.log(err.response.data);
       }
     };
 
-    fetchLogin();
+    fetchRegister();
 
     console.log(form);
   };
@@ -49,9 +49,9 @@ export default function LoginForm({onLogin}) {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>Register to create your account</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Enter your details below to register a new account
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import Navbar from '@/components/Navbar';
+import MainLayout from '@/components/MainLayout';
 import Register from '@/pages/Register';
 import LogIn from '@/pages/LogIn';
 
@@ -40,8 +41,12 @@ export default function App() {
         <Routes>
            <Route path='/register' element={<Register onRegister={onLogin}/>} />
           <Route path='/logIn' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
-         <Route path='/dashboard' element={<Dashboard loggedIn={loggedIn} />}
-/> 
+         <Route path='/dashboard'  element={
+    <MainLayout loggedIn={loggedIn} onLogin={onLogin}>
+      <Dashboard loggedIn={loggedIn} />
+    </MainLayout>
+  }
+/>
           <Route path="/festivals" element={<FestivalsIndex />} />
           <Route path="/festivals/:id" element={<FestivalsShow loggedIn={loggedIn} />} />
 

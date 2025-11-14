@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function LoginForm({onLogin}) {
+    const navigate = useNavigate();
+
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
@@ -36,6 +38,8 @@ export default function LoginForm({onLogin}) {
         console.log(response.data);
 
         onLogin(true, response.data.token);
+
+        navigate("/dashboard");
       } catch (err) {
         console.log(err.response.data);
       }

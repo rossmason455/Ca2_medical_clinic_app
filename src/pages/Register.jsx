@@ -1,4 +1,8 @@
+
+
 import RegisterForm from "@/components/RegisterForm";
+
+
 
 export default function Register({onLogin}) {
     return (

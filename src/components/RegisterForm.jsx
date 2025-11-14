@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function RegisterForm({onRegister}) {
+    const navigate = useNavigate();
   const [form, setForm] = useState({});
 
   const handleForm = (e) => {
@@ -36,6 +38,8 @@ export default function RegisterForm({onRegister}) {
         console.log(response.data);
 
         onRegister(true, response.data.token);
+
+        navigate("/dashboard");
       } catch (err) {
         console.log(err.response.data);
       }

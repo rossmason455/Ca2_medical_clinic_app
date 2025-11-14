@@ -27,7 +27,7 @@ export default function LoginForm({onLogin}) {
     const fetchLogin = async () => {
       const options = {
         method: "POST",
-        url: "https://ca2-med-api.vercel.app/login",
+        url: "https://ca2-med-api.vercel.app/register",
         data: form
       };
 
@@ -57,6 +57,28 @@ export default function LoginForm({onLogin}) {
       <CardContent>
         <form onSubmit={submitForm}>
           <div className="flex flex-col gap-6">
+                        <div className="grid gap-2">
+              <Label htmlFor="first_name">First Name</Label>
+              <Input
+                id="first_name"
+                name="first_name"
+                type="first_name"
+                placeholder="John"
+                required
+                onChange={handleForm}
+              />
+            </div>
+                        <div className="grid gap-2">
+              <Label htmlFor="first_name">Last Name</Label>
+              <Input
+                id="last_name"
+                name="last_name"
+                type="last_name"
+                placeholder="Doe"
+                required
+                onChange={handleForm}
+              />
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input

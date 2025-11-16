@@ -7,8 +7,8 @@ import Register from '@/pages/Register';
 import LogIn from '@/pages/LogIn';
 
 import Dashboard from '@/pages/Dashboard';
-import FestivalsIndex from '@/pages/festivals/Index';
-import FestivalsShow from '@/pages/festivals/Show';
+import DoctorsIndex from '@/pages/Doctors/Index';
+import DoctorsShow from '@/pages/Doctors/Show';
 
 
 export default function App() {
@@ -47,8 +47,8 @@ export default function App() {
     </MainLayout>
   }
 />
-          <Route path="/festivals" element={<FestivalsIndex />} />
-          <Route path="/festivals/:id" element={<FestivalsShow loggedIn={loggedIn} />} />
+          <Route path="/doctors" element={<DoctorsIndex />} />
+          <Route path="/doctors/:id" element={<DoctorsShow loggedIn={loggedIn} />} />
 
         </Routes>
       </Router>

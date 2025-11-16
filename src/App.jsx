@@ -37,7 +37,7 @@ export default function App() {
   return (
     <>
       <Router>
-        <Navbar onLogin={onLogin} loggedIn={loggedIn} />
+ 
         <Routes>
            <Route path='/register' element={<Register onRegister={onLogin}/>} />
           <Route path='/logIn' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />

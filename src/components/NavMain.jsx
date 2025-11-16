@@ -1,6 +1,6 @@
 import { IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
-import { useLocation } from 'react-router'
 import { Link } from 'react-router';
+import { useLocation } from 'react-router'
 import { Button } from "@/components/ui/button"
 import {
   SidebarGroup,
@@ -14,6 +14,22 @@ export default function NavMain({
     items
 }) {
 
+    let location = useLocation();
+
+     const checkActive = (url) => {
+    if(location.pathname === '/dashboard' && url === '/')
+    {
+      console.log("You are in dashboard")
+      return true
+    }
+    else if(url !== '/dashboard' && location.pathname.includes(url)) {
+      console.log("You are somwhere else")
+      return true
+    }
+
+    return false
+  };
+    
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">

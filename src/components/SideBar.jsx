@@ -8,7 +8,6 @@ import {
   IconFile,
 } from "@tabler/icons-react";
 
-
 import {
   Sidebar,
   SidebarContent,
@@ -19,7 +18,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import NavMain from '@/components/NavMain.jsx';
+import NavMain from "@/components/NavMain.jsx";
+import NavUser from "@/components/NavUser.jsx";
 
 const data = {
   user: {
@@ -61,20 +61,18 @@ const data = {
   ],
 };
 
-export default function AppSidebar({
-  onLogin,
-  loggedIn,
-  ...props
-}) {
+export default function AppSidebar({ onLogin, loggedIn, ...props }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
+            <SidebarMenuButton
+              asChild
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
               <a href="#">
-
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">Medi Direct+</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -84,7 +82,7 @@ export default function AppSidebar({
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-    hello
+        <NavUser user={data.user} onLogin={onLogin} />
       </SidebarFooter>
     </Sidebar>
   );

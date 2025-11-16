@@ -28,7 +28,20 @@ export default function Show() {
     };
 
     fetchDoctor();
-  }, []);
+  }, [id, token]);
 
-  return <>Show Doctor</>;
+
+  const doctorProfile = (
+    <>
+      <h2>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</h2>
+      <p>Specialization: {doctor.specialization}</p>
+      <p>Email: {doctor.email}</p>
+      <p>Phone: {doctor.phone}</p>
+    </>
+  );
+ 
+  return <>Show Doctor
+    {doctorProfile} 
+  
+  </>;
 }

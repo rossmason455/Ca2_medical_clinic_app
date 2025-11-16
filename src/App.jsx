@@ -10,6 +10,12 @@ import Dashboard from '@/pages/Dashboard';
 import DoctorsIndex from '@/pages/Doctors/Index';
 import DoctorsShow from '@/pages/Doctors/Show';
 import DoctorsCreate from '@/pages/Doctors/Create';
+import DoctorsEdit from '@/pages/Doctors/Edit';
+
+import PatientsIndex from '@/pages/Patients/Index';
+import PatientsShow from '@/pages/Patients/Show';
+import PatientsCreate from '@/pages/Patients/Create';
+import PatientsEdit from '@/pages/Patients/Edit';
 
 
 export default function App() {
@@ -51,7 +57,13 @@ export default function App() {
           <Route path="/doctors" element={<DoctorsIndex />} />
           <Route path="/doctors/create" element={<DoctorsCreate />} />
           <Route path="/doctors/:id" element={<DoctorsShow loggedIn={loggedIn} />} />
+          <Route path="/doctors/edit" element={<DoctorsEdit />} />
 
+
+          <Route path="/patients" element={<PatientsIndex />} />
+          <Route path="/patients/create" element={<PatientsCreate />} />
+          <Route path="/patients/:id" element={<PatientsShow loggedIn={loggedIn} />} />
+          <Route path="/patients/edit" element={<PatientsEdit />} />
         </Routes>
       </Router>
     </>

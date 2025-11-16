@@ -3,12 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { useParams } from "react-router";
 
-export default function Edit() {
-
-    const { id } = useParams();
-
+export default function Create() {
     const [form, setForm] = useState({
         first_name: "",
         last_name: "",
@@ -18,8 +14,6 @@ export default function Edit() {
     });
     const navigate = useNavigate();
 
-    
-
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -27,12 +21,12 @@ export default function Edit() {
         });
     };
 
-    const editDoctor = async () => {
+    const createDoctor = async () => {
         const token = localStorage.getItem("token");
 
         const options = {
-            method: "PATCH",
-            url: `https://ca2-med-api.vercel.app/doctors/${id}`,
+            method: "POST",
+            url: `https://ca2-med-api.vercel.app/doctors`,
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -52,12 +46,12 @@ export default function Edit() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        editDoctor();
+        createDoctor();
     };
 
   return (
     <>
-        <h1>Modify Doctor Details</h1>
+        <h1>Create a new Doctor</h1>
         <form onSubmit={handleSubmit}>
             <Input 
                 type="text" 

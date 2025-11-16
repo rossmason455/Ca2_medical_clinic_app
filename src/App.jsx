@@ -9,6 +9,7 @@ import LogIn from '@/pages/LogIn';
 import Dashboard from '@/pages/Dashboard';
 import DoctorsIndex from '@/pages/Doctors/Index';
 import DoctorsShow from '@/pages/Doctors/Show';
+import DoctorsCreate from '@/pages/Doctors/Create';
 
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
   }
 />
           <Route path="/doctors" element={<DoctorsIndex />} />
+          <Route path="/doctors/create" element={<DoctorsCreate />} />
           <Route path="/doctors/:id" element={<DoctorsShow loggedIn={loggedIn} />} />
 
         </Routes>

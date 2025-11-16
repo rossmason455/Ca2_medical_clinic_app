@@ -36,11 +36,38 @@ export default function Index() {
     fetchDoctors();
   }, []);
 
+  const dashboard = (
+      <Button
+    asChild
+    variant="outline"
+    className="mb-4 mr-auto block"
+  >
+    <Link size="sm" to="/dashboard">
+      Dashboard
+    </Link>
+  </Button>
+  )
+
+  const createButton = (
+  <Button
+    asChild
+    variant="outline"
+    className="mb-4 mr-auto block"
+  >
+    <Link size="sm" to="/doctors/create">
+      Create New Doctor
+    </Link>
+  </Button>
+);
+
   const doctorsCards = doctors.map((doctor) => {
     return (
+      
+
+
       <Card key={doctor.id}>  
         <CardHeader>
-          <CardTitle>{`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
+          <CardTitle>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</CardTitle>
           <CardDescription>{doctor.specialisation}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
@@ -55,12 +82,15 @@ export default function Index() {
           ><Link size='md' to={`/Doctors/${doctor.id}`}>View</Link></Button>
         </CardFooter>
       </Card>
+      
     );
   });
 
   return (
     <>
       <h1>Doctors page</h1>
+      {dashboard}
+      {createButton}
       {doctorsCards}
     </>
   );

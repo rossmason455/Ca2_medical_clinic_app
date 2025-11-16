@@ -19,6 +19,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import NavMain from '@/components/NavMain.jsx';
+
 const data = {
   user: {
     name: "Dr. Ross",
@@ -79,7 +81,7 @@ export default function AppSidebar({
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        hello
+        <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
     hello

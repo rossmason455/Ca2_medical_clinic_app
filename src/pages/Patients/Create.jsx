@@ -8,9 +8,10 @@ export default function Create() {
     const [form, setForm] = useState({
         first_name: "",
         last_name: "",
-        Specialization: "",
         email: "",
-        phone: ""
+        phone: "",
+        date_of_birth: "",
+        address: ""
     });
     const navigate = useNavigate();
 
@@ -21,12 +22,12 @@ export default function Create() {
         });
     };
 
-    const createDoctor = async () => {
+    const createPatient = async () => {
         const token = localStorage.getItem("token");
 
         const options = {
             method: "POST",
-            url: `https://ca2-med-api.vercel.app/doctors`,
+            url: `https://ca2-med-api.vercel.app/patients`,
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -36,9 +37,9 @@ export default function Create() {
         try {
             let response = await axios.request(options);
             console.log(response.data);
-            navigate('/doctors');
+            navigate('/patients');
         } catch (err) {
-            console.log(err);
+            console.log(err.response.data.error.issues);
         }
 
     };
@@ -46,12 +47,12 @@ export default function Create() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        createDoctor();
+        createPatient();
     };
 
   return (
     <>
-        <h1>Create a new Doctor</h1>
+        <h1>Add new Patient</h1>
         <form onSubmit={handleSubmit}>
             <Input 
                 type="text" 
@@ -67,14 +68,7 @@ export default function Create() {
                 value={form.last_name} 
                 onChange={handleChange} 
             />
-            <Input 
-                className="mt-2"
-                type="text" 
-                placeholder="Specialization" 
-                name="specialisation" 
-                value={form.specialisation} 
-                onChange={handleChange} 
-            />
+
             <Input 
                 className="mt-2"
                 type="text" 
@@ -89,6 +83,22 @@ export default function Create() {
                 placeholder="Phone" 
                 name="phone" 
                 value={form.phone} 
+                onChange={handleChange} 
+            />
+            <Input 
+                className="mt-2"
+                type="number" 
+                placeholder="Date of Birth" 
+                name="date_of_birth" 
+                value={form.date_of_birth} 
+                onChange={handleChange} 
+            />
+                        <Input 
+                className="mt-2"
+                type="text" 
+                placeholder="Address" 
+                name="address" 
+                value={form.address} 
                 onChange={handleChange} 
             />
             <Button 

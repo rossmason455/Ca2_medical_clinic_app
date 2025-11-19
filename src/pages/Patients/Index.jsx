@@ -75,6 +75,7 @@ export default function Index() {
           <p>{patient.email}</p>
           <p>{patient.phone}</p>
           <p>{patient.date_of_birth}</p>
+          <p>{patient.address}</p>
         </CardContent>
         <CardFooter>
           <Button

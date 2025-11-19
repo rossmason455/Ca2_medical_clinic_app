@@ -22,6 +22,11 @@ import AppointmentsShow from '@/pages/Appointments/Show';
 import AppointmentsCreate from '@/pages/Appointments/Create';
 import AppointmentsEdit from '@/pages/Appointments/Edit';
 
+import DiagnosesIndex from '@/pages/Diagnoses/Index';
+import DiagnosesShow from '@/pages/Diagnoses/Show';
+import DiagnosesCreate from '@/pages/Diagnoses/Create';
+import DiagnosesEdit from '@/pages/Diagnoses/Edit';
+
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -75,6 +80,12 @@ export default function App() {
           <Route path="/appointments/create" element={<AppointmentsCreate />} />
           <Route path="/appointments/:id" element={<AppointmentsShow loggedIn={loggedIn} />} />
           <Route path="/appointments/edit/:id" element={<AppointmentsEdit />} />
+
+          
+          <Route path="/diagnoses" element={<DiagnosesIndex />} />
+          <Route path="/diagnoses/create" element={<DiagnosesCreate />} />
+          <Route path="/diagnoses/:id" element={<DiagnosesShow loggedIn={loggedIn} />} />
+          <Route path="/diagnoses/edit/:id" element={<DiagnosesEdit />} />
         </Routes>
       </Router>
     </>

@@ -39,7 +39,7 @@ export default function Show() {
     variant="outline"
     className="mb-4 mr-auto block"
   >
-    <Link size="sm" to="/patients/edit">
+    <Link size="sm" to={`/patients/edit/${id}`}>
     Modify Patient Details
     </Link>
   </Button>

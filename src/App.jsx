@@ -63,7 +63,7 @@ export default function App() {
           <Route path="/patients" element={<PatientsIndex />} />
           <Route path="/patients/create" element={<PatientsCreate />} />
           <Route path="/patients/:id" element={<PatientsShow loggedIn={loggedIn} />} />
-          <Route path="/patients/edit" element={<PatientsEdit />} />
+          <Route path="/patients/edit/:id" element={<PatientsEdit />} />
         </Routes>
       </Router>
     </>

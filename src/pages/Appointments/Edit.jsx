@@ -10,30 +10,29 @@ export default function Edit() {
     const { id } = useParams();
 
     const [form, setForm] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        date_of_birth: "",
-        address: ""
+        appointment_date: "",
+        doctor_id: "",
+        patient_id: ""
     });
     const navigate = useNavigate();
 
     
 
     const handleChange = (e) => {
+       const { name, value, type } = e.target;
+
         setForm({
             ...form,
-            [e.target.name] : e.target.value
+            [name]: type === "number" ? Number(value) : value
         });
     };
 
-    const editPatient = async () => {
+    const editAppointment = async () => {
         const token = localStorage.getItem("token");
 
         const options = {
             method: "PATCH",
-            url: `https://ca2-med-api.vercel.app/patients/${id}`,
+            url: `https://ca2-med-api.vercel.app/appointment/${id}`,
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -43,9 +42,9 @@ export default function Edit() {
         try {
             let response = await axios.request(options);
             console.log(response.data);
-            navigate('/patients');
+            navigate('/appointments');
         } catch (err) {
-            console.log(err.response.data.error.issues);
+            console.log(err);
         }
 
     };
@@ -53,57 +52,38 @@ export default function Edit() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        editPatient();
+        console.log("ID from URL is:", id);
+        editAppointment();
     };
 
   return (
     <>
-        <h1>Modify Patient Details</h1>
+        <h1>Modify Appointment Details</h1>
         <form onSubmit={handleSubmit}>
-            <Input 
-                type="text" 
-                placeholder="First Name" 
-                name="first_name" 
-                value={form.first_name} 
-                onChange={handleChange} 
-            />
-            <Input 
-                type="text" 
-                placeholder="Last Name" 
-                name="last_name" 
-                value={form.last_name} 
-                onChange={handleChange} 
-            />
            <Input 
                 className="mt-2"
-                type="text" 
-                placeholder="Email" 
-                name="email" 
-                value={form.email} 
+                type="string" 
+                placeholder="Appointment Date" 
+                name="appointment_date" 
+                value={form.appointment_date} 
                 onChange={handleChange} 
             />
-            <Input 
+
+                        <Input 
                 className="mt-2"
-                type="text" 
-                placeholder="Phone" 
-                name="phone" 
-                value={form.phone} 
+                type="number" 
+                placeholder="Doctor ID" 
+                name="doctor_id" 
+                value={form.doctor_id} 
                 onChange={handleChange} 
             />
+
             <Input 
                 className="mt-2"
                 type="number" 
-                placeholder="Date of Birth" 
-                name="date_of_birth" 
-                value={form.date_of_birth} 
-                onChange={handleChange} 
-            />
-            <Input 
-                className="mt-2"
-                type="text" 
-                placeholder="Address" 
-                name="address" 
-                value={form.address} 
+                placeholder="Patient ID" 
+                name="patient_id" 
+                value={form.patient_id} 
                 onChange={handleChange} 
             />
             <Button 

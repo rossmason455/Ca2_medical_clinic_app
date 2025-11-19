@@ -6,16 +6,16 @@ import { Button } from '@/components/ui/button';
 
 
 export default function Show() {
-  const [doctor, setDoctor] = useState([]);
+  const [patient, setPatient] = useState([]);
   const { id } = useParams();
 
   let token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchDoctor = async () => {
+    const fetchPatient = async () => {
       const options = {
         method: "GET",
-        url: `https://ca2-med-api.vercel.app/doctors/${id}`,
+        url: `https://ca2-med-api.vercel.app/patients/${id}`,
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -24,13 +24,13 @@ export default function Show() {
       try {
         let response = await axios.request(options);
         console.log(response.data);
-        setDoctor(response.data);
+        setPatient(response.data);
       } catch (err) {
         console.log(err);
       }
     };
 
-    fetchDoctor();
+    fetchPatient();
   }, [id, token]);
 
    const editButton = (
@@ -39,23 +39,25 @@ export default function Show() {
     variant="outline"
     className="mb-4 mr-auto block"
   >
-    <Link size="sm" to="/doctors/edit">
-    Modify Doctors Details
+    <Link size="sm" to="/patients/edit">
+    Modify Patient Details
     </Link>
   </Button>
 );
 
-  const doctorProfile = (
+  const patientProfile = (
     <>
-      <h2>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</h2>
-      <p>Specialization: {doctor.specialisation}</p>
-      <p>Email: {doctor.email}</p>
-      <p>Phone: {doctor.phone}</p>
+      <h2>{`${patient.first_name} ${patient.last_name}`}</h2>
+      <p>Patient ID: {patient.id}</p>
+      <p>Email: {patient.email}</p>
+      <p>Phone: {patient.phone}</p>
+      <p>Date of Birth: {patient.date_of_birth}</p>
+      <p>Address: {patient.address}</p>
     </>
   );
  
-  return <>Show Doctor
-    {doctorProfile} 
+  return <>Show Patient
+    {patientProfile} 
     {editButton}
   
   </>;

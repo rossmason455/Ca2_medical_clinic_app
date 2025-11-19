@@ -93,7 +93,7 @@ export default function Create() {
                 value={form.date_of_birth} 
                 onChange={handleChange} 
             />
-                        <Input 
+            <Input 
                 className="mt-2"
                 type="text" 
                 placeholder="Address" 

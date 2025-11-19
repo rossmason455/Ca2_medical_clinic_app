@@ -47,6 +47,7 @@ export default function Create() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
+        console.log(form.date_of_birth, typeof form.date_of_birth)
         createPatient();
     };
 

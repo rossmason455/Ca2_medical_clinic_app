@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router';
 
 export default function Create() {
     const [form, setForm] = useState({
-        patient_id: "",
-        condition: "",
-        diagnosis_date: ""
-        
+        medication: "",
+        dosage: "",
+        start_date: "",
+        end_date: "",
+
     });
     const navigate = useNavigate();
 
@@ -22,12 +23,12 @@ export default function Create() {
         });
     };
 
-    const createDiagnosis = async () => {
+    const createPrescription = async () => {
         const token = localStorage.getItem("token");
 
         const options = {
             method: "POST",
-            url: `https://ca2-med-api.vercel.app/diagnoses`,
+            url: `https://ca2-med-api.vercel.app/prescriptions`,
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -37,7 +38,7 @@ export default function Create() {
         try {
             let response = await axios.request(options);
             console.log(response.data);
-            navigate('/diagnoses');
+            navigate('/prescriptions');
         } catch (err) {
             console.log(err.response.data);
         }
@@ -47,37 +48,46 @@ export default function Create() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        createDiagnosis();
+        createPrescription();
     };
 
   return (
     <>
-        <h1>Add new Diagnosis</h1>
+        <h1>Add new Prescription</h1>
         <form onSubmit={handleSubmit}>
-                                <Input 
+                <Input 
                 className="mt-2"
                 type="text" 
-                placeholder="Condition" 
-                name="condition" 
-                value={form.condition} 
+                placeholder="Medication" 
+                name="medication" 
+                value={form.medication} 
+                onChange={handleChange} 
+                />
+
+                <Input 
+                className="mt-2"
+                type="text" 
+                placeholder="Dosage" 
+                name="dosage" 
+                value={form.dosage} 
+                onChange={handleChange} 
+                />
+                
+                <Input 
+                className="mt-2"
+                type="text" 
+                placeholder="Start Date" 
+                name="start_date" 
+                value={form.start_date} 
                 onChange={handleChange} 
             />
 
                 <Input 
                 className="mt-2"
-                type="number" 
-                placeholder="Patient ID" 
-                name="patient_id" 
-                value={form.patient_id} 
-                onChange={handleChange} 
-            />
-                
-                <Input 
-                className="mt-2"
                 type="text" 
-                placeholder="Diagnosis Date" 
-                name="diagnosis_date" 
-                value={form.diagnosis_date} 
+                placeholder="End Date" 
+                name="end_date" 
+                value={form.end_date} 
                 onChange={handleChange} 
             />
 

@@ -4,18 +4,27 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Show() {
-  const [diagnosis, setDiagnosis] = useState([]);
+  const [prescription, setPrescriptions] = useState([]);
   const { id } = useParams();
 
   let token = localStorage.getItem('token');
 
   useEffect(() => {
-    const fetchDiagnosis = async () => {
+    const fetchPrescriptions = async () => {
       const options = {
         method: "GET",
-        url: `https://ca2-med-api.vercel.app/diagnoses/${id}`,
+        url: `https://ca2-med-api.vercel.app/prescriptions/${id}`,
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -24,39 +33,50 @@ export default function Show() {
       try {
         let response = await axios.request(options);
         console.log(response.data);
-        setDiagnosis(response.data);
+        setPrescriptions(response.data);
       } catch (err) {
         console.log(err);
       }
     };
 
-    fetchDiagnosis();
+    fetchPrescriptions();
   }, [id, token]);
 
-   const editButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto block"
-  >
-    <Link size="sm" to={`/diagnoses/edit/${id}`}>
-    Modify Diagnosis Details
-    </Link>
-  </Button>
-);
 
-  const diagnosisDetails = (
+  const prescriptionDetails = (
     <>
-      <h2>{`Diagnosis: ${diagnosis.condition}`}</h2>
-      <p>Patient ID: {diagnosis.patient_id}</p>
-      <p>Diagnosis Date: {diagnosis.diagnosis_date}</p>
+      <Card key={prescription.id}>  
+        <CardHeader>
+          <CardTitle>{`Medication: ${prescription.medication}`}</CardTitle>
+          <CardDescription>{prescription.dosage}</CardDescription>
+          {/* <CardAction>Card Action</CardAction> */}
+        </CardHeader>
+        <CardContent>
+          <p>{`Patient ID: ${prescription.patient_id}`}</p>
+          <p>{`Diagnosis ID: ${prescription.diagnosis_id}`}</p>
+          <p>{`Doctor ID: ${prescription.doctor_id}`}</p>
+          <p>{`Start Date: ${prescription.start_date}`}</p>
+          <p>{`End Date: ${prescription.end_date}`}</p>
+
+         <CardFooter>
+          <Button
+            asChild
+            variant='outline'
+          > <Link size="sm" to={`/prescriptions/edit/${id}`}>
+    Modify Prescription Details
+    </Link></Button>
+        </CardFooter>
+
+        </CardContent>
+       
+      </Card>
 
     </>
   );
  
-  return <>Show Diagnosis
-    {diagnosisDetails} 
-    {editButton}
+  return <>Show Prescription
+    {prescriptionDetails} 
+
   
   </>;
 }

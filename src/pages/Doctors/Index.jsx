@@ -36,6 +36,22 @@ export default function Index() {
     fetchDoctors();
   }, []);
 
+   const handleDelete = async (id) => {
+    const token = localStorage.getItem('token');
+    try {
+      await axios.delete(`https://ca2-med-api.vercel.app/prescriptions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setDoctors(doctors.filter(doctor => doctor.id !== id));
+    } catch (err) {
+      console.log('Delete failed:', err);
+
+    }
+  };
+
   const dashboard = (
       <Button
     asChild
@@ -80,6 +96,15 @@ export default function Index() {
             asChild
             variant='outline'
           ><Link size='md' to={`/Doctors/${doctor.id}`}>View</Link></Button>
+
+          <Button
+            variant='destructive'
+            onClick={() => handleDelete(doctor.id)}
+            className="ml-2"
+            style={{ backgroundColor: 'red', borderBottomColor: 'red' }}
+          >
+            Delete
+          </Button>
         </CardFooter>
       </Card>
       

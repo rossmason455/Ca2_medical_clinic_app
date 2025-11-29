@@ -4,6 +4,15 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Show() {
   const [doctor, setDoctor] = useState([]);
@@ -47,16 +56,32 @@ export default function Show() {
 
   const doctorProfile = (
     <>
-      <h2>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</h2>
-      <p>Specialization: {doctor.specialisation}</p>
-      <p>Email: {doctor.email}</p>
-      <p>Phone: {doctor.phone}</p>
+      <Card key={doctor.id}>  
+        <CardHeader>
+          <CardTitle>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</CardTitle>
+          <CardDescription>{doctor.specialisation}</CardDescription>
+          {/* <CardAction>Card Action</CardAction> */}
+        </CardHeader>
+        <CardContent>
+          <p>{doctor.email}</p>
+          <p>{doctor.phone}</p>
+        </CardContent>
+        <CardFooter>
+          <Button
+            asChild
+            variant='outline'
+          >    <Link size="sm" to={`/doctors/edit/${id}`}>
+    Modify Doctors Details
+    </Link></Button>
+
+        </CardFooter>
+      </Card>
     </>
   );
  
   return <>Show Doctor
     {doctorProfile} 
-    {editButton}
+
   
   </>;
 }

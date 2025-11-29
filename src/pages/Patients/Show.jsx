@@ -4,6 +4,15 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Show() {
   const [patient, setPatient] = useState([]);
@@ -33,32 +42,39 @@ export default function Show() {
     fetchPatient();
   }, [id, token]);
 
-   const editButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto block"
-  >
-    <Link size="sm" to={`/patients/edit/${id}`}>
-    Modify Patient Details
-    </Link>
-  </Button>
-);
 
   const patientProfile = (
     <>
-      <h2>{`${patient.first_name} ${patient.last_name}`}</h2>
-      <p>Patient ID: {patient.id}</p>
-      <p>Email: {patient.email}</p>
-      <p>Phone: {patient.phone}</p>
-      <p>Date of Birth: {patient.date_of_birth}</p>
-      <p>Address: {patient.address}</p>
+      <Card key={patient.id}>  
+        <CardHeader>
+          <CardTitle>{`${patient.first_name} ${patient.last_name}`}</CardTitle>
+          <CardDescription>{`Patient ID: ${patient.id}`}</CardDescription>
+          {/* <CardAction>Card Action</CardAction> */}
+        </CardHeader>
+        <CardContent>
+          <p>{patient.email}</p>
+          <p>{patient.phone}</p>
+          <p>{patient.date_of_birth}</p>
+          <p>{patient.address}</p>
+        </CardContent>
+        <CardFooter>
+          <Button
+            asChild
+            variant='outline'
+          ><Link size="sm" to={`/patients/edit/${id}`}>
+    Modify Patient Details
+    </Link></Button>
+
+        </CardFooter>
+      </Card>
+
+      
     </>
   );
  
   return <>Show Patient
     {patientProfile} 
-    {editButton}
+
   
   </>;
 }

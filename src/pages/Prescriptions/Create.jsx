@@ -26,6 +26,10 @@ export default function Create() {
     const createPrescription = async () => {
         const token = localStorage.getItem("token");
 
+        
+
+
+
         const options = {
             method: "POST",
             url: `https://ca2-med-api.vercel.app/prescriptions`,
@@ -75,7 +79,7 @@ export default function Create() {
                 
                 <Input 
                 className="mt-2"
-                type="text" 
+                type="number" 
                 placeholder="Start Date" 
                 name="start_date" 
                 value={form.start_date} 
@@ -84,7 +88,7 @@ export default function Create() {
 
                 <Input 
                 className="mt-2"
-                type="text" 
+                type="number" 
                 placeholder="End Date" 
                 name="end_date" 
                 value={form.end_date} 

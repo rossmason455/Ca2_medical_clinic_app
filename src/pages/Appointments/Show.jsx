@@ -4,6 +4,15 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Show() {
   const [appointment, setAppointment] = useState([]);
@@ -47,16 +56,34 @@ export default function Show() {
 
   const appointmentDetails = (
     <>
-      <h2>{`Appointment Date: ${appointment.appointment_date}`}</h2>
-      <p>Doctor ID: {appointment.doctor_id}</p>
-      <p>Patient ID: {appointment.patient_id}</p>
+      <Card key={appointment.id}>  
+        <CardHeader>
+          <CardTitle>{`Appointment: ${appointment.id}`}</CardTitle>
+          {/* <CardAction>Card Action</CardAction> */}
+        </CardHeader>
+        <CardContent>
+          <p>{appointment.appointment_date}</p>
+          <p>{appointment.doctor_id}</p>
+          <p>{appointment.patient_id}</p>
+
+        </CardContent>
+        <CardFooter>
+          <Button
+            asChild
+            variant='outline'
+          >    <Link size="sm" to={`/appointments/edit/${id}`}>
+    Modify Appointment Details
+    </Link></Button>
+
+        </CardFooter>
+      </Card>
 
     </>
   );
  
   return <>Show Appointment
     {appointmentDetails} 
-    {editButton}
+
   
   </>;
 }

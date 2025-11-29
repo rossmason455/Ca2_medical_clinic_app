@@ -104,7 +104,61 @@ export default function Dashboard() {
   }, []);
 
 
-  const appointmentsCard = (
+  const appointmentsNumberCard = (
+    <Card>
+      <CardHeader>
+        <CardTitle>Appointments</CardTitle>
+      </CardHeader>
+
+      <CardContent>
+       <div className="text-5xl font-bold">{appointments.length}</div>
+      </CardContent>
+
+      <CardFooter className="gap-2">
+       <CardContent>
+       <div className="text-sm">Appointments Scheduled</div>
+      </CardContent>
+      </CardFooter>
+    </Card>
+  );
+
+    const diagnosesNumberCard = (
+    <Card>
+      <CardHeader>
+        <CardTitle>Diagnoses</CardTitle>
+      </CardHeader>
+
+      <CardContent>
+       <div className="text-5xl font-bold">{diagnoses.length}</div>
+      </CardContent>
+
+      <CardFooter className="gap-2">
+       <CardContent>
+       <div className="text-sm">Diagnoses Recorded</div>
+      </CardContent>
+      </CardFooter>
+    </Card>
+  );
+
+      const prescriptionsNumberCard = (
+    <Card>
+      <CardHeader>
+        <CardTitle>Prescriptions</CardTitle>
+      </CardHeader>
+
+      <CardContent>
+       <div className="text-5xl font-bold">{prescriptions.length}</div>
+      </CardContent>
+
+      <CardFooter className="gap-2">
+       <CardContent>
+       <div className="text-sm">Prescriptions Given</div>
+      </CardContent>
+      </CardFooter>
+    </Card>
+  );
+
+  const appointmentsListCard = (
     <Card>
       <CardHeader>
         <CardTitle>Appointments</CardTitle>
@@ -151,7 +205,7 @@ export default function Dashboard() {
     </Card>
   );
 
-  const diagnosesCard = (
+  const diagnosesListCard = (
     <Card>
       <CardHeader>
         <CardTitle>Diagnosis</CardTitle>
@@ -198,7 +252,7 @@ export default function Dashboard() {
     </Card>
   );
 
-   const prescriptionsCard = (
+   const prescriptionsListCard = (
     <Card>
       <CardHeader>
         <CardTitle>Prescriptions</CardTitle>
@@ -249,10 +303,12 @@ export default function Dashboard() {
 
   return (
     <>
-      <h1>Appointments page</h1>
-      {appointmentsCard}
-        {diagnosesCard}
-        {prescriptionsCard}
+    {prescriptionsNumberCard}
+    {diagnosesNumberCard}
+        {appointmentsNumberCard}
+      {appointmentsListCard}
+        {diagnosesListCard}
+        {prescriptionsListCard}
     </>
   );
 }

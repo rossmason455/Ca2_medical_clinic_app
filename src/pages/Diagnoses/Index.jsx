@@ -89,7 +89,7 @@ export default function Index() {
 
       <Card key={diagnosis.id}>  
         <CardHeader>
-          <CardTitle>{`Diagnosis: ${diagnosis.condition}`}</CardTitle>
+          <CardTitle>{`Condition: ${diagnosis.condition}`}</CardTitle>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent>

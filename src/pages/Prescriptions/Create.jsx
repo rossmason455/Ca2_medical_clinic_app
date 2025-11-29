@@ -3,23 +3,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-import { useParams } from "react-router";
 
-export default function Edit() {
-
-    const { id } = useParams();
-
+export default function Create() {
     const [form, setForm] = useState({
         patient_id: "",
         condition: "",
         diagnosis_date: ""
+        
     });
     const navigate = useNavigate();
 
-    
-
     const handleChange = (e) => {
-       const { name, value, type } = e.target;
+        const { name, value, type } = e.target;
 
         setForm({
             ...form,
@@ -27,12 +22,12 @@ export default function Edit() {
         });
     };
 
-    const editDiagnoses = async () => {
+    const createDiagnosis = async () => {
         const token = localStorage.getItem("token");
 
         const options = {
-            method: "PATCH",
-            url: `https://ca2-med-api.vercel.app/diagnoses/${id}`,
+            method: "POST",
+            url: `https://ca2-med-api.vercel.app/diagnoses`,
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -44,7 +39,7 @@ export default function Edit() {
             console.log(response.data);
             navigate('/diagnoses');
         } catch (err) {
-            console.log(err);
+            console.log(err.response.data);
         }
 
     };
@@ -52,15 +47,14 @@ export default function Edit() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(form);
-        console.log("ID from URL is:", id);
-        editDiagnoses();
+        createDiagnosis();
     };
 
   return (
     <>
-        <h1>Modify Diagnosis Details</h1>
+        <h1>Add new Diagnosis</h1>
         <form onSubmit={handleSubmit}>
-          <Input 
+                                <Input 
                 className="mt-2"
                 type="text" 
                 placeholder="Condition" 
@@ -86,6 +80,8 @@ export default function Edit() {
                 value={form.diagnosis_date} 
                 onChange={handleChange} 
             />
+
+
 
             <Button 
                 className="mt-4 cursor-pointer" 

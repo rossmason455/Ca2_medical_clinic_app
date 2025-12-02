@@ -14,40 +14,37 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const loginSchema = z.object({
+  first_name: z.string().min(1, "First name is required"),
+  last_name: z.string().min(1, "Last name is required"),
+  email: z.email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+});
 
 export default function RegisterForm({onRegister}) {
     const navigate = useNavigate();
-  const [form, setForm] = useState({});
+ 
+ 
+    const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(registerSchema),
+  });
 
-  const handleForm = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const submitForm = (e) => {
-    e.preventDefault();
-
-    const fetchRegister = async () => {
-      const options = {
-        method: "POST",
-        url: "https://ca2-med-api.vercel.app/register",
-        data: form
-      };
-
-      try {
-        let response = await axios.request(options);
-        console.log(response.data);
-
-        onRegister(true, response.data.token);
-
-        navigate("/dashboard");
-      } catch (err) {
-        console.log(err.response.data);
-      }
-    };
-
-    fetchRegister();
-
-    console.log(form);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("https://ca2-med-api.vercel.app/register", data);
+      onRegister(true, response.data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+    }
   };
 
   return (
@@ -59,59 +56,35 @@ export default function RegisterForm({onRegister}) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={submitForm}>
-          <div className="flex flex-col gap-6">
-                        <div className="grid gap-2">
-              <Label htmlFor="first_name">First Name</Label>
-              <Input
-                id="first_name"
-                name="first_name"
-                type="first_name"
-                placeholder="John"
-                required
-                onChange={handleForm}
-              />
-            </div>
-                        <div className="grid gap-2">
-              <Label htmlFor="first_name">Last Name</Label>
-              <Input
-                id="last_name"
-                name="last_name"
-                type="last_name"
-                placeholder="Doe"
-                required
-                onChange={handleForm}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                onChange={handleForm}
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-              </div>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                onChange={handleForm}
-              />
-            </div>
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+          <div className="grid gap-2">
+            <Label htmlFor="first_name">First Name</Label>
+            <Input id="first_name" {...register("first_name")} placeholder="John" />
+            {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="last_name">Last Name</Label>
+            <Input id="last_name" {...register("last_name")} placeholder="Doe" />
+            {errors.last_name && <p className="text-sm text-red-500">{errors.last_name.message}</p>}
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" {...register("email")} placeholder="m@example.com" />
+            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" {...register("password")} />
+            {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <Button variant='outline' onClick={submitForm} type="submit" className="w-full">
-          Login
+        <Button variant='outline' onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
+          {isSubmitting ? "Registering…" : "Register"}
         </Button>
       </CardFooter>
     </Card>

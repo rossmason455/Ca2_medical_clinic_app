@@ -22,7 +22,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const registerSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-  email: z.email("Invalid email address"),
+     email: z
+    .string()
+    .min(1, "Email is required")
+    .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
   password: z.string().min(1, "Password is required"),
 });
 

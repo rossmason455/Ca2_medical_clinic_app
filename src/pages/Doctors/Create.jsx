@@ -21,8 +21,11 @@ import {
 const doctorSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-  specialisation: z.string().optional(),
-  email: z.email("Invalid email address").optional(),
+  specialisation: z.string()(1, "Specialization is required"),
+   email: z
+    .string()
+    .min(1, "Email is required")
+    .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
   phone: z.string().optional(),
 });
 

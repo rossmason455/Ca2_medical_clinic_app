@@ -25,14 +25,13 @@ const loginSchema = z.object({
 export default function LoginForm({onLogin}) {
     const navigate = useNavigate();
 
-    const {
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
-
 
   const onSubmit = async (data) => {
     try {
@@ -43,13 +42,16 @@ export default function LoginForm({onLogin}) {
       console.log(err.response?.data || err.message);
     }
   };
+
   return (
-<Card className="w-full max-w-md">
+    <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
-        <CardDescription>Enter your email below to login to your account</CardDescription>
+        <CardDescription>
+          Enter your email below to login to your account
+        </CardDescription>
       </CardHeader>
-
+      
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <div className="grid gap-2">
@@ -65,9 +67,9 @@ export default function LoginForm({onLogin}) {
           </div>
         </form>
       </CardContent>
-
+      
       <CardFooter className="flex-col gap-2">
-        <Button variant="outline" onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
+        <Button variant='outline' onClick={handleSubmit(onSubmit)}  className="w-full" disabled={isSubmitting}>
           {isSubmitting ? "Logging in…" : "Login"}
         </Button>
       </CardFooter>

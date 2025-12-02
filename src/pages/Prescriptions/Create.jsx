@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router';
 
 export default function Create() {
     const [form, setForm] = useState({
+        
+
+        patient_id: "",
+        doctor_id: "",
+        diagnosis_id: "",
         medication: "",
         dosage: "",
         start_date: "",
@@ -59,6 +64,35 @@ export default function Create() {
     <>
         <h1>Add new Prescription</h1>
         <form onSubmit={handleSubmit}>
+
+            <Input 
+                className="mt-2"
+                type="number" 
+                placeholder="Patient ID" 
+                name="patient_id" 
+                value={form.patient_id} 
+                onChange={handleChange} 
+            />
+
+                                    <Input 
+                className="mt-2"
+                type="number" 
+                placeholder="Diagnosis ID" 
+                name="diagnosis_id" 
+                value={form.diagnosis_id} 
+                onChange={handleChange} 
+            />
+
+
+                        <Input 
+                className="mt-2"
+                type="number" 
+                placeholder="Doctor ID" 
+                name="doctor_id" 
+                value={form.doctor_id} 
+                onChange={handleChange} 
+            />
+
                 <Input 
                 className="mt-2"
                 type="text" 
@@ -79,7 +113,7 @@ export default function Create() {
                 
                 <Input 
                 className="mt-2"
-                type="number" 
+                type="text" 
                 placeholder="Start Date" 
                 name="start_date" 
                 value={form.start_date} 
@@ -88,7 +122,7 @@ export default function Create() {
 
                 <Input 
                 className="mt-2"
-                type="number" 
+                type="text" 
                 placeholder="End Date" 
                 name="end_date" 
                 value={form.end_date} 

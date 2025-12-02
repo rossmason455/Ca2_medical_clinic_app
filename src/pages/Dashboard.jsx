@@ -162,7 +162,6 @@ export default function Dashboard() {
     <Card>
       <CardHeader>
         <CardTitle>Appointments</CardTitle>
-        <div className="text-sm">{appointments.length} total</div>
       </CardHeader>
 
       <CardContent>
@@ -209,7 +208,6 @@ export default function Dashboard() {
     <Card>
       <CardHeader>
         <CardTitle>Diagnosis</CardTitle>
-        <div className="text-sm">{diagnoses.length} total</div>
       </CardHeader>
 
       <CardContent>
@@ -256,7 +254,6 @@ export default function Dashboard() {
     <Card>
       <CardHeader>
         <CardTitle>Prescriptions</CardTitle>
-        <div className="text-sm">{prescriptions.length} total</div>
       </CardHeader>
 
       <CardContent>

@@ -57,46 +57,49 @@ export default function App() {
 
   return (
     <>
+        
       <Router>
- 
+      
         <Routes>
            <Route path='/register' element={<Register onRegister={onLogin}/>} />
           <Route path='/logIn' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
-         <Route path='/dashboard'  element={
-    <MainLayout loggedIn={loggedIn} onLogin={onLogin}>
-      <Dashboard loggedIn={loggedIn} />
-    </MainLayout>
-  }
-/>
-          <Route path="/doctors" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}>   <DoctorsIndex /> </MainLayout>} />
-          <Route path="/doctors/create" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DoctorsCreate /></MainLayout>} />
-          <Route path="/doctors/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DoctorsShow loggedIn={loggedIn} /></MainLayout>} />
-          <Route path="/doctors/edit/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DoctorsEdit /></MainLayout>} />
+
+         
+         <Route path='/dashboard'  element={ <MainLayout loggedIn={loggedIn} onLogin={onLogin}><Dashboard loggedIn={loggedIn} /></MainLayout>}/>
 
 
-          <Route path="/patients" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PatientsIndex /></MainLayout>} />
-          <Route path="/patients/create" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PatientsCreate /></MainLayout>} />
-          <Route path="/patients/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PatientsShow loggedIn={loggedIn} /></MainLayout>} />
-          <Route path="/patients/edit/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PatientsEdit /></MainLayout>} />
 
-          
-          <Route path="/appointments" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><AppointmentsIndex /></MainLayout>} />
-          <Route path="/appointments/create" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><AppointmentsCreate /></MainLayout>} />
-          <Route path="/appointments/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><AppointmentsShow loggedIn={loggedIn} /></MainLayout>} />
-          <Route path="/appointments/edit/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><AppointmentsEdit /></MainLayout>} />
+          <Route path="/doctors" element={   <DoctorsIndex /> } />
+          <Route path="/doctors/create" element={<DoctorsCreate />} />
+          <Route path="/doctors/:id" element={<DoctorsShow loggedIn={loggedIn} />} />
+          <Route path="/doctors/edit/:id" element={<DoctorsEdit />} />
+
+
+          <Route path="/patients" element={<PatientsIndex />} />
+          <Route path="/patients/create" element={<PatientsCreate />} />
+          <Route path="/patients/:id" element={<PatientsShow loggedIn={loggedIn} />} />
+          <Route path="/patients/edit/:id" element={<PatientsEdit />} />
 
           
-          <Route path="/diagnoses" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DiagnosesIndex /></MainLayout>} />
-          <Route path="/diagnoses/create" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DiagnosesCreate /></MainLayout>} />
-          <Route path="/diagnoses/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DiagnosesShow loggedIn={loggedIn} /></MainLayout>} />
-          <Route path="/diagnoses/edit/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><DiagnosesEdit /></MainLayout>} />
+          <Route path="/appointments" element={<AppointmentsIndex />} />
+          <Route path="/appointments/create" element={<AppointmentsCreate />} />
+          <Route path="/appointments/:id" element={<AppointmentsShow loggedIn={loggedIn} />} />
+          <Route path="/appointments/edit/:id" element={<AppointmentsEdit />} />
 
-          <Route path="/prescriptions" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PrescriptionsIndex /></MainLayout>} />
-          <Route path="/prescriptions/create" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PrescriptionsCreate /></MainLayout>} />
-          <Route path="/prescriptions/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PrescriptionsShow loggedIn={loggedIn} /></MainLayout>} />
-          <Route path="/prescriptions/edit/:id" element={<MainLayout loggedIn={loggedIn} onLogin={onLogin}><PrescriptionsEdit /></MainLayout>} />
+          
+          <Route path="/diagnoses" element={<DiagnosesIndex />} />
+          <Route path="/diagnoses/create" element={<DiagnosesCreate />} />
+          <Route path="/diagnoses/:id" element={<DiagnosesShow loggedIn={loggedIn} />} />
+          <Route path="/diagnoses/edit/:id" element={<DiagnosesEdit />} />
+
+          <Route path="/prescriptions" element={<PrescriptionsIndex />} />
+          <Route path="/prescriptions/create" element={<PrescriptionsCreate />} />
+          <Route path="/prescriptions/:id" element={<PrescriptionsShow loggedIn={loggedIn} />} />
+          <Route path="/prescriptions/edit/:id" element={<PrescriptionsEdit />} />
         </Routes>
+
       </Router>
+      
     </>
   )
 }

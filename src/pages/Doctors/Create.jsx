@@ -1,14 +1,28 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from "@/components/ui/label";
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const doctorSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
   specialisation: z.string().optional(),
-  email: z.string().email("Invalid email address").optional(),
+  email: z.email("Invalid email address").optional(),
   phone: z.string().optional(),
 });
 

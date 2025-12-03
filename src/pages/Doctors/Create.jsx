@@ -21,7 +21,7 @@ import {
 const doctorSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-  specialisation: z.string()(1, "Specialization is required"),
+  specialisation: z.string().min(1, "Specialization is required"),
    email: z
     .string()
     .min(1, "Email is required")
@@ -30,7 +30,7 @@ const doctorSchema = z.object({
 });
 
 
-export default function Create() {
+export default function CreateDoctor() {
     const navigate = useNavigate();
 
       const {

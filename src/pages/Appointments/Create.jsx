@@ -1,92 +1,112 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
 
-export default function Create() {
-    const [form, setForm] = useState({
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+const appointmentSchema = z.object({
+  appointment_date: z.string().min(1, "Appointment date is required"),
+  doctor_id: z.preprocess(
+    (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
+    z.number().min(1, "Doctor ID is required")
+  ),
+  patient_id: z.preprocess(
+    (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
+    z.number().min(1, "Patient ID is required")
+  ),
+});
+
+
+
+
+
+
+
+
+   export default function CreateAppointment() {
+    const navigate = useNavigate();
+
+      const  {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(appointmentSchema),
+    defaultValues: {
         appointment_date: "",
         doctor_id: "",
         patient_id: ""
-        
-    });
-    const navigate = useNavigate();
+    },
+  });
 
-    const handleChange = (e) => {
-        const { name, value, type } = e.target;
-
-        setForm({
-            ...form,
-            [name]: type === "number" ? Number(value) : value
-        });
-    };
-
-    const createAppointment = async () => {
-        const token = localStorage.getItem("token");
-
-        const options = {
-            method: "POST",
-            url: `https://ca2-med-api.vercel.app/appointments`,
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            data: form
-        };
-
-        try {
-            let response = await axios.request(options);
-            console.log(response.data);
-            navigate('/appointments');
-        } catch (err) {
-            console.log(err.response.data.error.issues);
-        }
-
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(form);
-        createAppointment();
-    };
+  const onSubmit = async (data) => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.post("https://ca2-med-api.vercel.app/appointments", data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      navigate("/appointments");
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+    }
+  };
 
   return (
     <>
-        <h1>Add new Appointment</h1>
-        <form onSubmit={handleSubmit}>
-                <Input 
-                className="mt-2"
-                type="string" 
-                placeholder="Appointment Date" 
-                name="appointment_date" 
-                value={form.appointment_date} 
-                onChange={handleChange} 
-            />
+ <Card className="w-full max-w-2xl">
+        <CardHeader>
+          <CardTitle>Create a new Appointment</CardTitle>
+          <CardDescription>Schedule an appointment between patient and doctor</CardDescription>
+        </CardHeader>
 
-                        <Input 
-                className="mt-2"
-                type="number" 
-                placeholder="Doctor ID" 
-                name="doctor_id" 
-                value={form.doctor_id} 
-                onChange={handleChange} 
-            />
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="appointment_date">Appointment Date</Label>
+              <Input
+                id="appointment_date"
+                {...register("appointment_date")}
+                placeholder="YYYY-MM-DD or unix seconds"
+              />
+              {errors.appointment_date && (
+                <p className="text-sm text-red-500">{errors.appointment_date.message}</p>
+              )}
+            </div>
 
-            <Input 
-                className="mt-2"
-                type="number" 
-                placeholder="Patient ID" 
-                name="patient_id" 
-                value={form.patient_id} 
-                onChange={handleChange} 
-            />
+            <div className="grid gap-2">
+              <Label htmlFor="doctor_id">Doctor ID</Label>
+              <Input id="doctor_id" type="number" {...register("doctor_id")} />
+              {errors.doctor_id && <p className="text-sm text-red-500">{errors.doctor_id.message}</p>}
+            </div>
 
-            <Button 
-                className="mt-4 cursor-pointer" 
-                variant="outline" 
-                type="submit" 
-            >Submit</Button>
-        </form>
+            <div className="grid gap-2">
+              <Label htmlFor="patient_id">Patient ID</Label>
+              <Input id="patient_id" type="number" {...register("patient_id")} />
+              {errors.patient_id && <p className="text-sm text-red-500">{errors.patient_id.message}</p>}
+            </div>
+          </form>
+        </CardContent>
+
+        <CardFooter>
+          <Button variant="outline" onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
+            {isSubmitting ? "Creating…" : "Submit"}
+          </Button>
+        </CardFooter>
+      </Card>
     </>
   );
 }

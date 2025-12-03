@@ -70,7 +70,7 @@ export default function EditDoctor() {
       }
     };
     fetchDoctor();
-  }, [id, reset]);
+  }, [id]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");

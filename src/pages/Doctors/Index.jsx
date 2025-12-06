@@ -83,13 +83,13 @@ export default function Index() {
 
       <Card key={doctor.id}>  
         <CardHeader>
-          <CardTitle>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</CardTitle>
+          <CardTitle>Dr. {`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
           <CardDescription>{doctor.specialisation}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent>
-          <p>{doctor.email}</p>
-          <p>{doctor.phone}</p>
+          <p>Email: {doctor.email}</p>
+          <p>Phone: {doctor.phone}</p>
         </CardContent>
         <CardFooter>
           <Button

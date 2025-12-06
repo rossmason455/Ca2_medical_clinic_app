@@ -29,6 +29,11 @@ export default function Dashboard() {
   const [diagnoses, setDiagnoses] = useState([]);
   const [prescriptions, setPrescriptions] = useState([]);
 
+      const formatDate = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString("en-GB");
+  };
+
+
   useEffect(() => {
     const fetchAppointments = async () => {
       const token = localStorage.getItem("token");
@@ -169,17 +174,18 @@ export default function Dashboard() {
           <TableCaption>Recent appointments</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Date</TableHead>
               <TableHead>Doctor ID</TableHead>
               <TableHead>Patient ID</TableHead>
+               <TableHead>Appointment Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {appointments.slice(0, 5).map((appt) => (
-              <TableRow key={appt.id}>
-                <TableCell>{appt.appointment_date}</TableCell>
-                <TableCell>{appt.doctor_id}</TableCell>
-                <TableCell>{appt.patient_id}</TableCell>
+            {appointments.slice(0, 5).map((apptointment) => (
+              <TableRow key={apptointment.id}>
+                
+                <TableCell>{apptointment.doctor_id}</TableCell>
+                <TableCell>{apptointment.patient_id}</TableCell>
+                <TableCell>{formatDate(apptointment.appointment_date)}</TableCell>
               </TableRow>
             ))}
             {appointments.length === 0 && (
@@ -225,7 +231,7 @@ export default function Dashboard() {
               <TableRow key={diagnosis.id}>
                 <TableCell>{diagnosis.condition}</TableCell>
                 <TableCell>{diagnosis.patient_id}</TableCell>
-                <TableCell>{diagnosis.diagnosis_date}</TableCell>
+                <TableCell>{formatDate(diagnosis.diagnosis_date)}</TableCell>
               </TableRow>
             ))}
             {diagnoses.length === 0 && (
@@ -272,8 +278,8 @@ export default function Dashboard() {
               <TableRow key={prescription.id}>
                 <TableCell>{prescription.medication}</TableCell>
                 <TableCell>{prescription.patient_id}</TableCell>
-                <TableCell>{prescription.start_date}</TableCell>
-                <TableCell>{prescription.end_date}</TableCell>
+                <TableCell>{formatDate(prescription.start_date)}</TableCell>
+                <TableCell>{formatDate(prescription.end_date)}</TableCell>
               </TableRow>
             ))}
             {diagnoses.length === 0 && (
@@ -300,12 +306,20 @@ export default function Dashboard() {
 
   return (
     <>
-    {prescriptionsNumberCard}
-    {diagnosesNumberCard}
-        {appointmentsNumberCard}
-      {appointmentsListCard}
-        {diagnosesListCard}
-        {prescriptionsListCard}
+
+
+    
+    <div className="grid grid-cols-3 gap-4">
+      {/* First row: 3 number cards */}
+      <div>{appointmentsNumberCard}</div>
+      <div>{diagnosesNumberCard}</div>
+      <div>{prescriptionsNumberCard}</div>
+
+      {/* Second row: 3 list cards */}
+      <div>{appointmentsListCard}</div>
+      <div>{diagnosesListCard}</div>
+      <div>{prescriptionsListCard}</div>
+    </div>
     </>
   );
 }

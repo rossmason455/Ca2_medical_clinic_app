@@ -17,6 +17,10 @@ import { Button } from '@/components/ui/button'
 export default function Index() {
   const [appointments, setAppointments] = useState([]);
 
+    const formatDate = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString("en-GB");
+  };
+
   useEffect(() => {
     const fetchAppointments = async () => {
 
@@ -93,9 +97,9 @@ export default function Index() {
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent>
-          <p>{appointment.appointment_date}</p>
-          <p>{appointment.doctor_id}</p>
-          <p>{appointment.patient_id}</p>
+          <p>Date: {formatDate(appointment.appointment_date)}</p>
+          <p>Doctor ID: {appointment.doctor_id}</p>
+          <p>Patient ID: {appointment.patient_id}</p>
 
         </CardContent>
         <CardFooter>

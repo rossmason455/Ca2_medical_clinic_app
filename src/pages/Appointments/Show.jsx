@@ -18,6 +18,11 @@ export default function Show() {
   const [appointment, setAppointment] = useState([]);
   const { id } = useParams();
 
+      const formatDate = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString("en-GB");
+  };
+
+
   let token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -62,9 +67,9 @@ export default function Show() {
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent>
-          <p>{appointment.appointment_date}</p>
-          <p>{appointment.doctor_id}</p>
-          <p>{appointment.patient_id}</p>
+          <p>Date: {formatDate(appointment.appointment_date)}</p>
+          <p>Doctor ID: {appointment.doctor_id}</p>
+          <p>Patient ID: {appointment.patient_id}</p>
 
         </CardContent>
         <CardFooter>

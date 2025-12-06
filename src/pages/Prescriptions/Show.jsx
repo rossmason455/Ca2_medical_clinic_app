@@ -18,6 +18,11 @@ export default function Show() {
   const [prescription, setPrescriptions] = useState([]);
   const { id } = useParams();
 
+      const formatDate = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString("en-GB");
+  };
+
+
   let token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -55,8 +60,8 @@ export default function Show() {
           <p>{`Patient ID: ${prescription.patient_id}`}</p>
           <p>{`Diagnosis ID: ${prescription.diagnosis_id}`}</p>
           <p>{`Doctor ID: ${prescription.doctor_id}`}</p>
-          <p>{`Start Date: ${prescription.start_date}`}</p>
-          <p>{`End Date: ${prescription.end_date}`}</p>
+          <p>{`Start Date: ${formatDate(prescription.start_date)}`}</p>
+          <p>{`End Date: ${formatDate(prescription.end_date)}`}</p>
 
          <CardFooter>
           <Button

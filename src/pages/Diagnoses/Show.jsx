@@ -18,6 +18,11 @@ export default function Show() {
   const [diagnosis, setDiagnosis] = useState([]);
   const { id } = useParams();
 
+
+      const formatDate = (timestamp) => {
+    return new Date(timestamp * 1000).toLocaleDateString("en-GB");
+  };
+
   let token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -63,7 +68,7 @@ export default function Show() {
         </CardHeader>
         <CardContent>
           <p>{`Patient ID: ${diagnosis.patient_id}`}</p>
-          <p>{`Diagnosis Date: ${diagnosis.diagnosis_date}`}</p>
+          <p>{`Diagnosis Date: ${formatDate(diagnosis.diagnosis_date)}`}</p>
 
 
         </CardContent>

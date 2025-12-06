@@ -6,6 +6,11 @@ import MainLayout from '@/components/MainLayout';
 import Register from '@/pages/Register';
 import LogIn from '@/pages/LogIn';
 
+
+import SideBar from '@/components/SideBar';
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
+
 import Dashboard from '@/pages/Dashboard';
 import DoctorsIndex from '@/pages/Doctors/Index';
 import DoctorsShow from '@/pages/Doctors/Show';
@@ -31,6 +36,12 @@ import PrescriptionsIndex from '@/pages/Prescriptions/Index';
 import PrescriptionsShow from '@/pages/Prescriptions/Show';
 import PrescriptionsCreate from '@/pages/Prescriptions/Create';
 import PrescriptionsEdit from '@/pages/Prescriptions/Edit';
+
+
+
+
+
+
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -59,13 +70,21 @@ export default function App() {
     <>
         
       <Router>
-      
-        <Routes>
+        <SidebarProvider
+          style={{
+            "--sidebar-width": "calc(var(--spacing) * 72)",
+            "--header-height": "calc(var(--spacing) * 12)",
+          }}
+        >
+        
+           <SideBar onLogin={onLogin} loggedIn={loggedIn} />
+           <SidebarInset>
+            <Routes>
            <Route path='/register' element={<Register onRegister={onLogin}/>} />
           <Route path='/logIn' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
 
          
-         <Route path='/dashboard'  element={ <MainLayout loggedIn={loggedIn} onLogin={onLogin}><Dashboard loggedIn={loggedIn} /></MainLayout>}/>
+         <Route path='/dashboard'  element={<Dashboard loggedIn={loggedIn} />}/>
 
 
 
@@ -81,7 +100,7 @@ export default function App() {
           <Route path="/patients/edit/:id" element={<PatientsEdit />} />
 
           
-          <Route path="/appointments" element={<AppointmentsIndex />} />
+          <Route path="/appointments" element={ <MainLayout loggedIn={loggedIn} onLogin={onLogin}><AppointmentsIndex /></MainLayout>} />
           <Route path="/appointments/create" element={<AppointmentsCreate />} />
           <Route path="/appointments/:id" element={<AppointmentsShow loggedIn={loggedIn} />} />
           <Route path="/appointments/edit/:id" element={<AppointmentsEdit />} />
@@ -96,8 +115,10 @@ export default function App() {
           <Route path="/prescriptions/create" element={<PrescriptionsCreate />} />
           <Route path="/prescriptions/:id" element={<PrescriptionsShow loggedIn={loggedIn} />} />
           <Route path="/prescriptions/edit/:id" element={<PrescriptionsEdit />} />
-        </Routes>
+                  </Routes>
+          </SidebarInset>
 
+</SidebarProvider>
       </Router>
       
     </>

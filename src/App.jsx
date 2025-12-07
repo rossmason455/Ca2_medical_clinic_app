@@ -8,6 +8,7 @@ import LogIn from '@/pages/LogIn';
 
 
 import SideBar from '@/components/SideBar';
+import SiteHeader from '@/components/SiteHeader';
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 
@@ -71,14 +72,12 @@ export default function App() {
         
       <Router>
         <SidebarProvider
-          style={{
-            "--sidebar-width": "calc(var(--spacing) * 72)",
-            "--header-height": "calc(var(--spacing) * 12)",
-          }}
         >
-        
+
            <SideBar onLogin={onLogin} loggedIn={loggedIn} />
-           <SidebarInset>
+                <SidebarInset>
+              <SiteHeader />
+
             <Routes>
            <Route path='/register' element={<Register onRegister={onLogin}/>} />
           <Route path='/logIn' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
@@ -100,7 +99,7 @@ export default function App() {
           <Route path="/patients/edit/:id" element={<PatientsEdit />} />
 
           
-          <Route path="/appointments" element={ <MainLayout loggedIn={loggedIn} onLogin={onLogin}><AppointmentsIndex /></MainLayout>} />
+          <Route path="/appointments" element={<AppointmentsIndex />} />
           <Route path="/appointments/create" element={<AppointmentsCreate />} />
           <Route path="/appointments/:id" element={<AppointmentsShow loggedIn={loggedIn} />} />
           <Route path="/appointments/edit/:id" element={<AppointmentsEdit />} />
@@ -116,11 +115,16 @@ export default function App() {
           <Route path="/prescriptions/:id" element={<PrescriptionsShow loggedIn={loggedIn} />} />
           <Route path="/prescriptions/edit/:id" element={<PrescriptionsEdit />} />
                   </Routes>
-          </SidebarInset>
 
+
+
+</SidebarInset>
 </SidebarProvider>
       </Router>
       
     </>
   )
 }
+
+
+

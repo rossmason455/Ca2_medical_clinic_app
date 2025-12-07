@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 
@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button'
 
 export default function Index() {
   const [patients, setPatients] = useState([]);
+
 
     const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
@@ -39,6 +40,9 @@ export default function Index() {
 
     fetchPatients();
   }, []);
+
+
+
 
 
    const handleDelete = async (id) => {
@@ -86,7 +90,7 @@ export default function Index() {
       
 
 
-      <Card key={patient.id}>  
+      <Card key={patient.id} className="max-w-sm max-h-64">  
         <CardHeader>
           <CardTitle>{`${patient.first_name} ${patient.last_name}`}</CardTitle>
           <CardDescription>{`Patient ID: ${patient.id}`}</CardDescription>
@@ -120,10 +124,11 @@ export default function Index() {
 
   return (
     <>
-      <h1>Patients page</h1>
-      {dashboard}
-      {createButton}
-      {patientCards}
+
+
+
+          {patientCards}
+
     </>
   );
 }

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 
+
+
+
 import {
   Card,
   CardAction,
@@ -91,7 +94,7 @@ export default function Index() {
       
 
 
-      <Card key={appointment.id}>  
+      <Card  key={appointment.id} className="!rounded-none">  
         <CardHeader>
           <CardTitle>{`Appointment: ${appointment.id}`}</CardTitle>
           {/* <CardAction>Card Action</CardAction> */}
@@ -111,7 +114,7 @@ export default function Index() {
           <Button
             variant='destructive'
             onClick={() => handleDelete(appointment.id)}
-            className="ml-2"
+            className="ml-2 rounded-none"
             style={{ backgroundColor: 'red', borderBottomColor: 'red' }}
           >
             Delete
@@ -124,10 +127,16 @@ export default function Index() {
 
   return (
     <>
-      <h1>Appointments page</h1>
-      {dashboard}
-      {createButton}
-      {appointmentCards}
+
+
+        {dashboard}
+        {createButton}
+
+
+        {appointmentCards}
+
+
+
     </>
   );
 }

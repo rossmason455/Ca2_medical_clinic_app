@@ -3,6 +3,11 @@ import axios from "axios";
 import { Link } from "react-router";
 
 import {
+  IconTrash,
+  IconBinoculars
+} from "@tabler/icons-react"
+
+import {
   Card,
   CardAction,
   CardContent,
@@ -13,6 +18,7 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from '@/components/ui/button'
+import { bg } from "zod/v4/locales";
 
 export default function Index() {
   const [doctors, setDoctors] = useState([]);
@@ -56,7 +62,7 @@ export default function Index() {
       <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto block"
+    className="mb-4 mr-auto"
   >
     <Link size="sm" to="/dashboard">
       Dashboard
@@ -68,7 +74,7 @@ export default function Index() {
   <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto block"
+    className="mb-4 mr-auto"
   >
     <Link size="sm" to="/doctors/create">
       Create New Doctor
@@ -81,7 +87,7 @@ export default function Index() {
       
 
 
-      <Card key={doctor.id}>  
+      <Card key={doctor.id} className="max-w-sm max-h-64">  
         <CardHeader>
           <CardTitle>Dr. {`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
           <CardDescription>{doctor.specialisation}</CardDescription>
@@ -95,15 +101,15 @@ export default function Index() {
           <Button
             asChild
             variant='outline'
-          ><Link size='md' to={`/Doctors/${doctor.id}`}>View</Link></Button>
+          ><Link size='md' to={`/Doctors/${doctor.id}`}><IconBinoculars /></Link></Button>
 
           <Button
             variant='destructive'
             onClick={() => handleDelete(doctor.id)}
             className="ml-2"
-            style={{ backgroundColor: 'red', borderBottomColor: 'red' }}
+            style={{ color: 'red'}}
           >
-            Delete
+            <IconTrash />
           </Button>
         </CardFooter>
       </Card>
@@ -113,10 +119,16 @@ export default function Index() {
 
   return (
     <>
-      <h1>Doctors page</h1>
-      {dashboard}
+
+  <div className="ml-6 justify-content-center overflow-x-hidden">
+
+  
       {createButton}
-      {doctorsCards}
+
+<div className="w-full">
+ <div className="grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
+</div>
+</div>
     </>
   );
 }

@@ -4,7 +4,8 @@ import { Link } from "react-router";
 
 import {
   IconTrash,
-  IconBinoculars
+  IconBinoculars,
+  IconCirclePlus
 } from "@tabler/icons-react"
 
 import {
@@ -77,18 +78,20 @@ export default function Index() {
     className="mb-4 mr-auto"
   >
     <Link size="sm" to="/doctors/create">
-      Create New Doctor
+      Create New Doctor <IconCirclePlus />
     </Link>
   </Button>
 );
 
   const doctorsCards = doctors.map((doctor) => {
+     const randomImage = `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 99)}.jpg`;
     return (
       
 
 
-      <Card key={doctor.id} className="max-w-sm max-h-64">  
+      <Card key={doctor.id} className="max-w-sm">  
         <CardHeader>
+          <img src={randomImage} alt={`Dr. ${doctor.first_name} ${doctor.last_name}`} className="w-16 rounded-full mr-4" />
           <CardTitle>Dr. {`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
           <CardDescription>{doctor.specialisation}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
@@ -120,13 +123,16 @@ export default function Index() {
   return (
     <>
 
-  <div className="ml-6 justify-content-center overflow-x-hidden">
+  <div className=" dbBackground justify-content-center overflow-x-hidden min-h-screen">
 
   
       {createButton}
 
-<div className="w-full">
- <div className="grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+ <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
 </div>
 </div>
     </>

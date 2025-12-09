@@ -1,10 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @custom-variant dark (&:is(.dark *));
 
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat ', sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -48,15 +52,16 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #000000;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #1efc91;
 }
 
 body {
@@ -65,7 +70,23 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+   font-family: 'Montserrat';
+
 }
+
+.dbBackground {
+   background-image: url('/images/SL-040820-29750-26.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.dbHeader{
+   background: linear-gradient(to right, #ffffff, #F7F8FC, #F5F5F5);
+}
+
+
 
 h1 {
   font-size: 3.2em;
@@ -83,9 +104,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -97,7 +116,7 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #adfcff;
   }
   button {
     background-color: #f9f9f9;
@@ -182,5 +201,6 @@ button:focus-visible {
   }
   body {
     @apply bg-background text-foreground;
+    
   }
 }

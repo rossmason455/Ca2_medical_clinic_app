@@ -64,15 +64,20 @@ const data = {
 export default function AppSidebar({ onLogin, loggedIn, ...props }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
-        <SidebarMenu>
+      <SidebarHeader className="!p-0">
+        <SidebarMenu >
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:!p-0 min-h-40 justify-center"
             >
               <a href="#">
-                <span className="text-base font-semibold">Medi Direct+</span>
+                   <img
+      src="public/images/Gemini_Generated_Image_wny4u5wny4u5wny4.png"
+      alt="Medi Direct+ Logo"
+      className="w-60 h-60" 
+    />
+
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

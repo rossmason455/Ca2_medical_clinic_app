@@ -71,7 +71,7 @@ export default function App() {
     <>
         
       <Router>
-        <SidebarProvider
+        <SidebarProvider 
         >
 
            <SideBar onLogin={onLogin} loggedIn={loggedIn} />

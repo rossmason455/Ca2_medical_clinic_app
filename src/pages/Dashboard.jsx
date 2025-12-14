@@ -110,7 +110,7 @@ export default function Dashboard() {
 
 
   const appointmentsNumberCard = (
-    <Card>
+    <Card className="text-center">
       <CardHeader>
         <CardTitle>Appointments</CardTitle>
       </CardHeader>
@@ -119,8 +119,8 @@ export default function Dashboard() {
        <div className="text-5xl font-bold">{appointments.length}</div>
       </CardContent>
 
-      <CardFooter className="gap-2">
-       <CardContent>
+      <CardFooter className="flex justify-center gap-2">
+       <CardContent className="w-full text-center">
        <div className="text-sm">Appointments Scheduled</div>
       </CardContent>
       </CardFooter>
@@ -128,7 +128,7 @@ export default function Dashboard() {
   );
 
     const diagnosesNumberCard = (
-    <Card>
+    <Card className="text-center">
       <CardHeader>
         <CardTitle>Diagnoses</CardTitle>
       </CardHeader>
@@ -137,8 +137,8 @@ export default function Dashboard() {
        <div className="text-5xl font-bold">{diagnoses.length}</div>
       </CardContent>
 
-      <CardFooter className="gap-2">
-       <CardContent>
+      <CardFooter className="flex justify-center gap-2">
+       <CardContent className="w-full text-center">
        <div className="text-sm">Diagnoses Recorded</div>
       </CardContent>
       </CardFooter>
@@ -146,7 +146,7 @@ export default function Dashboard() {
   );
 
       const prescriptionsNumberCard = (
-    <Card>
+    <Card className="text-center">
       <CardHeader>
         <CardTitle>Prescriptions</CardTitle>
       </CardHeader>
@@ -155,8 +155,8 @@ export default function Dashboard() {
        <div className="text-5xl font-bold">{prescriptions.length}</div>
       </CardContent>
 
-      <CardFooter className="gap-2">
-       <CardContent>
+      <CardFooter className="flex justify-center gap-2">
+       <CardContent className="w-full text-center">
        <div className="text-sm">Prescriptions Given</div>
       </CardContent>
       </CardFooter>
@@ -202,7 +202,7 @@ export default function Dashboard() {
         </Table>
       </CardContent>
 
-      <CardFooter className="gap-2">
+      <CardFooter className="gap-2 justify-end">
         <Button asChild variant="outline">
           <Link to="/appointments">View all</Link>
         </Button>
@@ -248,7 +248,7 @@ export default function Dashboard() {
         </Table>
       </CardContent>
 
-      <CardFooter className="gap-2">
+      <CardFooter className="gap-2 justify-end">
         <Button asChild variant="outline">
           <Link to="/diagnoses">View all</Link>
         </Button>
@@ -296,7 +296,7 @@ export default function Dashboard() {
         </Table>
       </CardContent>
 
-      <CardFooter className="gap-2">
+      <CardFooter className="gap-2 justify-end">
         <Button asChild variant="outline">
           <Link to="/prescriptions">View all</Link>
         </Button>
@@ -309,7 +309,19 @@ export default function Dashboard() {
 
 
     
-    <div className="grid grid-cols-3 gap-4">
+  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+
+
+
+    
+    <div className="grid grid-cols-3 gap-4 p-10">
       {/* First row: 3 number cards */}
       <div>{appointmentsNumberCard}</div>
       <div>{diagnosesNumberCard}</div>
@@ -320,6 +332,8 @@ export default function Dashboard() {
       <div>{diagnosesListCard}</div>
       <div>{prescriptionsListCard}</div>
     </div>
+    </div>
+</div>
     </>
   );
 }

@@ -73,7 +73,7 @@ export default function AppSidebar({ onLogin, loggedIn, ...props }) {
             >
               <a href="#">
                    <img
-      src="public/images/Gemini_Generated_Image_wny4u5wny4u5wny4.png"
+      src="public/images/Gemini_Generated_Image_p6r1m0p6r1m0p6r1.png"
       alt="Medi Direct+ Logo"
       className="w-60 h-60" 
     />

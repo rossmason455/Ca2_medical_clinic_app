@@ -84,12 +84,13 @@ export default function EditDoctor() {
     }
   };
 
-  return (
-    <>
-    <Card className="w-full max-w-2xl">
+
+  const editForm = (    
+  
+  <Card className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Edit Doctor</CardTitle>
-        <CardDescription>Enter the doctor's details</CardDescription>
+        <CardTitle className="viewCardHeader">Modify Doctor Details</CardTitle>
+        <CardDescription className="viewCardSubHeader">Enter the doctor's details</CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -131,7 +132,22 @@ export default function EditDoctor() {
           {isSubmitting ? "Creating…" : "Submit"}
         </Button>
       </CardFooter>
-    </Card>
+    </Card>);
+
+  return (
+    <>
+        <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+ <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{editForm}</div> 
+</div>
+</div>
+
     </>
   );
 }

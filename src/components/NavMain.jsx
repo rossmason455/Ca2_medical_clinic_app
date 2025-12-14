@@ -54,9 +54,9 @@ export default function NavMain({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild tooltip={item.title} isActive={checkActive(item.url)} >
-                <Link to={item.url}  >
+                <Link className="sideBarText p-10 mb-5" to={item.url}  >
                    {item.icon && <item.icon />}
-                  <span>{item.title}</span>
+                  <span className="font-bold">{item.title}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

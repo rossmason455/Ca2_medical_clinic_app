@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 
 @custom-variant dark (&:is(.dark *));
@@ -83,9 +83,30 @@ body {
 }
 
 .dbHeader{
-   background: linear-gradient(to right, #ffffff, #F7F8FC, #F5F5F5);
+   background: linear-gradient(to right, #ffffff, #fcfeff, #fafcff, #e9f3fc);
 }
 
+.sideBarText {
+  font-size: 17px;
+}
+
+
+.viewCardHeader {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 0.25em;
+}
+
+.viewCardSubHeader {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.viewCardBody {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0.25em;
+}
 
 
 h1 {

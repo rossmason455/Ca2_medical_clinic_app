@@ -75,7 +75,7 @@ export default function Index() {
   <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto"
+    className="mb-4 mr-auto pt-5 pb-5 pr-20 pl-20"
   >
     <Link size="sm" to="/doctors/create">
       Create New Doctor <IconCirclePlus />
@@ -101,7 +101,7 @@ export default function Index() {
           <p>Phone: {doctor.phone}</p>
         </CardContent>
         <CardFooter>
-          <Button
+          <Button 
             asChild
             variant='outline'
           ><Link size='md' to={`/Doctors/${doctor.id}`}><IconBinoculars /></Link></Button>
@@ -123,10 +123,9 @@ export default function Index() {
   return (
     <>
 
-  <div className=" dbBackground justify-content-center overflow-x-hidden min-h-screen">
+  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
 
-  
-      {createButton}
+    <div className="ml-5">{createButton}</div>  
 
     <div
       className="dbBackground justify-content-center overflow-x-hidden"

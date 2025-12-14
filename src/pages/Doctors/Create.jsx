@@ -60,15 +60,14 @@ export default function CreateDoctor() {
     }
   };
 
-  return (
-    <>
-    <Card className="w-full max-w-2xl">
+
+  const createForm = (<Card className="w-full max-w-2xl">
       <CardHeader>
-        <CardTitle>Create a new Doctor</CardTitle>
-        <CardDescription>Enter the doctor's details</CardDescription>
+        <CardTitle className="viewCardHeader">Create a new Doctor</CardTitle>
+        <CardDescription className="viewCardSubHeader">Enter the doctor's details</CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent >
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="grid gap-2">
             <Label htmlFor="first_name">First Name</Label>
@@ -108,6 +107,27 @@ export default function CreateDoctor() {
         </Button>
       </CardFooter>
     </Card>
+);
+
+  return (
+    <>
+
+    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+ <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{createForm}</div> 
+</div>
+</div>
+
+
+  
+
+
     </>
   );
 }

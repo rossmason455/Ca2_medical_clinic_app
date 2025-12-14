@@ -56,18 +56,18 @@ export default function Show() {
 
   const doctorProfile = (
     <>
-      <Card key={doctor.id}>  
+      <Card className="min-h-100 max-w-200" key={doctor.id}>  
         <CardHeader>
-          <CardTitle>{`Dr. ${doctor.first_name} ${doctor.last_name}`}</CardTitle>
-          <CardDescription>{doctor.specialisation}</CardDescription>
+          <CardTitle className="viewCardHeader">{`Dr. ${doctor.first_name} ${doctor.last_name}`}</CardTitle>
+          <CardDescription className="viewCardSubHeader">{doctor.specialisation}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
-        <CardContent>
+        <CardContent className="viewCardBody">
           <p>{doctor.email}</p>
           <p>{doctor.phone}</p>
         </CardContent>
-        <CardFooter>
-          <Button
+        <CardFooter className="flex justify-end">
+          <Button className="mt-50"
             asChild
             variant='outline'
           >    <Link size="sm" to={`/doctors/edit/${id}`}>
@@ -79,8 +79,21 @@ export default function Show() {
     </>
   );
  
-  return <>Show Doctor
-    {doctorProfile} 
+  return <>
+
+
+    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+     <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{doctorProfile} </div>
+</div>
+</div>
+    
 
   
   </>;

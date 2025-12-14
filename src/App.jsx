@@ -1,10 +1,10 @@
 import { useState, useEffect} from 'react';
 
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router";
 import Navbar from '@/components/Navbar';
 import MainLayout from '@/components/MainLayout';
 import Register from '@/pages/Register';
-import LogIn from '@/pages/LogIn';
+import LogIn from '@/pages/Login';
 
 
 import SideBar from '@/components/SideBar';
@@ -40,47 +40,39 @@ import PrescriptionsEdit from '@/pages/Prescriptions/Edit';
 
 
 
+function AppContent({ loggedIn, onLogin }) {
+  const location = useLocation();
+  const showSidebar = !['/login', '/register'].includes(location.pathname);
 
 
 
 
-export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
 
-   useEffect(() => {
-    let token = localStorage.getItem("token");
 
-    if(token){
-      setLoggedIn(true);
-    }
 
-  }, []);
 
-  const onLogin = (auth, token) => {
-    setLoggedIn(auth);
 
-    if(auth){
-      localStorage.setItem('token', token)
-    }
-    else {
-      localStorage.removeItem('token');
-    }
-  };
+
+  
+
+
+
+
 
   return (
     <>
         
-      <Router>
+     
         <SidebarProvider 
         >
 
-           <SideBar onLogin={onLogin} loggedIn={loggedIn} />
+             {showSidebar && <SideBar onLogin={onLogin} loggedIn={loggedIn} />}
                 <SidebarInset>
               <SiteHeader />
 
             <Routes>
-           <Route path='/register' element={<Register onRegister={onLogin}/>} />
-          <Route path='/logIn' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
+           <Route path='/register' element={<Register onRegister={onLogin} />} />
+          <Route path='/login' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
 
          
          <Route path='/dashboard'  element={<Dashboard loggedIn={loggedIn} />}/>
@@ -120,11 +112,43 @@ export default function App() {
 
 </SidebarInset>
 </SidebarProvider>
-      </Router>
+   
       
     </>
   )
 }
+export default function App() {
 
+
+
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+   useEffect(() => {
+    let token = localStorage.getItem("token");
+
+    if(token){
+      setLoggedIn(true);
+    }
+
+  }, []);
+
+  const onLogin = (auth, token) => {
+    setLoggedIn(auth);
+
+    if(auth){
+      localStorage.setItem('token', token)
+    }
+    else {
+      localStorage.removeItem('token');
+    }
+  };
+
+    return (
+    <Router>
+      <AppContent loggedIn={loggedIn} onLogin={onLogin} />
+    </Router>
+  );
+}
 
 

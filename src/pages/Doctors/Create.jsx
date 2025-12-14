@@ -61,7 +61,7 @@ export default function CreateDoctor() {
   };
 
 
-  const createForm = (<Card className="w-full max-w-2xl">
+  const createForm = (<Card className="w-full">
       <CardHeader>
         <CardTitle className="viewCardHeader">Create a new Doctor</CardTitle>
         <CardDescription className="viewCardSubHeader">Enter the doctor's details</CardDescription>
@@ -112,15 +112,15 @@ export default function CreateDoctor() {
   return (
     <>
 
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
+      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
       style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
     >
- <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{createForm}</div> 
+{createForm}
 </div>
 </div>
 

@@ -104,7 +104,7 @@ export default function Index() {
           <Button 
             asChild
             variant='outline'
-          ><Link size='md' to={`/Doctors/${doctor.id}`}><IconBinoculars /></Link></Button>
+          ><Link size='md' to={`/Doctors/${doctor.id}`}>View<IconBinoculars /></Link></Button>
 
           <Button
             variant='destructive'

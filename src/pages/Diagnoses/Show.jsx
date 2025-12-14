@@ -63,23 +63,22 @@ export default function Show() {
     <>
 <Card key={diagnosis.id}>  
         <CardHeader>
-          <CardTitle>{`Diagnosis: ${diagnosis.condition}`}</CardTitle>
+          <CardTitle className="viewCardHeader">{`Diagnosis: ${diagnosis.condition}`}</CardTitle>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
-        <CardContent>
+        <CardContent className="viewCardBody">
           <p>{`Patient ID: ${diagnosis.patient_id}`}</p>
           <p>{`Diagnosis Date: ${formatDate(diagnosis.diagnosis_date)}`}</p>
 
 
         </CardContent>
-        <CardFooter>
-          <Button
+        <CardFooter className="flex justify-end">
+          <Button className="mt-50"
             asChild
             variant='outline'
           >    <Link size="sm" to={`/diagnoses/edit/${id}`}>
     Modify Diagnosis Details
     </Link></Button>
-
 
         </CardFooter>
       </Card>
@@ -88,7 +87,17 @@ export default function Show() {
   );
  
   return <>Show Diagnosis
-    {diagnosisDetails} 
+        <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+     <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{diagnosisDetails} </div>
+</div>
+</div>
 
   
   </>;

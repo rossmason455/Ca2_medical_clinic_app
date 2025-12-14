@@ -65,12 +65,12 @@ const appointmentSchema = z.object({
     }
   };
 
-  return (
+     const createForm = (
     <>
- <Card className="w-full max-w-2xl">
+ <Card className="w-full">
         <CardHeader>
-          <CardTitle>Create a new Appointment</CardTitle>
-          <CardDescription>Schedule an appointment between patient and doctor</CardDescription>
+          <CardTitle className="viewCardHeader">Create a new Appointment</CardTitle>
+          <CardDescription className="viewCardDescription">Schedule an appointment between patient and doctor</CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -107,6 +107,29 @@ const appointmentSchema = z.object({
           </Button>
         </CardFooter>
       </Card>
+    </>
+  );
+
+
+    return (
+    <>
+
+    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+{createForm}
+</div>
+</div>
+
+
+  
+
+
     </>
   );
 }

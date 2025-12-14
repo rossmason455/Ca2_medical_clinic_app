@@ -3,6 +3,13 @@ import axios from "axios";
 import { Link } from "react-router";
 
 import {
+  IconTrash,
+  IconBinoculars,
+  IconCirclePlus
+} from "@tabler/icons-react"
+
+
+import {
   Card,
   CardAction,
   CardContent,
@@ -67,7 +74,7 @@ export default function Index() {
       <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto block"
+    className="mb-4 mr-auto"
   >
     <Link size="sm" to="/dashboard">
       Dashboard
@@ -79,10 +86,10 @@ export default function Index() {
   <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto block"
+    className="mb-4 mr-auto"
   >
     <Link size="sm" to="/prescriptions/create">
-      Add New Prescription
+      Create New Prescription <IconCirclePlus />
     </Link>
   </Button>
 );
@@ -112,15 +119,15 @@ export default function Index() {
           <Button
             asChild
             variant='outline'
-          ><Link size='md' to={`/prescriptions/${prescription.id}`}>View</Link></Button>
+          ><Link size='md' to={`/prescriptions/${prescription.id}`}>View <IconBinoculars /></Link></Button>
 
-                    <Button
+          <Button
             variant='destructive'
             onClick={() => handleDelete(prescription.id)}
             className="ml-2"
-            style={{ backgroundColor: 'red', borderBottomColor: 'red' }}
+            style={{ color: 'red'}}
           >
-            Delete
+            <IconTrash />
           </Button>
         </CardFooter>
       </Card>
@@ -130,10 +137,17 @@ export default function Index() {
 
   return (
     <>
-      <h1>Prescriptions page</h1>
-      {dashboard}
-      {createButton}
-      {prescriptionsCards}
+  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+    <div className="ml-5">{createButton}</div>  
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+ <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{prescriptionsCards}</div>
+</div>
+</div>
     </>
   );
 }

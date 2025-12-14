@@ -71,12 +71,12 @@ const prescriptionSchema = z.object({
   };
 
 
-  return (
+   const createForm = (
     <>
-          <Card className="w-full max-w-2xl">
+          <Card className="w-full">
       <CardHeader>
-        <CardTitle>Create a new Prescription</CardTitle>
-        <CardDescription>Record a prescription for a patient</CardDescription>
+        <CardTitle className="viewCardHeader">Create a new Prescription</CardTitle>
+        <CardDescription className="viewCardDescription">Record a prescription for a patient</CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -131,6 +131,29 @@ const prescriptionSchema = z.object({
         </Button>
       </CardFooter>
     </Card>
+    </>
+  );
+
+
+    return (
+    <>
+
+    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+{createForm}
+</div>
+</div>
+
+
+  
+
+
     </>
   );
 }

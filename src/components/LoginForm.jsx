@@ -47,10 +47,10 @@ export default function LoginForm({onLogin}) {
   };
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
-        <CardDescription>
+        <CardTitle className="viewCardHeader">Login to your account</CardTitle>
+        <CardDescription className="viewCardSubHeader">
           Enter your email below to login to your account
         </CardDescription>
       </CardHeader>

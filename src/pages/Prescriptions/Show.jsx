@@ -52,24 +52,25 @@ export default function Show() {
     <>
       <Card key={prescription.id}>  
         <CardHeader>
-          <CardTitle>{`Medication: ${prescription.medication}`}</CardTitle>
-          <CardDescription>{prescription.dosage}</CardDescription>
+          <CardTitle className="viewCardHeader">{`Medication: ${prescription.medication}`}</CardTitle>
+          <CardDescription className="viewCardSubHeader">{prescription.dosage}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
-        <CardContent>
+        <CardContent className="viewCardBody">
           <p>{`Patient ID: ${prescription.patient_id}`}</p>
           <p>{`Diagnosis ID: ${prescription.diagnosis_id}`}</p>
           <p>{`Doctor ID: ${prescription.doctor_id}`}</p>
           <p>{`Start Date: ${formatDate(prescription.start_date)}`}</p>
           <p>{`End Date: ${formatDate(prescription.end_date)}`}</p>
 
-         <CardFooter>
-          <Button
+        <CardFooter className="flex justify-end">
+          <Button className="mt-50"
             asChild
             variant='outline'
-          > <Link size="sm" to={`/prescriptions/edit/${id}`}>
+          >    <Link size="sm" to={`/prescriptions/edit/${id}`}>
     Modify Prescription Details
     </Link></Button>
+
         </CardFooter>
 
         </CardContent>
@@ -80,7 +81,17 @@ export default function Show() {
   );
  
   return <>Show Prescription
-    {prescriptionDetails} 
+        <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+
+
+
+    <div
+      className="dbBackground justify-content-center overflow-x-hidden"
+      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+    >
+     <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{prescriptionDetails} </div>
+</div>
+</div>
 
   
   </>;

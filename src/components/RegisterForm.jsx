@@ -52,10 +52,10 @@ export default function RegisterForm({onRegister}) {
   };
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Register to create your account</CardTitle>
-        <CardDescription>
+        <CardTitle className="viewCardHeader">Register to create your account</CardTitle>
+        <CardDescription className="viewCardSubHeader">
           Enter your details below to register a new account
         </CardDescription>
       </CardHeader>

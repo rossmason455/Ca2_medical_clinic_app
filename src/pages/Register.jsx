@@ -12,7 +12,7 @@ export default function Register({onLogin}) {
             
             
                 <div
-                  className="dbBackground justify-content-center overflow-x-hidden justify-center pl-180 pr-180 mt-40"
+                  className="dbBackground justify-content-center overflow-x-hidden justify-center pl-220 pr-220 mt-40"
                   style={{ minWidth: '99vw' }}
                 >
              <RegisterForm onRegister={(auth, token) => onLogin(auth, token)} />

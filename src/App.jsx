@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-
+import jwtDecode from 'jwt-decode';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router";
 import Navbar from '@/components/Navbar';
 import MainLayout from '@/components/MainLayout';
@@ -112,20 +112,32 @@ function AppContent({ loggedIn, onLogin }) {
   )
 }
 export default function App() {
-
-
-
-
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(() => {
+     const token = localStorage.getItem("token");
+    return !!token;
+  });
 
    useEffect(() => {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-    if(token){
-      setLoggedIn(true);
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUser({
+          name: decoded.name || "User", 
+          email: decoded.email || "user@example.com"
+        });
+      } catch (error) {
+        console.error("Invalid token:", error);
+        setLoggedIn(false);
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    } else {
+      setUser(null);
     }
 
-  }, []);
+  }, [loggedIn]);
 
   const onLogin = (auth, token) => {
     setLoggedIn(auth);

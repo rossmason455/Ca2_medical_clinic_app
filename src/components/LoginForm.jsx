@@ -27,6 +27,7 @@ const loginSchema = z.object({
 
 export default function LoginForm({onLogin}) {
     const navigate = useNavigate();
+    const [loginError, setLoginError] = useState("");
 
   const {
     register,
@@ -37,12 +38,14 @@ export default function LoginForm({onLogin}) {
   });
 
   const onSubmit = async (data) => {
+    setLoginError("");
     try {
       const response = await axios.post("https://ca2-med-api.vercel.app/login", data);
       onLogin(true, response.data.token);
       navigate("/dashboard");
     } catch (err) {
-      console.log(err.response?.data || err.message);
+       setLoginError(err.response?.data?.message || "Invalid email or password");
+    
     }
   };
 
@@ -68,6 +71,7 @@ export default function LoginForm({onLogin}) {
             <Input id="password" type="password" {...register("password")} />
             {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
           </div>
+          {loginError && <p className="text-sm text-red-500">{loginError}</p>}
         </form>
       </CardContent>
       
@@ -75,6 +79,7 @@ export default function LoginForm({onLogin}) {
         <Button variant='outline' onClick={handleSubmit(onSubmit)}  className="w-full" disabled={isSubmitting}>
           {isSubmitting ? "Logging in…" : "Login"}
         </Button>
+        <p className="mt-5">Don't have an account? <a href="/register">Register now.</a></p>
       </CardFooter>
     </Card>
   );

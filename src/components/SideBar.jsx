@@ -58,6 +58,7 @@ const data = {
       url: "/diagnoses",
       icon: IconFile,
     },
+
   ],
 };
 
@@ -79,14 +80,19 @@ export default function AppSidebar({ onLogin, loggedIn, ...props }) {
     />
 
               </a>
+
+              
             </SidebarMenuButton>
+            
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
+        
       </SidebarContent>
       <SidebarFooter>
+        
         <NavUser user={data.user} onLogin={onLogin} />
       </SidebarFooter>
     </Sidebar>

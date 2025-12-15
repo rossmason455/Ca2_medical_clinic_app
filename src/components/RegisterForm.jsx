@@ -90,6 +90,7 @@ export default function RegisterForm({onRegister}) {
         <Button variant='outline' onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
           {isSubmitting ? "Registering…" : "Register"}
         </Button>
+        
       </CardFooter>
     </Card>
   );

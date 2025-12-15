@@ -11,7 +11,7 @@ export default function LogIn({loggedIn, onLogin}) {
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-180 pr-180 mt-40 min-w-screen"
+      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-220 pr-220 mt-40 min-w-screen"
       
     >
  <LoginForm onLogin={onLogin} loggedIn={loggedIn} />

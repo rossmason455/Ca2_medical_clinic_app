@@ -129,7 +129,7 @@ export default function Index() {
 
     <div
       className="dbBackground justify-content-center overflow-x-hidden"
-      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+      
     >
  <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
 </div>

@@ -47,7 +47,7 @@ export default function LoginForm({onLogin}) {
   };
 
   return (
-    <Card className="w-full">
+    <Card className="w-full ax-w-100px">
       <CardHeader>
         <CardTitle className="viewCardHeader">Login to your account</CardTitle>
         <CardDescription className="viewCardSubHeader">

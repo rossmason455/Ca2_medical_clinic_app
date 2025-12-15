@@ -158,7 +158,7 @@ const patientSchema = z.object({
 
     <div
       className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
-      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+      style={{ width: 'calc(100vw - 282px)' }}
     >
 {editForm}
 </div>

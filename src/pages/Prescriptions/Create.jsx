@@ -46,7 +46,7 @@ const prescriptionSchema = z.object({
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(diagnosisSchema),
+    resolver: zodResolver(prescriptionSchema),
     defaultValues: {
         patient_id: "",
         doctor_id: "",
@@ -144,7 +144,7 @@ const prescriptionSchema = z.object({
 
     <div
       className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
-      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+      style={{ width: 'calc(100vw - 282px)' }}
     >
 {createForm}
 </div>

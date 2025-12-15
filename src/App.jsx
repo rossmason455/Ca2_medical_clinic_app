@@ -1,6 +1,6 @@
 import { useState, useEffect} from 'react';
 
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router";
 import Navbar from '@/components/Navbar';
 import MainLayout from '@/components/MainLayout';
 import Register from '@/pages/Register';
@@ -43,7 +43,7 @@ import PrescriptionsEdit from '@/pages/Prescriptions/Edit';
 function AppContent({ loggedIn, onLogin }) {
   const location = useLocation();
   const showSidebar = !['/login', '/register'].includes(location.pathname);
-
+  const showHeader = !['/login', '/register'].includes(location.pathname);
 
 
 
@@ -68,44 +68,38 @@ function AppContent({ loggedIn, onLogin }) {
 
              {showSidebar && <SideBar onLogin={onLogin} loggedIn={loggedIn} />}
                 <SidebarInset>
-              <SiteHeader />
+              {showHeader && <SiteHeader />}
 
             <Routes>
+               <Route path="/" element={<Navigate to={loggedIn ? "/dashboard" : "/login"} />} />
            <Route path='/register' element={<Register onRegister={onLogin} />} />
           <Route path='/login' element={<LogIn onLogin={onLogin} loggedIn={loggedIn} />} />
 
          
-         <Route path='/dashboard'  element={<Dashboard loggedIn={loggedIn} />}/>
+         <Route path='/dashboard'  element={loggedIn ? <Dashboard loggedIn={loggedIn} /> : <Navigate to="/login" />} />
 
 
 
-          <Route path="/doctors" element={   <DoctorsIndex /> } />
-          <Route path="/doctors/create" element={<DoctorsCreate />} />
-          <Route path="/doctors/:id" element={<DoctorsShow loggedIn={loggedIn} />} />
-          <Route path="/doctors/edit/:id" element={<DoctorsEdit />} />
-
-
-          <Route path="/patients" element={<PatientsIndex />} />
-          <Route path="/patients/create" element={<PatientsCreate />} />
-          <Route path="/patients/:id" element={<PatientsShow loggedIn={loggedIn} />} />
-          <Route path="/patients/edit/:id" element={<PatientsEdit />} />
-
-          
-          <Route path="/appointments" element={<AppointmentsIndex />} />
-          <Route path="/appointments/create" element={<AppointmentsCreate />} />
-          <Route path="/appointments/:id" element={<AppointmentsShow loggedIn={loggedIn} />} />
-          <Route path="/appointments/edit/:id" element={<AppointmentsEdit />} />
-
-          
-          <Route path="/diagnoses" element={<DiagnosesIndex />} />
-          <Route path="/diagnoses/create" element={<DiagnosesCreate />} />
-          <Route path="/diagnoses/:id" element={<DiagnosesShow loggedIn={loggedIn} />} />
-          <Route path="/diagnoses/edit/:id" element={<DiagnosesEdit />} />
-
-          <Route path="/prescriptions" element={<PrescriptionsIndex />} />
-          <Route path="/prescriptions/create" element={<PrescriptionsCreate />} />
-          <Route path="/prescriptions/:id" element={<PrescriptionsShow loggedIn={loggedIn} />} />
-          <Route path="/prescriptions/edit/:id" element={<PrescriptionsEdit />} />
+ <Route path="/doctors" element={loggedIn ? <DoctorsIndex /> : <Navigate to="/login" />} />
+  <Route path="/doctors/create" element={loggedIn ? <DoctorsCreate /> : <Navigate to="/login" />} />
+  <Route path="/doctors/:id" element={loggedIn ? <DoctorsShow loggedIn={loggedIn} /> : <Navigate to="/login" />} />
+  <Route path="/doctors/edit/:id" element={loggedIn ? <DoctorsEdit /> : <Navigate to="/login" />} />
+  <Route path="/patients" element={loggedIn ? <PatientsIndex /> : <Navigate to="/login" />} />
+  <Route path="/patients/create" element={loggedIn ? <PatientsCreate /> : <Navigate to="/login" />} />
+  <Route path="/patients/:id" element={loggedIn ? <PatientsShow loggedIn={loggedIn} /> : <Navigate to="/login" />} />
+  <Route path="/patients/edit/:id" element={loggedIn ? <PatientsEdit /> : <Navigate to="/login" />} />
+  <Route path="/appointments" element={loggedIn ? <AppointmentsIndex /> : <Navigate to="/login" />} />
+  <Route path="/appointments/create" element={loggedIn ? <AppointmentsCreate /> : <Navigate to="/login" />} />
+  <Route path="/appointments/:id" element={loggedIn ? <AppointmentsShow loggedIn={loggedIn} /> : <Navigate to="/login" />} />
+  <Route path="/appointments/edit/:id" element={loggedIn ? <AppointmentsEdit /> : <Navigate to="/login" />} />
+  <Route path="/diagnoses" element={loggedIn ? <DiagnosesIndex /> : <Navigate to="/login" />} />
+  <Route path="/diagnoses/create" element={loggedIn ? <DiagnosesCreate /> : <Navigate to="/login" />} />
+  <Route path="/diagnoses/:id" element={loggedIn ? <DiagnosesShow loggedIn={loggedIn} /> : <Navigate to="/login" />} />
+  <Route path="/diagnoses/edit/:id" element={loggedIn ? <DiagnosesEdit /> : <Navigate to="/login" />} />
+  <Route path="/prescriptions" element={loggedIn ? <PrescriptionsIndex /> : <Navigate to="/login" />} />
+  <Route path="/prescriptions/create" element={loggedIn ? <PrescriptionsCreate /> : <Navigate to="/login" />} />
+  <Route path="/prescriptions/:id" element={loggedIn ? <PrescriptionsShow loggedIn={loggedIn} /> : <Navigate to="/login" />} />
+  <Route path="/prescriptions/edit/:id" element={loggedIn ? <PrescriptionsEdit /> : <Navigate to="/login" />} />
                   </Routes>
 
 

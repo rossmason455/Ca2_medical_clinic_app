@@ -93,7 +93,7 @@ export default function Show() {
 
     <div
       className="dbBackground justify-content-center overflow-x-hidden"
-      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+      style={{ width: 'calc(100vw - 282px)' }}
     >
      <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{appointmentDetails} </div>
 </div>

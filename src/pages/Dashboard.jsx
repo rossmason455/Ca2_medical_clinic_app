@@ -309,13 +309,14 @@ export default function Dashboard() {
 
 
     
-  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen w-full"
+  style={{ width: 'calc(100vw - 282px)' }}>
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
-      style={{ minWidth: 'calc(98vw - var(--sidebar-width))' }}
+      className="dbBackground justify-content-center overflow-x-hidden "
+      
     >
 
 

@@ -74,12 +74,16 @@ const prescriptionSchema = z.object({
     }
   };
 
-       const backButton = (
-
-    <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+     const backButton = (
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+  >
+    <Link to={`/prescriptions`}>
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
+      </Button>
 );
 
 

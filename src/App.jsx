@@ -40,7 +40,7 @@ import PrescriptionsEdit from '@/pages/Prescriptions/Edit';
 
 
 
-function AppContent({ loggedIn, onLogin }) {
+function AppContent({ loggedIn, onLogin, user }) {
   const location = useLocation();
   const showSidebar = !['/login', '/register'].includes(location.pathname);
   const showHeader = !['/login', '/register'].includes(location.pathname);
@@ -66,7 +66,7 @@ function AppContent({ loggedIn, onLogin }) {
         <SidebarProvider 
         >
 
-             {showSidebar && <SideBar onLogin={onLogin} loggedIn={loggedIn} />}
+             {showSidebar && <SideBar onLogin={onLogin} loggedIn={loggedIn} user={user} />}
                 <SidebarInset>
               {showHeader && <SiteHeader />}
 

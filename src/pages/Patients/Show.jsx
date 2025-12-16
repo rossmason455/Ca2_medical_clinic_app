@@ -52,12 +52,17 @@ export default function Show() {
     fetchPatient();
   }, [id, token]);
 
+
      const backButton = (
-
-    <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+  >
+    <Link to={`/patients`}>
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
+      </Button>
 );
 
 
@@ -79,8 +84,8 @@ export default function Show() {
           <Button className="mt-50"
             asChild
             variant='outline'
-          >    <Link size="sm" to={`/doctors/edit/${id}`}>
-    Modify Doctors Details
+          >    <Link size="sm" to={`/patients/edit/${id}`}>
+    Modify Patient Details
     </Link></Button>
 
         </CardFooter>

@@ -81,10 +81,10 @@ export default function Index() {
   <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto pt-5 pb-5 pr-20 pl-20"
+    className="mb-4 mr-auto !font-bold !p-8 !text-lg"
   >
     <Link size="sm" to="/doctors/create">
-      Create New Doctor <IconCirclePlus />
+      Create New Doctor <IconCirclePlus className="size-7" />
     </Link>
   </Button>
 );

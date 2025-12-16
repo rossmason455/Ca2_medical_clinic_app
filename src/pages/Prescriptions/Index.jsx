@@ -87,10 +87,10 @@ export default function Index() {
   <Button
     asChild
     variant="outline"
-    className="mb-4 mr-auto"
+    className="mb-4 mr-auto !font-bold !p-8 !text-lg"
   >
     <Link size="sm" to="/prescriptions/create">
-      Create New Prescription <IconCirclePlus />
+      Create New Prescription <IconCirclePlus className="size-7" />
     </Link>
   </Button>
 );

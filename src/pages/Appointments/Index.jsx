@@ -68,12 +68,16 @@ export default function Index() {
 
 
   const createButton = (
-    <Button asChild variant="outline" className="mb-4 mr-auto">
-      <Link size="sm" to="/appointments/create">
-        Create New Appointment <IconCirclePlus />
-      </Link>
-    </Button>
-  );
+  <Button
+    asChild
+    variant="outline"
+    className="mb-4 mr-auto !font-bold !p-8 !text-lg"
+  >
+    <Link size="sm" to="/appointments/create">
+      Create New Appointment <IconCirclePlus className="size-7" />
+    </Link>
+  </Button>
+);
 
 
 

@@ -64,14 +64,18 @@ export default function Show() {
   </Button>
 );
 
-
      const backButton = (
-
-    <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+  >
+    <Link to={`/diagnoses`}>
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
+      </Button>
 );
+
 
   const diagnosisDetails = (
     <>
@@ -100,7 +104,7 @@ export default function Show() {
     </>
   );
  
-  return <>Show Diagnosis
+  return <>
 
         <div className="dbBackground"> {backButton} 
         <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
@@ -111,7 +115,7 @@ export default function Show() {
       className="dbBackground justify-content-center overflow-x-hidden"
       style={{ width: 'calc(100vw - 282px)' }}
     >
-     <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{diagnosisDetails} </div>
+     <div className="w-full pl-150 pr-150 mt-40">{diagnosisDetails} </div>
 </div>
 </div>
 </div>

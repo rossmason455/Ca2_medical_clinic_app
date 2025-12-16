@@ -5,7 +5,8 @@ import { Link } from "react-router";
 import {
   IconTrash,
   IconBinoculars,
-  IconCirclePlus
+  IconCirclePlus,
+
 } from "@tabler/icons-react"
 
 import {
@@ -24,6 +25,8 @@ import { bg } from "zod/v4/locales";
 export default function Index() {
   const [doctors, setDoctors] = useState([]);
 
+
+
   useEffect(() => {
     const fetchDoctors = async () => {
       const options = {
@@ -37,7 +40,10 @@ export default function Index() {
         setDoctors(response.data);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
+      
     };
 
     fetchDoctors();
@@ -122,15 +128,10 @@ export default function Index() {
 
   return (
     <>
-
   <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
-
-    <div className="ml-5">{createButton}</div>  
-
+  <div className="ml-5">{createButton}</div>  
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
-      
-    >
+      className="dbBackground justify-content-center overflow-x-hidden">
  <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
 </div>
 </div>

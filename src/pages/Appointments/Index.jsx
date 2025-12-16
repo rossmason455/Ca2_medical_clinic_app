@@ -2,44 +2,39 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 
+import { IconTrash, IconBinoculars, IconCirclePlus } from "@tabler/icons-react";
 
 import {
-  IconTrash,
-  IconBinoculars,
-  IconCirclePlus
-} from "@tabler/icons-react"
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 
 export default function Index() {
   const [appointments, setAppointments] = useState([]);
 
-    const formatDate = (timestamp) => {
+  const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
   useEffect(() => {
     const fetchAppointments = async () => {
-
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const options = {
         method: "GET",
         url: "https://ca2-med-api.vercel.app/appointments",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       try {
@@ -54,98 +49,98 @@ export default function Index() {
     fetchAppointments();
   }, []);
 
-   const handleDelete = async (id) => {
-    const token = localStorage.getItem('token');
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("token");
     try {
       await axios.delete(`https://ca2-med-api.vercel.app/prescriptions/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      setAppointments(appointments.filter(appointment => appointment.id !== id));
+      setAppointments(
+        appointments.filter((appointment) => appointment.id !== id)
+      );
     } catch (err) {
-      console.log('Delete failed:', err);
-
+      console.log("Delete failed:", err);
     }
   };
 
-  const dashboard = (
-      <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto block"
-  >
-    <Link size="sm" to="/dashboard">
-      Dashboard
-    </Link>
-  </Button>
-  )
 
   const createButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto"
-  >
-    <Link size="sm" to="/appointments/create">
-      Create New Appointment <IconCirclePlus />
-    </Link>
-  </Button>
-);
-
-  const appointmentCards = appointments.map((appointment) => {
-    return (
-      
+    <Button asChild variant="outline" className="mb-4 mr-auto">
+      <Link size="sm" to="/appointments/create">
+        Create New Appointment <IconCirclePlus />
+      </Link>
+    </Button>
+  );
 
 
-      <Card  key={appointment.id} className="!rounded-none">  
-        <CardHeader>
-          <CardTitle>{`Appointment: ${appointment.id}`}</CardTitle>
-          {/* <CardAction>Card Action</CardAction> */}
-        </CardHeader>
-        <CardContent>
-          <p>Date: {formatDate(appointment.appointment_date)}</p>
-          <p>Doctor ID: {appointment.doctor_id}</p>
-          <p>Patient ID: {appointment.patient_id}</p>
 
-        </CardContent>
-        <CardFooter>
-          <Button
-            asChild
-            variant='outline'
-          ><Link size='md' to={`/appointments/${appointment.id}`}>View<IconBinoculars /></Link></Button>
+  const appointmentsList = (
 
-          <Button
-            variant='destructive'
-            onClick={() => handleDelete(appointment.id)}
-            className="ml-2"
-            style={{ color: 'red'}}
-          >
-            <IconTrash />
-          </Button>
-        </CardFooter>
-      </Card>
-      
-    );
-  });
+    <Table>
+      <TableCaption>Recent appointments</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="text-2xl font-extrabold">Doctor ID</TableHead>
+          <TableHead className="text-2xl font-extrabold">Patient ID</TableHead>
+          <TableHead className="text-2xl font-extrabold">Appointment Date</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {appointments.map((appointment) => (
+          <TableRow key={appointment.id}>
+            <TableCell className="text-xl font-medium">{appointment.doctor_id} </TableCell>
+            <TableCell className="text-xl font-medium">{appointment.patient_id}</TableCell>
+            <TableCell className="text-xl font-medium">
+              {formatDate(appointment.appointment_date)}
+
+
+            </TableCell>
+            <div className="flex justify-end mt-1">                          
+              <Button asChild variant="outline">
+                <Link size="md" to={`/appointments/${appointment.id}`}>
+                  View
+                  <IconBinoculars />
+                </Link>
+              </Button>
+
+              <Button 
+                variant="destructive"
+                onClick={() => handleDelete(appointment.id)}
+                className="ml-2"
+                style={{ color: "red" }}
+              >
+                <IconTrash />
+              </Button></div>
+
+          </TableRow>
+        ))}
+        {appointments.length === 0 && (
+          <TableRow>
+            <TableCell colSpan={3} className="text-sm text-muted-foreground">
+              No appointments
+            </TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+
+  );
 
   return (
     <>
+      <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+        <div className="ml-5">{createButton}</div>
 
-
-  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
-
-    <div className="ml-5">{createButton}</div>  
-
-    <div
-      className="dbBackground justify-content-center overflow-x-hidden"
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
- <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{appointmentCards}</div>
-</div>
-</div>
-
+        <div
+          className="dbBackground justify-content-center overflow-x-hidden"
+          style={{ width: "calc(100vw - 282px)" }}
+        >
+          <div className="w-full p-10 ">{appointmentsList}</div>
+        </div>
+      </div>
     </>
   );
 }

@@ -8,16 +8,17 @@ import {
   IconCirclePlus
 } from "@tabler/icons-react"
 
-
 import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+
 
 import { Button } from '@/components/ui/button'
 
@@ -94,46 +95,58 @@ export default function Index() {
   </Button>
 );
 
-  const prescriptionsCards = prescriptions.map((prescription) => {
-    return (
-      
+ 
 
 
-      <Card key={prescription.id}>  
-        <CardHeader>
-          <CardTitle>{`Medication: ${prescription.medication}`}</CardTitle>
-          <CardDescription>{prescription.dosage}</CardDescription>
-          {/* <CardAction>Card Action</CardAction> */}
-        </CardHeader>
-        <CardContent>
-          <p>{`Patient ID: ${prescription.patient_id}`}</p>
-          <p>{`Diagnosis ID: ${prescription.diagnosis_id}`}</p>
-          <p>{`Doctor ID: ${prescription.doctor_id}`}</p>
-          <p>{`Start Date: ${formatDate(prescription.start_date)}`}</p>
-          <p>{`End Date: ${formatDate(prescription.end_date)}`}</p>
+  const prescriptionsList = (
+    <Table>
+          <TableCaption>Recent prescriptions</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-2xl font-extrabold">Medication</TableHead>
+              <TableHead className="text-2xl font-extrabold">Patient ID</TableHead>
+            <TableHead className="text-2xl font-extrabold">Start Date</TableHead>
+            <TableHead className="text-2xl font-extrabold">End Date</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {prescriptions.map((prescription) => (
+              <TableRow key={prescription.id}>
+                <TableCell className="text-xl font-medium">{prescription.medication}</TableCell>
+                <TableCell className="text-xl font-medium">{prescription.patient_id}</TableCell>
+                <TableCell className="text-xl font-medium">{formatDate(prescription.start_date)}</TableCell>
+                <TableCell className="text-xl font-medium">{formatDate(prescription.end_date)}</TableCell>
+                 <div className="flex justify-end mt-1">                          
+              <Button asChild variant="outline">
+                <Link size="md" to={`/prescriptions/${prescription.id}`}>
+                  View
+                  <IconBinoculars />
+                </Link>
+              </Button>
 
-
-
-        </CardContent>
-        <CardFooter>
-          <Button
-            asChild
-            variant='outline'
-          ><Link size='md' to={`/prescriptions/${prescription.id}`}>View <IconBinoculars /></Link></Button>
-
-          <Button
-            variant='destructive'
-            onClick={() => handleDelete(prescription.id)}
-            className="ml-2"
-            style={{ color: 'red'}}
-          >
-            <IconTrash />
-          </Button>
-        </CardFooter>
-      </Card>
-      
-    );
-  });
+              <Button 
+                variant="destructive"
+                onClick={() => handleDelete(prescription.id)}
+                className="ml-2"
+                style={{ color: "red" }}
+              >
+                <IconTrash />
+              </Button></div>
+              </TableRow>
+            ))}
+            {prescriptions.length === 0 && (
+              <TableRow>
+                <TableCell
+                  colSpan={3}
+                  className="text-sm text-muted-foreground"
+                >
+                  No prescriptions
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+  )
 
   return (
     <>
@@ -145,7 +158,7 @@ export default function Index() {
       className="dbBackground justify-content-center overflow-x-hidden"
       style={{ width: 'calc(100vw - 282px)' }}
     >
- <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{prescriptionsCards}</div>
+ <div className="w-full p-10">{prescriptionsList}</div>
 </div>
 </div>
     </>

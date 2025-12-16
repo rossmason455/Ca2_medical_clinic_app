@@ -105,7 +105,7 @@ export default function Show() {
       className="justify-content-center overflow-x-hidden"
       style={{ width: 'calc(100vw - 282px)' }}
     >
-     <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{doctorProfile} </div>
+     <div className="w-full pl-150 pr-150 mt-40">{doctorProfile} </div>
 </div>
 </div>
 </div>

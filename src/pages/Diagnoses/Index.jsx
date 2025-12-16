@@ -8,6 +8,16 @@ import {
   IconCirclePlus
 } from "@tabler/icons-react"
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 
 
 import {
@@ -94,6 +104,8 @@ export default function Index() {
   </Button>
 );
 
+
+
   const diagnosesCards = diagnoses.map((diagnosis) => {
     return (
       
@@ -130,6 +142,59 @@ export default function Index() {
     );
   });
 
+
+  const diagnosesList = (
+
+      <Table>
+          <TableCaption>Recent diagnoses</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-2xl font-extrabold">Condition</TableHead>
+              <TableHead className="text-2xl font-extrabold">Patient ID</TableHead>
+            <TableHead className="text-2xl font-extrabold">Diagnosis Date</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {diagnoses.map((diagnosis) => (
+              <TableRow key={diagnosis.id}>
+                <TableCell className="text-xl font-medium">{diagnosis.condition}</TableCell>
+                <TableCell className="text-xl font-medium">{diagnosis.patient_id}</TableCell>
+                <TableCell className="text-xl font-medium">{formatDate(diagnosis.diagnosis_date)}</TableCell>
+
+                 <div className="flex justify-end mt-1">                          
+              <Button asChild variant="outline">
+                <Link size="md" to={`/diagnoses/${diagnosis.id}`}>
+                  View
+                  <IconBinoculars />
+                </Link>
+              </Button>
+
+              <Button 
+                variant="destructive"
+                onClick={() => handleDelete(diagnosis.id)}
+                className="ml-2"
+                style={{ color: "red" }}
+              >
+                <IconTrash />
+              </Button></div>
+              </TableRow>
+            ))}
+            {diagnoses.length === 0 && (
+              <TableRow>
+                <TableCell
+                  colSpan={3}
+                  className="text-sm text-muted-foreground"
+                >
+                  No appointments
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+
+
+  )
+
   return (
     <>
   <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
@@ -140,7 +205,7 @@ export default function Index() {
       className="dbBackground justify-content-center overflow-x-hidden"
       style={{ width: 'calc(100vw - 282px)' }}
     >
- <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{diagnosesCards}</div>
+ <div className="w-full p-10">{diagnosesList}</div>
 </div>
 </div>
     </>

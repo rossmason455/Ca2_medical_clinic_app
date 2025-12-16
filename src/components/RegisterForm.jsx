@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 
+import { IconLoader } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -97,7 +98,7 @@ export default function RegisterForm({onRegister}) {
             "Register"
           )}
         </Button>
-        
+        <p className="mt-5">Already have an account? <a href="/login">Login now.</a></p>
       </CardFooter>
     </Card>
   );

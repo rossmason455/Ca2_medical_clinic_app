@@ -14,6 +14,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import {
+IconArrowNarrowLeft
+} from "@tabler/icons-react";
+
+
 export default function Show() {
   const [appointment, setAppointment] = useState([]);
   const { id } = useParams();
@@ -59,6 +64,15 @@ export default function Show() {
   </Button>
 );
 
+
+     const backButton = (
+
+    <Link to={`/doctors`}>
+    <IconArrowNarrowLeft className="ml-10 size-15" />
+    </Link>
+
+);
+
   const appointmentDetails = (
     <>
       <Card key={appointment.id}>  
@@ -87,6 +101,8 @@ export default function Show() {
   );
  
   return <>
+
+    <div className="dbBackground"> {backButton} 
     <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
 
 
@@ -98,7 +114,7 @@ export default function Show() {
      <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{appointmentDetails} </div>
 </div>
 </div>
-
+</div>
   
   </>;
 }

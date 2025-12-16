@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Link } from 'react-router';
+
+
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useParams } from "react-router";
@@ -18,6 +21,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import {IconArrowNarrowLeft
+} from "@tabler/icons-react";
+
 
 const appointmentSchema = z.object({
   appointment_date: z.string().min(1, "Appointment date is required"),
@@ -38,7 +45,7 @@ const appointmentSchema = z.object({
 
 
 
-   export default function CreateAppointment() {
+   export default function EditAppointment() {
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -88,6 +95,14 @@ const appointmentSchema = z.object({
     }
   };
 
+     const backButton = (
+
+    <Link to={`/doctors`}>
+    <IconArrowNarrowLeft className="ml-10 size-15" />
+    </Link>
+
+);
+
   const editForm = (
     <>
   <Card className="w-full">
@@ -136,6 +151,8 @@ const appointmentSchema = z.object({
 
     return (
     <>
+    <div className='dbBackground'>
+      {backButton}
     <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
 
 
@@ -147,7 +164,7 @@ const appointmentSchema = z.object({
 {editForm}
 </div>
 </div>
-
+</div>
     </>
   );
 }

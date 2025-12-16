@@ -62,7 +62,7 @@ const data = {
   ],
 };
 
-export default function AppSidebar({ onLogin, loggedIn, ...props }) {
+export default function AppSidebar({ onLogin, loggedIn, user, ...props }) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader className="!p-0">
@@ -93,7 +93,7 @@ export default function AppSidebar({ onLogin, loggedIn, ...props }) {
       </SidebarContent>
       <SidebarFooter>
         
-        <NavUser user={data.user} onLogin={onLogin} />
+        <NavUser user={user || data.user} onLogin={onLogin}  />
       </SidebarFooter>
     </Sidebar>
   );

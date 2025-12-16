@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
+import { IconLoader } from "@tabler/icons-react";
 import {
   Card,
   CardAction,
@@ -76,8 +77,15 @@ export default function LoginForm({onLogin}) {
       </CardContent>
       
       <CardFooter className="flex-col gap-2">
-        <Button variant='outline' onClick={handleSubmit(onSubmit)}  className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Logging in…" : "Login"}
+        <Button variant='outline' onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <IconLoader className="mr-2 animate-spin" />  
+              Logging in…
+            </>
+          ) : (
+            "Login"
+          )}
         </Button>
         <p className="mt-5">Don't have an account? <a href="/register">Register now.</a></p>
       </CardFooter>

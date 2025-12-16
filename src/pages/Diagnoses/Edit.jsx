@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Link } from 'react-router';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { useParams } from "react-router";
@@ -11,7 +12,7 @@ import { useForm } from "react-hook-form";
 
 
 import {
-  Card,
+  Card, 
   CardAction,
   CardContent,
   CardDescription,
@@ -19,6 +20,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+import {IconArrowNarrowLeft
+} from "@tabler/icons-react";
+
 
 const diagnosisSchema = z.object({
   patient_id: z.preprocess(
@@ -79,6 +84,14 @@ const diagnosisSchema = z.object({
     }
   };
 
+       const backButton = (
+
+    <Link to={`/doctors`}>
+    <IconArrowNarrowLeft className="ml-10 size-15" />
+    </Link>
+
+);
+
   const editForm = (
     <>
          <Card className="w-full">
@@ -120,6 +133,8 @@ const diagnosisSchema = z.object({
 
     return (
     <>
+
+    <div className='dbBackground'></div>
     <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
 
 

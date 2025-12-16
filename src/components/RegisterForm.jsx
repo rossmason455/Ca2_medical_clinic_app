@@ -88,7 +88,14 @@ export default function RegisterForm({onRegister}) {
       </CardContent>
       <CardFooter className="flex-col gap-2">
         <Button variant='outline' onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Registering…" : "Register"}
+          {isSubmitting ? (
+            <>
+              <IconLoader className="mr-2 animate-spin" />  
+              Registering…
+            </>
+          ) : (
+            "Register"
+          )}
         </Button>
         
       </CardFooter>

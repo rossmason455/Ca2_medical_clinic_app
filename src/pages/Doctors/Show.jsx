@@ -4,6 +4,12 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router';
 import { Button } from '@/components/ui/button';
 
+
+import {
+IconArrowNarrowLeft
+} from "@tabler/icons-react";
+
+
 import {
   Card,
   CardAction,
@@ -54,6 +60,15 @@ export default function Show() {
   </Button>
 );
 
+
+   const backButton = (
+
+    <Link to={`/doctors`}>
+    <IconArrowNarrowLeft className="ml-10 size-15" />
+    </Link>
+
+);
+
   const doctorProfile = (
     <>
       <Card className="min-h-100 max-w-200" key={doctor.id}>  
@@ -80,17 +95,18 @@ export default function Show() {
   );
  
   return <>
+<div className="dbBackground">{backButton}
 
+    <div className="justify-content-center overflow-x-hidden min-h-screen">
 
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
-
-
+    
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
+      className="justify-content-center overflow-x-hidden"
       style={{ width: 'calc(100vw - 282px)' }}
     >
      <div className="m-5 grid grid-cols-2 gap-6 items-stretch">{doctorProfile} </div>
+</div>
 </div>
 </div>
     

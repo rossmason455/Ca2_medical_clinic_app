@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router";
 import Navbar from '@/components/Navbar';
 import MainLayout from '@/components/MainLayout';
@@ -117,6 +117,8 @@ export default function App() {
     return !!token;
   });
 
+   const [user, setUser] = useState(null);
+
    useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -152,7 +154,7 @@ export default function App() {
 
     return (
     <Router>
-      <AppContent loggedIn={loggedIn} onLogin={onLogin} />
+      <AppContent loggedIn={loggedIn} onLogin={onLogin} user={user} />
     </Router>
   );
 }

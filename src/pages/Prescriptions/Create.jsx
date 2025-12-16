@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Link } from 'react-router';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
+import {
+IconArrowNarrowLeft
+} from "@tabler/icons-react";
 
 import {
   Card,
@@ -69,6 +73,14 @@ const prescriptionSchema = z.object({
       console.log(err.response?.data || err.message);
     }
   };
+
+       const backButton = (
+
+    <Link to={`/doctors`}>
+    <IconArrowNarrowLeft className="ml-10 size-15" />
+    </Link>
+
+);
 
 
    const createForm = (
@@ -137,19 +149,19 @@ const prescriptionSchema = z.object({
 
     return (
     <>
-
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
+  <div className='dbBackground'>{backButton}
+    <div className=" justify-content-center overflow-x-hidden min-h-screen flex">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {createForm}
 </div>
 </div>
-
+</div>
 
   
 

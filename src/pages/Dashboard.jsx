@@ -164,7 +164,7 @@ export default function Dashboard() {
   );
 
   const appointmentsListCard = (
-    <Card>
+    <Card className="min-h-104">
       <CardHeader>
         <CardTitle>Appointments</CardTitle>
       </CardHeader>
@@ -211,7 +211,7 @@ export default function Dashboard() {
   );
 
   const diagnosesListCard = (
-    <Card>
+    <Card className="min-h-104">
       <CardHeader>
         <CardTitle>Diagnosis</CardTitle>
       </CardHeader>
@@ -257,7 +257,7 @@ export default function Dashboard() {
   );
 
    const prescriptionsListCard = (
-    <Card>
+    <Card className="min-h-104">
       <CardHeader>
         <CardTitle>Prescriptions</CardTitle>
       </CardHeader>

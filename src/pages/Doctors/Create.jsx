@@ -68,13 +68,16 @@ export default function CreateDoctor() {
   };
 
      const backButton = (
-
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+  >
     <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
+      </Button>
 );
-
 
   const createForm = (<Card className="w-full">
       <CardHeader>
@@ -86,31 +89,31 @@ export default function CreateDoctor() {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="grid gap-2">
             <Label htmlFor="first_name">First Name</Label>
-            <Input id="first_name" {...register("first_name")} />
+            <Input id="first_name" placeholder="e.g. John" {...register("first_name")} />
             {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="last_name">Last Name</Label>
-            <Input id="last_name" {...register("last_name")} />
+            <Input id="last_name" placeholder="e.g. Doe" {...register("last_name")} />
             {errors.last_name && <p className="text-sm text-red-500">{errors.last_name.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="specialisation">Specialisation</Label>
-            <Input id="specialisation" {...register("specialisation")} />
+            <Input id="specialisation" placeholder="e.g. Cardiology" {...register("specialisation")} />
             {errors.specialisation && <p className="text-sm text-red-500">{errors.specialisation.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" {...register("email")} />
+            <Input id="email" type="email" placeholder="e.g. john.doe@example.com" {...register("email")} />
             {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="phone">Phone</Label>
-            <Input id="phone" {...register("phone")} />
+            <Input id="phone" placeholder="e.g. 123-456-7890" {...register("phone")} />
             {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
           </div>
         </form>
@@ -129,12 +132,12 @@ export default function CreateDoctor() {
     <div className='dbBackground'>
        {backButton} 
     
-    <div className=" justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className="min-h-screen">
 
    
 
     <div
-      className=" justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
       

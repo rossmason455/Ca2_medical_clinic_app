@@ -107,12 +107,12 @@ export default function Show() {
   return <>
 
         <div className="dbBackground"> {backButton} 
-        <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+        <div className=" min-h-screen">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
+
       style={{ width: 'calc(100vw - 282px)' }}
     >
      <div className="w-full pl-150 pr-150 mt-40">{diagnosisDetails} </div>

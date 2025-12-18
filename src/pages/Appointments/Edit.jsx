@@ -66,9 +66,9 @@ const appointmentSchema = z.object({
     useEffect(() => {
 
     const token = localStorage.getItem("token");
-    const fetchPatient = async () => {
+    const fetchAppointment = async () => {
       try {
-        const res = await axios.get(`https://ca2-med-api.vercel.app/diagnoses/${id}`, {
+        const res = await axios.get(`https://ca2-med-api.vercel.app/appointments/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         reset({
@@ -80,16 +80,16 @@ const appointmentSchema = z.object({
         console.log(err.response?.data || err.message);
       }
     };
-    fetchPatient();
-  }, [id]);
+    fetchAppointment();
+  }, [id, reset]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
-      await axios.patch(`https://ca2-med-api.vercel.app/diagnoses/${id}`, data, {
+      await axios.patch(`https://ca2-med-api.vercel.app/appointments/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      navigate("/diagnoses");
+      navigate("/appointments");
     } catch (err) {
       console.log(err.response?.data || err.message);
     }
@@ -99,7 +99,7 @@ const appointmentSchema = z.object({
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/appointments/${id}`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -158,12 +158,12 @@ const appointmentSchema = z.object({
     <>
     <div className='dbBackground'>
       {backButton}
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className=" min-h-screen">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {editForm}

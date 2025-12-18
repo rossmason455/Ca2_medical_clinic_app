@@ -34,13 +34,14 @@ const diagnosisSchema = z.object({
   diagnosis_date: z.string().min(1, "Diagnosis Date is required"),
 });
 
-   export default function CreateDiagnosis() {
+   export default function EditDiagnosis() {
     const navigate = useNavigate();
         const { id } = useParams();
       const  {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     resolver: zodResolver(diagnosisSchema),
     defaultValues: {
@@ -55,7 +56,7 @@ const diagnosisSchema = z.object({
       useEffect(() => {
 
     const token = localStorage.getItem("token");
-    const fetchDoctor = async () => {
+    const fetchDiagnosis = async () => {
       try {
         const res = await axios.get(`https://ca2-med-api.vercel.app/diagnoses/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -69,8 +70,8 @@ const diagnosisSchema = z.object({
         console.log(err.response?.data || err.message);
       }
     };
-    fetchDoctor();
-  }, [id]);
+    fetchDiagnosis();
+  }, [id, reset]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
@@ -87,7 +88,7 @@ const diagnosisSchema = z.object({
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/diagnoses/${id}`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -138,7 +139,7 @@ const diagnosisSchema = z.object({
     return (
     <>
 
-    <div className='dbBackground'></div>
+    <div className='dbBackground'>{backButton}
     <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
 
 
@@ -148,6 +149,7 @@ const diagnosisSchema = z.object({
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {editForm}
+</div>
 </div>
 </div>
 

@@ -135,14 +135,13 @@ export default function Index() {
 
   return (
     <>
-      <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+      <div className="dbBackground min-h-screen">
         <div className="ml-5">{createButton}</div>
 
         <div
-          className="dbBackground justify-content-center overflow-x-hidden"
           style={{ width: "calc(100vw - 282px)" }}
         >
-          <div className="w-full p-10 ">{appointmentsList}</div>
+          <div className="w-full p-5">{appointmentsList}</div>
         </div>
       </div>
     </>

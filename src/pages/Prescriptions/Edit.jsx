@@ -44,13 +44,14 @@ const prescriptionSchema = z.object({
   end_date: z.string().min(1, "End Date is required"),
 });
 
-  export default function CreatePrescription() {
+  export default function EditPrescription() {
     const navigate = useNavigate();
         const { id } = useParams();
       const  {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     resolver: zodResolver(prescriptionSchema),
     defaultValues: {
@@ -68,24 +69,26 @@ const prescriptionSchema = z.object({
       useEffect(() => {
 
     const token = localStorage.getItem("token");
-    const fetchDoctor = async () => {
+    const fetchPrescription = async () => {
       try {
         const res = await axios.get(`https://ca2-med-api.vercel.app/prescriptions/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         reset({
-          first_name: res.data.first_name ?? "",
-          last_name: res.data.last_name ?? "",
-          specialisation: res.data.specialisation ?? "",
-          email: res.data.email ?? "",
-          phone: res.data.phone ?? "",
+          patient_id: res.data.patient_id ?? "",
+          doctor_id: res.data.doctor_id ?? "",
+          diagnosis_id: res.data.diagnosis_id ?? "",
+          medication: res.data.medication ?? "",
+          dosage: res.data.dosage ?? "",
+          start_date: res.data.start_date ?? "",
+          end_date: res.data.end_date ?? "",
         });
       } catch (err) {
         console.log(err.response?.data || err.message);
       }
     };
-    fetchDoctor();
-  }, [id]);
+    fetchPrescription();
+  }, [id, reset]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
@@ -104,7 +107,7 @@ const prescriptionSchema = z.object({
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/prescriptions/${id}`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -178,12 +181,12 @@ const prescriptionSchema = z.object({
     return (
     <>
     <div className='dbBackground'> {backButton}
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className=" min-h-screen">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className="pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {editForm}

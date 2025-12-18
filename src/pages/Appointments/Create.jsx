@@ -72,13 +72,18 @@ const appointmentSchema = z.object({
     }
   };
 
-       const backButton = (
-
-    <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+     const backButton = (
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+  >
+    <Link to={`/appointments`}>
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
+      </Button>
+    );
 
-);
 
      const createForm = (
     <>
@@ -94,8 +99,8 @@ const appointmentSchema = z.object({
               <Label htmlFor="appointment_date">Appointment Date</Label>
               <Input
                 id="appointment_date"
+                placeholder="e.g. 2023-12-01T10:00:00Z"
                 {...register("appointment_date")}
-                placeholder="YYYY-MM-DD or unix seconds"
               />
               {errors.appointment_date && (
                 <p className="text-sm text-red-500">{errors.appointment_date.message}</p>
@@ -104,13 +109,13 @@ const appointmentSchema = z.object({
 
             <div className="grid gap-2">
               <Label htmlFor="doctor_id">Doctor ID</Label>
-              <Input id="doctor_id" type="number" {...register("doctor_id")} />
+              <Input id="doctor_id" type="number" placeholder="e.g. 1" {...register("doctor_id")} />
               {errors.doctor_id && <p className="text-sm text-red-500">{errors.doctor_id.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="patient_id">Patient ID</Label>
-              <Input id="patient_id" type="number" {...register("patient_id")} />
+              <Input id="patient_id" type="number" placeholder="e.g. 1" {...register("patient_id")} />
               {errors.patient_id && <p className="text-sm text-red-500">{errors.patient_id.message}</p>}
             </div>
           </form>
@@ -129,12 +134,12 @@ const appointmentSchema = z.object({
     return (
     <>
   <div className='dbBackground'>{backButton}
-    <div className=" justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className=" min-h-screen">
 
 
 
     <div
-      className=" justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {createForm}

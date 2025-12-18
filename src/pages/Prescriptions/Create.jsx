@@ -78,7 +78,7 @@ const prescriptionSchema = z.object({
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/prescriptions`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -99,43 +99,43 @@ const prescriptionSchema = z.object({
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="grid gap-2">
             <Label htmlFor="patient_id">Patient ID</Label>
-            <Input id="patient_id" type="number" {...register("patient_id")} />
+            <Input id="patient_id" type="number" placeholder="Enter patient ID" {...register("patient_id")} />
             {errors.patient_id && <p className="text-sm text-red-500">{errors.patient_id.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="doctor_id">Doctor ID</Label>
-            <Input id="doctor_id" type="number" {...register("doctor_id")} />
+            <Input id="doctor_id" type="number" placeholder="Enter doctor ID" {...register("doctor_id")} />
             {errors.doctor_id && <p className="text-sm text-red-500">{errors.doctor_id.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="diagnosis_id">Diagnosis ID</Label>
-            <Input id="diagnosis_id" type="number" {...register("diagnosis_id")} />
+            <Input id="diagnosis_id" type="number" placeholder="Enter diagnosis ID" {...register("diagnosis_id")} />
             {errors.diagnosis_id && <p className="text-sm text-red-500">{errors.diagnosis_id.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="medication">Medication</Label>
-            <Input id="medication" {...register("medication")} />
+            <Input id="medication" placeholder="Enter medication name" {...register("medication")} />
             {errors.medication && <p className="text-sm text-red-500">{errors.medication.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="dosage">Dosage</Label>
-            <Input id="dosage" {...register("dosage")} />
+            <Input id="dosage" placeholder="Enter dosage" {...register("dosage")} />
             {errors.dosage && <p className="text-sm text-red-500">{errors.dosage.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="start_date">Start Date</Label>
-            <Input id="start_date" {...register("start_date")} placeholder="YYYY-MM-DD or unix seconds" />
+            <Input id="start_date" placeholder="YYYY-MM-DD" {...register("start_date")} />
             {errors.start_date && <p className="text-sm text-red-500">{errors.start_date.message}</p>}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="end_date">End Date</Label>
-            <Input id="end_date" {...register("end_date")} placeholder="YYYY-MM-DD or unix seconds" />
+            <Input id="end_date" placeholder="YYYY-MM-DD" {...register("end_date")} />
             {errors.end_date && <p className="text-sm text-red-500">{errors.end_date.message}</p>}
           </div>
         </form>
@@ -154,12 +154,12 @@ const prescriptionSchema = z.object({
     return (
     <>
   <div className='dbBackground'>{backButton}
-    <div className=" justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className=" min-h-screen">
 
 
 
     <div
-      className=" justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {createForm}

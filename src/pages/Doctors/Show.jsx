@@ -60,14 +60,18 @@ export default function Show() {
   </Button>
 );
 
-
-   const backButton = (
-
+     const backButton = (
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+  >
     <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
+      </Button>
 );
+
 
   const doctorProfile = (
     <>
@@ -97,12 +101,12 @@ export default function Show() {
   return <>
 <div className="dbBackground">{backButton}
 
-    <div className="justify-content-center overflow-x-hidden min-h-screen">
+    <div className=" min-h-screen">
 
     
 
     <div
-      className="justify-content-center overflow-x-hidden"
+
       style={{ width: 'calc(100vw - 282px)' }}
     >
      <div className="w-full pl-150 pr-150 mt-40">{doctorProfile} </div>

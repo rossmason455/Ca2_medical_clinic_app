@@ -57,7 +57,7 @@ export default function Show() {
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/patients`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -99,12 +99,12 @@ export default function Show() {
 
   <div className="dbBackground"> {backButton} 
 
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+    <div className="min-h-screen">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
+
       style={{ width: 'calc(100vw - 282px)' }}
     >
      <div className="w-full pl-150 pr-150 mt-40">{patientProfile} </div>

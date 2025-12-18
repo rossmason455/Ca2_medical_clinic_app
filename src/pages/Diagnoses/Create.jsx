@@ -65,7 +65,7 @@ const diagnosisSchema = z.object({
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/diagnoses`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -86,19 +86,19 @@ const diagnosisSchema = z.object({
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="grid gap-2">
               <Label htmlFor="patient_id">Patient ID</Label>
-              <Input id="patient_id" type="number" {...register("patient_id")} />
+              <Input id="patient_id" type="number" placeholder="e.g. 1" {...register("patient_id")} />
               {errors.patient_id && <p className="text-sm text-red-500">{errors.patient_id.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="condition">Condition</Label>
-              <Input id="condition" {...register("condition")} />
+              <Input id="condition" placeholder="e.g. Hypertension" {...register("condition")} />
               {errors.condition && <p className="text-sm text-red-500">{errors.condition.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="diagnosis_date">Diagnosis Date</Label>
-              <Input id="diagnosis_date" {...register("diagnosis_date")} placeholder="YYYY-MM-DD or unix seconds" />
+              <Input id="diagnosis_date" placeholder="e.g. 2023-10-01" {...register("diagnosis_date")} />
               {errors.diagnosis_date && <p className="text-sm text-red-500">{errors.diagnosis_date.message}</p>}
             </div>
           </form>
@@ -117,12 +117,12 @@ const diagnosisSchema = z.object({
     return (
     <>
     <div className='dbBackground'>{backButton}
-    <div className=" justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className="min-h-screen">
 
 
 
     <div
-      className=" justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {createForm}

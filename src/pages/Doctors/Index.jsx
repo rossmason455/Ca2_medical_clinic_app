@@ -98,13 +98,13 @@ export default function Index() {
       <Card key={doctor.id} className="max-w-sm">  
         <CardHeader>
           <img src={randomImage} alt={`Dr. ${doctor.first_name} ${doctor.last_name}`} className="w-16 rounded-full mr-4" />
-          <CardTitle>Dr. {`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
-          <CardDescription>{doctor.specialisation}</CardDescription>
+          <CardTitle className="font-bold text-lg">Dr. {`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
+          <CardDescription className="text-base">{doctor.specialisation}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
-        <CardContent>
-          <p>Email: {doctor.email}</p>
-          <p>Phone: {doctor.phone}</p>
+        <CardContent className="min-h-18 ">
+          <p><span className="font-medium">Email:</span> {doctor.email}</p>
+          <p><span className="font-medium">Phone:</span> {doctor.phone}</p>
         </CardContent>
         <CardFooter>
           <Button 
@@ -128,10 +128,11 @@ export default function Index() {
 
   return (
     <>
-  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+  <div className="dbBackground min-h-screen">
   <div className="ml-5">{createButton}</div>  
     <div
-      className="dbBackground justify-content-center overflow-x-hidden">
+      style={{ width: 'calc(100vw - 282px)' }}
+    >
  <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
 </div>
 </div>

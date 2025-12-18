@@ -96,17 +96,17 @@ export default function Index() {
       
 
 
-      <Card key={patient.id} className="max-w-sm max-h-64">  
+      <Card key={patient.id} className="max-w-sm max-h-70">  
         <CardHeader>
-          <CardTitle>{`${patient.first_name} ${patient.last_name}`}</CardTitle>
-          <CardDescription>{`Patient ID: ${patient.id}`}</CardDescription>
+          <CardTitle className="font-bold text-lg">{`${patient.first_name} ${patient.last_name}`}</CardTitle>
+          <CardDescription className="text-base">{`Patient ID: ${patient.id}`}</CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
-        <CardContent>
-          <p>Email: {patient.email}</p>
-          <p>Phone: {patient.phone}</p>
-          <p>Date of Birth: {formatDate(patient.date_of_birth)}</p>
-          <p>Address: {patient.address}</p>
+        <CardContent className="max-h-60 ">
+          <p><span className="font-medium">Email:</span> {patient.email}</p>
+          <p><span className="font-medium">Phone:</span> {patient.phone}</p>
+          <p><span className="font-medium">Date of Birth:</span> {formatDate(patient.date_of_birth)}</p>
+          <p><span className="font-medium">Address:</span> {patient.address}</p>
         </CardContent>
         <CardFooter>
           <Button
@@ -130,12 +130,11 @@ export default function Index() {
 
   return (
     <>
-  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen">
+  <div className="dbBackground min-h-screen">
 
     <div className="ml-5">{createButton}</div>  
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden"
       style={{ width: 'calc(100vw - 282px)' }}
     >
  <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{patientCards}</div>

@@ -72,14 +72,17 @@ const patientSchema = z.object({
   };
 
 
-       const backButton = (
-
-    <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+     const backButton = (
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+  >
+    <Link to={`/patients`}>
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
-);
-
+      </Button>
+    );
 
   const createForm = (
     <>
@@ -93,38 +96,38 @@ const patientSchema = z.object({
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="grid gap-2">
               <Label htmlFor="first_name">First Name</Label>
-              <Input id="first_name" {...register("first_name")} />
+              <Input id="first_name" placeholder="e.g. Jane" {...register("first_name")} />
               {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="last_name">Last Name</Label>
-              <Input id="last_name" {...register("last_name")} />
+              <Input id="last_name" placeholder="e.g. Smith" {...register("last_name")} />
               {errors.last_name && <p className="text-sm text-red-500">{errors.last_name.message}</p>}
             </div>
 
 
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" {...register("email")} />
+              <Input id="email" type="email" placeholder="e.g. jane.smith@example.com" {...register("email")} />
               {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="phone">Phone</Label>
-              <Input id="phone" {...register("phone")} />
+              <Input id="phone" placeholder="e.g. 098-765-4321" {...register("phone")} />
               {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="date_of_birth">Date of Birth</Label>
-              <Input id="date_of_birth" {...register("date_of_birth")} placeholder="YYYY-MM-DD or unix timestamp" />
+              <Input id="date_of_birth" placeholder="e.g. 1990-01-01" {...register("date_of_birth")} />
               {errors.date_of_birth && <p className="text-sm text-red-500">{errors.date_of_birth.message}</p>}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="address">Address</Label>
-              <Input id="address" {...register("address")} />
+              <Input id="address" placeholder="e.g. 123 Main St, City, State" {...register("address")} />
               {errors.address && <p className="text-sm text-red-500">{errors.address.message}</p>}
             </div>
           </form>
@@ -145,12 +148,12 @@ const patientSchema = z.object({
 
       <div className='dbBackground'>{backButton}
 
-    <div className="justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className="min-h-screen">
 
 
 
     <div
-      className="justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className="pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {createForm}

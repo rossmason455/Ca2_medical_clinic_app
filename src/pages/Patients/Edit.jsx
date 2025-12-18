@@ -27,7 +27,7 @@ import {IconArrowNarrowLeft
 const patientSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-   email: z
+  email: z
     .string()
     .min(1, "Email is required")
     .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
@@ -47,6 +47,7 @@ const patientSchema = z.object({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     resolver: zodResolver(patientSchema),
     defaultValues: {
@@ -81,7 +82,7 @@ const patientSchema = z.object({
       }
     };
     fetchPatient();
-  }, [id]);
+  }, [id, reset]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
@@ -99,7 +100,7 @@ const patientSchema = z.object({
       <Button
     asChild
     variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
   >
     <Link to={`/patients/${id}`}>
     <IconArrowNarrowLeft className=" size-15" />
@@ -119,7 +120,7 @@ const patientSchema = z.object({
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <div className="grid gap-2">
               <Label htmlFor="first_name">First Name</Label>
-              <Input id="first_name" {...register("first_name")} />
+              <Input id="first_name" placeholder="Enter first name" {...register("first_name")} />
               {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
             </div>
 
@@ -143,7 +144,7 @@ const patientSchema = z.object({
 
             <div className="grid gap-2">
               <Label htmlFor="date_of_birth">Date of Birth</Label>
-              <Input id="date_of_birth" {...register("date_of_birth")} placeholder="YYYY-MM-DD or unix timestamp" />
+              <Input id="date_of_birth" {...register("date_of_birth")} />
               {errors.date_of_birth && <p className="text-sm text-red-500">{errors.date_of_birth.message}</p>}
             </div>
 
@@ -171,12 +172,12 @@ const patientSchema = z.object({
 
       {backButton}
 
-    <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className=" min-h-screen">
 
 
 
     <div
-      className="dbBackground justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {editForm}

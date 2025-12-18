@@ -44,6 +44,7 @@ export default function EditDoctor() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm({
     resolver: zodResolver(doctorSchema),
     defaultValues: {
@@ -75,7 +76,7 @@ export default function EditDoctor() {
       }
     };
     fetchDoctor();
-  }, [id]);
+  }, [id, reset]);
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
@@ -91,11 +92,15 @@ export default function EditDoctor() {
 
 
      const backButton = (
-
-    <Link to={`/doctors`}>
-    <IconArrowNarrowLeft className="ml-10 size-15" />
+      <Button
+    asChild
+    variant="outline"
+    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+  >
+    <Link to={`/doctors/${id}`}>
+    <IconArrowNarrowLeft className=" size-15" />
     </Link>
-
+      </Button>
 );
 
   const editForm = (    
@@ -153,12 +158,12 @@ export default function EditDoctor() {
     
     <div className='dbBackground'>
       {backButton}
-    <div className=" justify-content-center overflow-x-hidden min-h-screen flex">
+    <div className=" min-h-screen">
 
 
 
     <div
-      className=" justify-content-center overflow-x-hidden justify-center pl-150 pr-150 mt-40"
+      className="pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}
     >
 {editForm}

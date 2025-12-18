@@ -26,6 +26,7 @@ import {IconArrowNarrowLeft
 
 
 const diagnosisSchema = z.object({
+  // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Patient ID is required")
@@ -53,6 +54,7 @@ const diagnosisSchema = z.object({
 
 
 
+      // useEffect to fetch existing diagnosis data on component mount and reset the form with fetched values
       useEffect(() => {
 
     const token = localStorage.getItem("token");
@@ -73,6 +75,7 @@ const diagnosisSchema = z.object({
     fetchDiagnosis();
   }, [id, reset]);
 
+  // onSubmit: handles form submission by patching diagnosis data to API and navigating back to diagnoses list
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {

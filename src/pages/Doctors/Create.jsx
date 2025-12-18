@@ -32,6 +32,7 @@ const doctorSchema = z.object({
    email: z
     .string()
     .min(1, "Email is required")
+    // Email validation using regex to ensure proper email format
     .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
   phone: z.string().optional(),
 });
@@ -55,6 +56,7 @@ export default function CreateDoctor() {
     },
   });
 
+  // onSubmit: handles form submission by posting new doctor data to API and navigating to doctors list on success
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
@@ -67,6 +69,7 @@ export default function CreateDoctor() {
     }
   };
 
+     // Back button component: circular button linking back to the doctors list page
      const backButton = (
       <Button
     asChild
@@ -136,6 +139,7 @@ export default function CreateDoctor() {
 
    
 
+    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
     <div
       className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}

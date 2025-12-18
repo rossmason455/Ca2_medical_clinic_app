@@ -24,12 +24,14 @@ export default function Show() {
   const { id } = useParams();
 
 
+      // formatDate: converts Unix timestamp to localized date string in en-GB format
       const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
   let token = localStorage.getItem('token');
 
+  // useEffect to fetch individual diagnosis data by ID from API with authorization token on component mount
   useEffect(() => {
     const fetchDiagnosis = async () => {
       const options = {
@@ -63,7 +65,8 @@ export default function Show() {
     </Link>
   </Button>
 );
-
+     // backButton: circular button linking back to the diagnoses list page     
+     
      const backButton = (
       <Button
     asChild
@@ -104,6 +107,7 @@ export default function Show() {
     </>
   );
  
+  // layout: main container with width calculation to account for sidebar, centering content with background
   return <>
 
         <div className="dbBackground"> {backButton} 

@@ -71,6 +71,7 @@ export default function NavUser({
             </DropdownMenuLabel>
         
             <DropdownMenuSeparator />
+     
             <DropdownMenuItem className="text-red-600" onClick={() => onLogin(false)}>
               <IconLogout className="text-red-600"/>
               Log out

@@ -25,10 +25,12 @@ import { Button } from '@/components/ui/button'
 export default function Index() {
   const [prescriptions, setPrescriptions] = useState([]);
 
+  // formatDate: converts Unix timestamp to localized date string in en-GB format
   const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
+  // useEffect to fetch prescriptions list from API with authorization token on component mount
   useEffect(() => {
     const fetchPrescriptions = async () => {
 
@@ -55,6 +57,7 @@ export default function Index() {
   }, []);
 
 
+  // handleDelete: deletes a prescription by ID from API
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
@@ -98,6 +101,7 @@ export default function Index() {
  
 
 
+  // prescriptionsList: renders prescriptions in a table format with columns for medication, patient ID, start date, end date, and action buttons
   const prescriptionsList = (
     <Table>
           <TableCaption>Recent prescriptions</TableCaption>
@@ -154,6 +158,7 @@ export default function Index() {
 
     <div className="ml-5">{createButton}</div>  
 
+    {/* Container div with width calculated to account for sidebar width (282px), displaying table */}
     <div
       style={{ width: 'calc(100vw - 282px)' }}
     >

@@ -38,6 +38,9 @@ export default function LoginForm({onLogin}) {
     resolver: zodResolver(loginSchema),
   });
 
+  // onSubmit: handles form submission by posting login data to API
+  // On success: calls onLogin with true and token, navigates to dashboard
+  // On error: sets login error message from response or default
   const onSubmit = async (data) => {
     setLoginError("");
     try {

@@ -8,6 +8,8 @@ export default function SiteHeader() {
 
   let location = useLocation();
 
+  // Function to derive the page title from the current URL path
+  // Splits the pathname, takes the last segment, capitalizes it, defaults to 'Dashboard' if empty
   const getPageTitle = () => {
     const path = location.pathname.split('/').filter(Boolean).pop() || 'dashboard';
     return path.charAt(0).toUpperCase() + path.slice(1);

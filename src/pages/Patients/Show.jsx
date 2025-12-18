@@ -24,12 +24,14 @@ export default function Show() {
   const { id } = useParams();
 
 
+      // formatDate: converts Unix timestamp to localized date string in en-GB format
       const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
   let token = localStorage.getItem('token');
 
+  // useEffect to fetch individual patient data by ID from API with authorization token on component mount
   useEffect(() => {
     const fetchPatient = async () => {
       const options = {
@@ -53,6 +55,7 @@ export default function Show() {
   }, [id, token]);
 
 
+     // backButton: circular button linking back to the patients list page
      const backButton = (
       <Button
     asChild
@@ -103,6 +106,7 @@ export default function Show() {
 
 
 
+    {/* Container div with width calculated to account for sidebar width (282px), centering the profile card */}
     <div
 
       style={{ width: 'calc(100vw - 282px)' }}

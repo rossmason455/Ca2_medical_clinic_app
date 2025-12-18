@@ -31,6 +31,7 @@ const doctorSchema = z.object({
    email: z
     .string()
     .min(1, "Email is required")
+    // Email validation using regex to ensure proper email format
     .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
   phone: z.string().optional(),
 });
@@ -56,6 +57,7 @@ export default function EditDoctor() {
     },
   });
 
+    // useEffect to fetch existing doctor data on component mount and reset the form with fetched values
     useEffect(() => {
 
     const token = localStorage.getItem("token");
@@ -78,6 +80,7 @@ export default function EditDoctor() {
     fetchDoctor();
   }, [id, reset]);
 
+  // onSubmit: handles form submission by patching doctor data to API and navigating back to doctors list
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
@@ -91,6 +94,7 @@ export default function EditDoctor() {
   };
 
 
+     // Back button component: circular button linking back to the doctor's detail view page
      const backButton = (
       <Button
     asChild
@@ -162,6 +166,7 @@ export default function EditDoctor() {
 
 
 
+    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
     <div
       className="pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}

@@ -26,14 +26,17 @@ import {IconArrowNarrowLeft
 
 
 const prescriptionSchema = z.object({
+  // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Patient ID is required")
   ),
+  // doctor_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   doctor_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Doctor ID is required")
   ),
+  // diagnosis_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   diagnosis_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Diagnosis ID is required")

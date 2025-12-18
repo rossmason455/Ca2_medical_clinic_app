@@ -27,10 +27,12 @@ import {
 
 const appointmentSchema = z.object({
   appointment_date: z.string().min(1, "Appointment date is required"),
+  // doctor_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   doctor_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Doctor ID is required")
   ),
+  // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Patient ID is required")
@@ -60,6 +62,7 @@ const appointmentSchema = z.object({
     },
   });
 
+  // onSubmit: handles form submission by posting new appointment data to API and navigating to appointments list on success
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
@@ -72,6 +75,7 @@ const appointmentSchema = z.object({
     }
   };
 
+     // Back button component: circular button linking back to the appointments list page
      const backButton = (
       <Button
     asChild
@@ -138,6 +142,7 @@ const appointmentSchema = z.object({
 
 
 
+    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
     <div
       className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}

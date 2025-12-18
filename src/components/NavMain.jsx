@@ -16,6 +16,9 @@ export default function NavMain({
 
     let location = useLocation();
 
+     // Function to check if a navigation item is active based on current pathname
+     // Special case: if on '/dashboard' and url is '/', consider active (possibly for root redirect)
+     // Otherwise, if url is not '/dashboard' and pathname includes the url, consider active
      const checkActive = (url) => {
     if(location.pathname === '/dashboard' && url === '/')
     {

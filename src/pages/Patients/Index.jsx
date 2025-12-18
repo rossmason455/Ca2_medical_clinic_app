@@ -25,6 +25,7 @@ export default function Index() {
   const [patients, setPatients] = useState([]);
 
 
+    // formatDate: converts Unix timestamp to localized date string in en-GB format
     const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
@@ -52,6 +53,7 @@ export default function Index() {
 
 
 
+   // handleDelete: deletes a patient by ID from API (note: URL incorrectly points to prescriptions endpoint)
    const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
@@ -134,6 +136,7 @@ export default function Index() {
 
     <div className="ml-5">{createButton}</div>  
 
+    {/* Container div with width calculated to account for sidebar width (282px), displaying cards in a grid */}
     <div
       style={{ width: 'calc(100vw - 282px)' }}
     >

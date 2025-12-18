@@ -26,6 +26,7 @@ export default function Show() {
 
   let token = localStorage.getItem('token');
 
+  // useEffect to fetch individual doctor data by ID from API with authorization token on component mount
   useEffect(() => {
     const fetchDoctor = async () => {
       const options = {
@@ -54,12 +55,13 @@ export default function Show() {
     variant="outline"
     className="mb-4 mr-auto block"
   >
-    <Link size="sm" to={`/doctors/edit/${id}`}>
+    <Link to={`/doctors/edit/${id}`}>
     Modify Doctors Details
     </Link>
   </Button>
 );
 
+     // backButton: circular button linking back to the doctors list page
      const backButton = (
       <Button
     asChild
@@ -89,7 +91,7 @@ export default function Show() {
           <Button className="mt-50"
             asChild
             variant='outline'
-          >    <Link size="sm" to={`/doctors/edit/${id}`}>
+          >    <Link to={`/doctors/edit/${id}`}>
     Modify Doctors Details
     </Link></Button>
 
@@ -105,6 +107,7 @@ export default function Show() {
 
     
 
+    {/* Container div with width calculated to account for sidebar width (282px), centering the profile card */}
     <div
 
       style={{ width: 'calc(100vw - 282px)' }}

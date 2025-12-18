@@ -23,6 +23,7 @@ export default function Show() {
   const [prescription, setPrescriptions] = useState([]);
   const { id } = useParams();
 
+      // formatDate: converts Unix timestamp to localized date string in en-GB format
       const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
@@ -30,6 +31,7 @@ export default function Show() {
 
   let token = localStorage.getItem('token');
 
+  // useEffect: fetches individual prescription data by ID from API with authorization token on component mount
   useEffect(() => {
     const fetchPrescriptions = async () => {
       const options = {
@@ -53,6 +55,7 @@ export default function Show() {
   }, [id, token]);
 
 
+     // backButton: circular button linking back to the prescriptions list page
      const backButton = (
       <Button
     asChild
@@ -98,6 +101,7 @@ export default function Show() {
     </>
   );
  
+  // layout: main container with width calculation to account for sidebar, centering content with background
   return <>
 
 

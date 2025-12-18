@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/card";
 
 const diagnosisSchema = z.object({
+  // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Patient ID is required")
@@ -48,6 +49,7 @@ const diagnosisSchema = z.object({
     },
   });
 
+  // onSubmit: handles form submission by posting new diagnosis data to API and navigating to diagnoses list on success
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
@@ -61,6 +63,7 @@ const diagnosisSchema = z.object({
   };
 
 
+     // Back button component: circular button linking back to the diagnoses list page
      const backButton = (
       <Button
     asChild
@@ -121,6 +124,7 @@ const diagnosisSchema = z.object({
 
 
 
+    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
     <div
       className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}

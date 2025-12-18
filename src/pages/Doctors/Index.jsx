@@ -27,6 +27,7 @@ export default function Index() {
 
 
 
+  // useEffect to fetch doctors list from API on component mount
   useEffect(() => {
     const fetchDoctors = async () => {
       const options = {
@@ -49,10 +50,11 @@ export default function Index() {
     fetchDoctors();
   }, []);
 
+   // handleDelete: deletes a doctor by ID from API
    const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`https://ca2-med-api.vercel.app/prescriptions/${id}`, {
+      await axios.delete(`https://ca2-med-api.vercel.app/doctors/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -89,7 +91,9 @@ export default function Index() {
   </Button>
 );
 
+  // doctorsCards: maps each doctor to a card component, generating a random avatar image for each
   const doctorsCards = doctors.map((doctor) => {
+     // Generate random user image from randomuser.me API, alternating between men and women
      const randomImage = `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 99)}.jpg`;
     return (
       
@@ -130,6 +134,7 @@ export default function Index() {
     <>
   <div className="dbBackground min-h-screen">
   <div className="ml-5">{createButton}</div>  
+    {/* Container div with width calculated to account for sidebar width (282px), displaying cards in a grid */}
     <div
       style={{ width: 'calc(100vw - 282px)' }}
     >

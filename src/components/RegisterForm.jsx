@@ -44,10 +44,13 @@ export default function RegisterForm({onRegister}) {
 
   const onSubmit = async (data) => {
     try {
+      // Post registration data to API
       const response = await axios.post("https://ca2-med-api.vercel.app/register", data);
+      // On success: call onRegister with true and token, navigate to dashboard
       onRegister(true, response.data.token);
       navigate("/dashboard");
     } catch (err) {
+      // On error: log the error response or message
       console.log(err.response?.data || err.message);
     }
   };

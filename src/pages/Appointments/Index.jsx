@@ -21,10 +21,12 @@ import { Button } from "@/components/ui/button";
 export default function Index() {
   const [appointments, setAppointments] = useState([]);
 
+  // formatDate: converts Unix timestamp to localized date string in en-GB format
   const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
+  // useEffect to fetch appointments list from API with authorization token on component mount
   useEffect(() => {
     const fetchAppointments = async () => {
       const token = localStorage.getItem("token");
@@ -49,6 +51,7 @@ export default function Index() {
     fetchAppointments();
   }, []);
 
+  // handleDelete: deletes an appointment by ID from API (note: URL incorrectly points to prescriptions endpoint)
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
     try {
@@ -81,6 +84,7 @@ export default function Index() {
 
 
 
+  // appointmentsList: renders appointments in a table format with columns for doctor ID, patient ID, appointment date, and action buttons
   const appointmentsList = (
 
     <Table>
@@ -138,6 +142,7 @@ export default function Index() {
       <div className="dbBackground min-h-screen">
         <div className="ml-5">{createButton}</div>
 
+        {/* Container div with width calculated to account for sidebar width (282px), displaying table */}
         <div
           style={{ width: "calc(100vw - 282px)" }}
         >

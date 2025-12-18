@@ -34,6 +34,7 @@ export default function Dashboard() {
   };
 
 
+  // useEffect fetches recent appointments from API on component mount, using token for auth.
   useEffect(() => {
     const fetchAppointments = async () => {
       const token = localStorage.getItem("token");

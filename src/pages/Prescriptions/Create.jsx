@@ -24,14 +24,17 @@ import {
 } from "@/components/ui/card";
 
 const prescriptionSchema = z.object({
+  // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Patient ID is required")
   ),
+  // doctor_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   doctor_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Doctor ID is required")
   ),
+  // diagnosis_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   diagnosis_id: z.preprocess(
     (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
     z.number().min(1, "Diagnosis ID is required")
@@ -62,6 +65,7 @@ const prescriptionSchema = z.object({
     },
   });
 
+  // onSubmit: handles form submission by posting new prescription data to API and navigating to prescriptions list on success
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
@@ -74,6 +78,7 @@ const prescriptionSchema = z.object({
     }
   };
 
+     // Back button component: circular button linking back to the prescriptions list page
      const backButton = (
       <Button
     asChild
@@ -158,6 +163,7 @@ const prescriptionSchema = z.object({
 
 
 
+    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
     <div
       className=" pl-150 pr-150 mt-40"
       style={{ width: 'calc(100vw - 282px)' }}

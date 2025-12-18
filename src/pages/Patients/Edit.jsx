@@ -31,6 +31,7 @@ const patientSchema = z.object({
     .string()
     .min(1, "Email is required")
     .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
+  // Phone requires at least 10 characters (basic length validation)
   phone: z.string().min(10, "Phone number is required"),
     date_of_birth: z.string().min(1, "Date of Birth is required"),
     address: z.string().min(1, "Address is required")
@@ -61,6 +62,7 @@ const patientSchema = z.object({
   });
 
 
+      // useEffect to fetch existing patient data on component mount and reset the form with fetched values
       useEffect(() => {
 
     const token = localStorage.getItem("token");
@@ -84,6 +86,7 @@ const patientSchema = z.object({
     fetchPatient();
   }, [id, reset]);
 
+  // onSubmit: handles form submission by patching patient data to API and navigating back to patients list
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {

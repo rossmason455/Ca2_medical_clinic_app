@@ -1,13 +1,28 @@
-# Front-End Development Starter Code
+# ca2-medical-clinic-app
 
-This template provides a minimal setup to get started on CA2. It has Vite + React + ReactRouter + Tailwind CSS + ShadCN installed.
+## Description
+This is a React application that allows users to Create Update View and Delete Doctors, Patients, Appointments, Prescriptions and Diagnoses
+The goal of this project was to practice React fundamentals such as components, props, state, and hooks.
 
-## Instructions:
+## Features
+- Create, update, and delete items
+- Responsive UI
+- Reusable React components
+- State management using hooks
 
-1. Make a copy of this repo
-2. Give the copy the name of your application e.g. `ca2-festivals-example`
-3. Change the `name` property in `package.json` to your application name
-4. `npm install`
-5. `npx shadcn@latest init` // you only need to do this once
-    - Select a base color
-6. `npm run dev`
+## Technologies Used
+- React
+- JavaScript (ES6+)
+- HTML5
+- CSS / Tailwind / ShadCN
+- Vite / Create React App
+- FireBase
+
+## Installation
+1. Clone the repository
+   ```bash
+   git clone https://github.com/rossmason455/Ca2_medical_clinic_app
+
+2. Input npm i in the CLI
+
+3. npm run dev

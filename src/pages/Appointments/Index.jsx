@@ -14,8 +14,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-
-
 import { Button } from "@/components/ui/button";
 
 export default function Index() {
@@ -69,44 +67,44 @@ export default function Index() {
     }
   };
 
-
   const createButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto !font-bold !p-8 !text-lg"
-  >
-    <Link size="sm" to="/appointments/create">
-      Create New Appointment <IconCirclePlus className="size-7" />
-    </Link>
-  </Button>
-);
-
-
+    <Button
+      asChild
+      variant="outline"
+      className="mb-4 mr-auto !font-bold !p-8 !text-lg"
+    >
+      <Link size="sm" to="/appointments/create">
+        Create New Appointment <IconCirclePlus className="size-7" />
+      </Link>
+    </Button>
+  );
 
   // appointmentsList: renders appointments in a table format with columns for doctor ID, patient ID, appointment date, and action buttons
   const appointmentsList = (
-
     <Table>
       <TableCaption>Recent appointments</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="text-2xl font-extrabold">Doctor ID</TableHead>
           <TableHead className="text-2xl font-extrabold">Patient ID</TableHead>
-          <TableHead className="text-2xl font-extrabold">Appointment Date</TableHead>
+          <TableHead className="text-2xl font-extrabold">
+            Appointment Date
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {appointments.map((appointment) => (
           <TableRow key={appointment.id}>
-            <TableCell className="text-xl font-medium">{appointment.doctor_id} </TableCell>
-            <TableCell className="text-xl font-medium">{appointment.patient_id}</TableCell>
+            <TableCell className="text-xl font-medium">
+              {appointment.doctor_id}{" "}
+            </TableCell>
+            <TableCell className="text-xl font-medium">
+              {appointment.patient_id}
+            </TableCell>
             <TableCell className="text-xl font-medium">
               {formatDate(appointment.appointment_date)}
-
-
             </TableCell>
-            <div className="flex justify-end mt-1">                          
+            <div className="flex justify-end mt-1">
               <Button asChild variant="outline">
                 <Link size="md" to={`/appointments/${appointment.id}`}>
                   View
@@ -114,15 +112,15 @@ export default function Index() {
                 </Link>
               </Button>
 
-              <Button 
+              <Button
                 variant="destructive"
                 onClick={() => handleDelete(appointment.id)}
                 className="ml-2"
                 style={{ color: "red" }}
               >
                 <IconTrash />
-              </Button></div>
-
+              </Button>
+            </div>
           </TableRow>
         ))}
         {appointments.length === 0 && (
@@ -134,7 +132,6 @@ export default function Index() {
         )}
       </TableBody>
     </Table>
-
   );
 
   return (
@@ -143,9 +140,7 @@ export default function Index() {
         <div className="ml-5">{createButton}</div>
 
         {/* Container div with width calculated to account for sidebar width (282px), displaying table */}
-        <div
-          style={{ width: "calc(100vw - 282px)" }}
-        >
+        <div style={{ width: "calc(100vw - 282px)" }}>
           <div className="w-full p-5">{appointmentsList}</div>
         </div>
       </div>

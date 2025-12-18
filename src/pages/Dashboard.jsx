@@ -29,10 +29,9 @@ export default function Dashboard() {
   const [diagnoses, setDiagnoses] = useState([]);
   const [prescriptions, setPrescriptions] = useState([]);
 
-      const formatDate = (timestamp) => {
+  const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
-
 
   // useEffect fetches recent appointments from API on component mount, using token for auth.
   useEffect(() => {
@@ -61,15 +60,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchDiagnoses = async () => {
-
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const options = {
         method: "GET",
         url: "https://ca2-med-api.vercel.app/diagnoses",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       try {
@@ -86,15 +84,14 @@ export default function Dashboard() {
 
   useEffect(() => {
     const fetchPrescriptions = async () => {
-
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const options = {
         method: "GET",
         url: "https://ca2-med-api.vercel.app/prescriptions",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       try {
@@ -109,7 +106,6 @@ export default function Dashboard() {
     fetchPrescriptions();
   }, []);
 
-
   const appointmentsNumberCard = (
     <Card className="text-center">
       <CardHeader>
@@ -117,49 +113,49 @@ export default function Dashboard() {
       </CardHeader>
 
       <CardContent>
-       <div className="text-5xl font-bold">{appointments.length}</div>
+        <div className="text-5xl font-bold">{appointments.length}</div>
       </CardContent>
 
       <CardFooter className="flex justify-center gap-2">
-       <CardContent className="w-full text-center">
-       <div className="text-sm">Appointments Scheduled</div>
-      </CardContent>
+        <CardContent className="w-full text-center">
+          <div className="text-sm">Appointments Scheduled</div>
+        </CardContent>
       </CardFooter>
     </Card>
   );
 
-    const diagnosesNumberCard = (
+  const diagnosesNumberCard = (
     <Card className="text-center">
       <CardHeader>
         <CardTitle>Diagnoses</CardTitle>
       </CardHeader>
 
       <CardContent>
-       <div className="text-5xl font-bold">{diagnoses.length}</div>
+        <div className="text-5xl font-bold">{diagnoses.length}</div>
       </CardContent>
 
       <CardFooter className="flex justify-center gap-2">
-       <CardContent className="w-full text-center">
-       <div className="text-sm">Diagnoses Recorded</div>
-      </CardContent>
+        <CardContent className="w-full text-center">
+          <div className="text-sm">Diagnoses Recorded</div>
+        </CardContent>
       </CardFooter>
     </Card>
   );
 
-      const prescriptionsNumberCard = (
+  const prescriptionsNumberCard = (
     <Card className="text-center">
       <CardHeader>
         <CardTitle>Prescriptions</CardTitle>
       </CardHeader>
 
       <CardContent>
-       <div className="text-5xl font-bold">{prescriptions.length}</div>
+        <div className="text-5xl font-bold">{prescriptions.length}</div>
       </CardContent>
 
       <CardFooter className="flex justify-center gap-2">
-       <CardContent className="w-full text-center">
-       <div className="text-sm">Prescriptions Given</div>
-      </CardContent>
+        <CardContent className="w-full text-center">
+          <div className="text-sm">Prescriptions Given</div>
+        </CardContent>
       </CardFooter>
     </Card>
   );
@@ -177,16 +173,17 @@ export default function Dashboard() {
             <TableRow>
               <TableHead>Doctor ID</TableHead>
               <TableHead>Patient ID</TableHead>
-               <TableHead>Appointment Date</TableHead>
+              <TableHead>Appointment Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {appointments.slice(0, 5).map((apptointment) => (
               <TableRow key={apptointment.id}>
-                
                 <TableCell>{apptointment.doctor_id}</TableCell>
                 <TableCell>{apptointment.patient_id}</TableCell>
-                <TableCell>{formatDate(apptointment.appointment_date)}</TableCell>
+                <TableCell>
+                  {formatDate(apptointment.appointment_date)}
+                </TableCell>
               </TableRow>
             ))}
             {appointments.length === 0 && (
@@ -224,7 +221,7 @@ export default function Dashboard() {
             <TableRow>
               <TableHead>Condition</TableHead>
               <TableHead>Patient ID</TableHead>
-            <TableHead>Diagnosis Date</TableHead>
+              <TableHead>Diagnosis Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -257,7 +254,7 @@ export default function Dashboard() {
     </Card>
   );
 
-   const prescriptionsListCard = (
+  const prescriptionsListCard = (
     <Card className="min-h-104">
       <CardHeader>
         <CardTitle>Prescriptions</CardTitle>
@@ -270,8 +267,8 @@ export default function Dashboard() {
             <TableRow>
               <TableHead>Medication</TableHead>
               <TableHead>Patient ID</TableHead>
-            <TableHead>Start Date</TableHead>
-            <TableHead>End Date</TableHead>
+              <TableHead>Start Date</TableHead>
+              <TableHead>End Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -307,35 +304,22 @@ export default function Dashboard() {
 
   return (
     <>
+      <div
+        className="dbBackground justify-content-center overflow-x-hidden min-h-screen w-full"
+        style={{ width: "calc(100vw - 282px)" }}
+      >
+        <div className="dbBackground justify-content-center overflow-x-hidden ">
+          <div className="grid grid-cols-3 gap-4 p-10">
+            <div>{appointmentsNumberCard}</div>
+            <div>{diagnosesNumberCard}</div>
+            <div>{prescriptionsNumberCard}</div>
 
-
-    
-  <div className="dbBackground justify-content-center overflow-x-hidden min-h-screen w-full"
-  style={{ width: 'calc(100vw - 282px)' }}>
-
-
-
-    <div
-      className="dbBackground justify-content-center overflow-x-hidden "
-      
-    >
-
-
-
-    
-    <div className="grid grid-cols-3 gap-4 p-10">
-      {/* First row: 3 number cards */}
-      <div>{appointmentsNumberCard}</div>
-      <div>{diagnosesNumberCard}</div>
-      <div>{prescriptionsNumberCard}</div>
-
-      {/* Second row: 3 list cards */}
-      <div>{appointmentsListCard}</div>
-      <div>{diagnosesListCard}</div>
-      <div>{prescriptionsListCard}</div>
-    </div>
-    </div>
-</div>
+            <div>{appointmentsListCard}</div>
+            <div>{diagnosesListCard}</div>
+            <div>{prescriptionsListCard}</div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

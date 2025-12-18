@@ -19,16 +19,18 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const loginSchema = z.object({
-     email: z
+  email: z
     .string()
     .min(1, "Email is required")
-    .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
+    .refine((val) => /^\S+@\S+\.\S+$/.test(val), {
+      message: "Invalid email address",
+    }),
   password: z.string().min(1, "Password is required"),
 });
 
-export default function LoginForm({onLogin}) {
-    const navigate = useNavigate();
-    const [loginError, setLoginError] = useState("");
+export default function LoginForm({ onLogin }) {
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
 
   const {
     register,
@@ -44,12 +46,14 @@ export default function LoginForm({onLogin}) {
   const onSubmit = async (data) => {
     setLoginError("");
     try {
-      const response = await axios.post("https://ca2-med-api.vercel.app/login", data);
+      const response = await axios.post(
+        "https://ca2-med-api.vercel.app/login",
+        data
+      );
       onLogin(true, response.data.token);
       navigate("/dashboard");
     } catch (err) {
-       setLoginError(err.response?.data?.message || "Invalid email or password");
-    
+      setLoginError(err.response?.data?.message || "Invalid email or password");
     }
   };
 
@@ -61,36 +65,52 @@ export default function LoginForm({onLogin}) {
           Enter your email below to login to your account
         </CardDescription>
       </CardHeader>
-      
+
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" {...register("email")} />
-            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+            <Input
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+              {...register("email")}
+            />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" {...register("password")} />
-            {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
           </div>
           {loginError && <p className="text-sm text-red-500">{loginError}</p>}
         </form>
       </CardContent>
-      
+
       <CardFooter className="flex-col gap-2">
-        <Button variant='outline' onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
+        <Button
+          variant="outline"
+          onClick={handleSubmit(onSubmit)}
+          className="w-full"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
-              <IconLoader className="mr-2 animate-spin" />  
+              <IconLoader className="mr-2 animate-spin" />
               Logging in…
             </>
           ) : (
             "Login"
           )}
         </Button>
-        <p className="mt-5">Don't have an account? <a href="/register">Register now.</a></p>
+        <p className="mt-5">
+          Don't have an account? <a href="/register">Register now.</a>
+        </p>
       </CardFooter>
     </Card>
   );

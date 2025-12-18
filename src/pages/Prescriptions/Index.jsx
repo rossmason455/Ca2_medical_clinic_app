@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 
-import {
-  IconTrash,
-  IconBinoculars,
-  IconCirclePlus
-} from "@tabler/icons-react"
+import { IconTrash, IconBinoculars, IconCirclePlus } from "@tabler/icons-react";
 
 import {
   Table,
@@ -18,9 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-
-
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 
 export default function Index() {
   const [prescriptions, setPrescriptions] = useState([]);
@@ -33,15 +27,14 @@ export default function Index() {
   // useEffect to fetch prescriptions list from API with authorization token on component mount
   useEffect(() => {
     const fetchPrescriptions = async () => {
-
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
 
       const options = {
         method: "GET",
         url: "https://ca2-med-api.vercel.app/prescriptions",
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       try {
@@ -56,71 +49,72 @@ export default function Index() {
     fetchPrescriptions();
   }, []);
 
-
   // handleDelete: deletes a prescription by ID from API
   const handleDelete = async (id) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
       await axios.delete(`https://ca2-med-api.vercel.app/prescriptions/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      setPrescriptions(prescriptions.filter(prescription => prescription.id !== id));
+      setPrescriptions(
+        prescriptions.filter((prescription) => prescription.id !== id)
+      );
     } catch (err) {
-      console.log('Delete failed:', err);
-
+      console.log("Delete failed:", err);
     }
   };
 
   const dashboard = (
-      <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto"
-  >
-    <Link size="sm" to="/dashboard">
-      Dashboard
-    </Link>
-  </Button>
-  )
+    <Button asChild variant="outline" className="mb-4 mr-auto">
+      <Link size="sm" to="/dashboard">
+        Dashboard
+      </Link>
+    </Button>
+  );
 
   const createButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto !font-bold !p-8 !text-lg"
-  >
-    <Link size="sm" to="/prescriptions/create">
-      Create New Prescription <IconCirclePlus className="size-7" />
-    </Link>
-  </Button>
-);
-
- 
-
+    <Button
+      asChild
+      variant="outline"
+      className="mb-4 mr-auto !font-bold !p-8 !text-lg"
+    >
+      <Link size="sm" to="/prescriptions/create">
+        Create New Prescription <IconCirclePlus className="size-7" />
+      </Link>
+    </Button>
+  );
 
   // prescriptionsList: renders prescriptions in a table format with columns for medication, patient ID, start date, end date, and action buttons
   const prescriptionsList = (
     <Table>
-          <TableCaption>Recent prescriptions</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="text-2xl font-extrabold">Medication</TableHead>
-              <TableHead className="text-2xl font-extrabold">Patient ID</TableHead>
-            <TableHead className="text-2xl font-extrabold">Start Date</TableHead>
-            <TableHead className="text-2xl font-extrabold">End Date</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {prescriptions.map((prescription) => (
-              <TableRow key={prescription.id}>
-                <TableCell className="text-xl font-medium">{prescription.medication}</TableCell>
-                <TableCell className="text-xl font-medium">{prescription.patient_id}</TableCell>
-                <TableCell className="text-xl font-medium">{formatDate(prescription.start_date)}</TableCell>
-                <TableCell className="text-xl font-medium">{formatDate(prescription.end_date)}</TableCell>
-                 <div className="flex justify-end mt-1">                          
+      <TableCaption>Recent prescriptions</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead className="text-2xl font-extrabold">Medication</TableHead>
+          <TableHead className="text-2xl font-extrabold">Patient ID</TableHead>
+          <TableHead className="text-2xl font-extrabold">Start Date</TableHead>
+          <TableHead className="text-2xl font-extrabold">End Date</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {prescriptions.map((prescription) => (
+          <TableRow key={prescription.id}>
+            <TableCell className="text-xl font-medium">
+              {prescription.medication}
+            </TableCell>
+            <TableCell className="text-xl font-medium">
+              {prescription.patient_id}
+            </TableCell>
+            <TableCell className="text-xl font-medium">
+              {formatDate(prescription.start_date)}
+            </TableCell>
+            <TableCell className="text-xl font-medium">
+              {formatDate(prescription.end_date)}
+            </TableCell>
+            <div className="flex justify-end mt-1">
               <Button asChild variant="outline">
                 <Link size="md" to={`/prescriptions/${prescription.id}`}>
                   View
@@ -128,43 +122,38 @@ export default function Index() {
                 </Link>
               </Button>
 
-              <Button 
+              <Button
                 variant="destructive"
                 onClick={() => handleDelete(prescription.id)}
                 className="ml-2"
                 style={{ color: "red" }}
               >
                 <IconTrash />
-              </Button></div>
-              </TableRow>
-            ))}
-            {prescriptions.length === 0 && (
-              <TableRow>
-                <TableCell
-                  colSpan={3}
-                  className="text-sm text-muted-foreground"
-                >
-                  No prescriptions
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-  )
+              </Button>
+            </div>
+          </TableRow>
+        ))}
+        {prescriptions.length === 0 && (
+          <TableRow>
+            <TableCell colSpan={3} className="text-sm text-muted-foreground">
+              No prescriptions
+            </TableCell>
+          </TableRow>
+        )}
+      </TableBody>
+    </Table>
+  );
 
   return (
     <>
-  <div className="dbBackground min-h-screen">
+      <div className="dbBackground min-h-screen">
+        <div className="ml-5">{createButton}</div>
 
-    <div className="ml-5">{createButton}</div>  
-
-    {/* Container div with width calculated to account for sidebar width (282px), displaying table */}
-    <div
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
- <div className="w-full p-5">{prescriptionsList}</div>
-</div>
-</div>
+        {/* Container div with width calculated to account for sidebar width (282px), displaying table */}
+        <div style={{ width: "calc(100vw - 282px)" }}>
+          <div className="w-full p-5">{prescriptionsList}</div>
+        </div>
+      </div>
     </>
   );
 }

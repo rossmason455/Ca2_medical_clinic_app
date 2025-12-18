@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router";
 
-import {
-  IconTrash,
-  IconBinoculars,
-  IconCirclePlus,
-
-} from "@tabler/icons-react"
+import { IconTrash, IconBinoculars, IconCirclePlus } from "@tabler/icons-react";
 
 import {
   Card,
@@ -19,13 +14,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button";
 import { bg } from "zod/v4/locales";
 
 export default function Index() {
   const [doctors, setDoctors] = useState([]);
-
-
 
   // useEffect to fetch doctors list from API on component mount
   useEffect(() => {
@@ -44,103 +37,109 @@ export default function Index() {
       } finally {
         setLoading(false);
       }
-      
     };
 
     fetchDoctors();
   }, []);
 
-   // handleDelete: deletes a doctor by ID from API
-   const handleDelete = async (id) => {
-    const token = localStorage.getItem('token');
+  // handleDelete: deletes a doctor by ID from API
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("token");
     try {
       await axios.delete(`https://ca2-med-api.vercel.app/doctors/${id}`, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      setDoctors(doctors.filter(doctor => doctor.id !== id));
+      setDoctors(doctors.filter((doctor) => doctor.id !== id));
     } catch (err) {
-      console.log('Delete failed:', err);
-
+      console.log("Delete failed:", err);
     }
   };
 
   const dashboard = (
-      <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto"
-  >
-    <Link size="sm" to="/dashboard">
-      Dashboard
-    </Link>
-  </Button>
-  )
+    <Button asChild variant="outline" className="mb-4 mr-auto">
+      <Link size="sm" to="/dashboard">
+        Dashboard
+      </Link>
+    </Button>
+  );
 
   const createButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto !font-bold !p-8 !text-lg"
-  >
-    <Link size="sm" to="/doctors/create">
-      Create New Doctor <IconCirclePlus className="size-7" />
-    </Link>
-  </Button>
-);
+    <Button
+      asChild
+      variant="outline"
+      className="mb-4 mr-auto !font-bold !p-8 !text-lg"
+    >
+      <Link size="sm" to="/doctors/create">
+        Create New Doctor <IconCirclePlus className="size-7" />
+      </Link>
+    </Button>
+  );
 
   // doctorsCards: maps each doctor to a card component, generating a random avatar image for each
   const doctorsCards = doctors.map((doctor) => {
-     // Generate random user image from randomuser.me API, alternating between men and women
-     const randomImage = `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 99)}.jpg`;
+    // Generate random user image from randomuser.me API, alternating between men and women
+    const randomImage = `https://randomuser.me/api/portraits/${
+      Math.random() > 0.5 ? "men" : "women"
+    }/${Math.floor(Math.random() * 99)}.jpg`;
     return (
-      
-
-
-      <Card key={doctor.id} className="max-w-sm">  
+      <Card key={doctor.id} className="max-w-sm">
         <CardHeader>
-          <img src={randomImage} alt={`Dr. ${doctor.first_name} ${doctor.last_name}`} className="w-16 rounded-full mr-4" />
-          <CardTitle className="font-bold text-lg">Dr. {`${doctor.first_name} ${doctor.last_name}`}</CardTitle>
-          <CardDescription className="text-base">{doctor.specialisation}</CardDescription>
+          <img
+            src={randomImage}
+            alt={`Dr. ${doctor.first_name} ${doctor.last_name}`}
+            className="w-16 rounded-full mr-4"
+          />
+          <CardTitle className="font-bold text-lg">
+            Dr. {`${doctor.first_name} ${doctor.last_name}`}
+          </CardTitle>
+          <CardDescription className="text-base">
+            {doctor.specialisation}
+          </CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent className="min-h-18 ">
-          <p><span className="font-medium">Email:</span> {doctor.email}</p>
-          <p><span className="font-medium">Phone:</span> {doctor.phone}</p>
+          <p>
+            <span className="font-medium">Email:</span> {doctor.email}
+          </p>
+          <p>
+            <span className="font-medium">Phone:</span> {doctor.phone}
+          </p>
         </CardContent>
         <CardFooter>
-          <Button 
-            asChild
-            variant='outline'
-          ><Link size='md' to={`/Doctors/${doctor.id}`}>View<IconBinoculars /></Link></Button>
+          <Button asChild variant="outline">
+            <Link size="md" to={`/Doctors/${doctor.id}`}>
+              View
+              <IconBinoculars />
+            </Link>
+          </Button>
 
           <Button
-            variant='destructive'
+            variant="destructive"
             onClick={() => handleDelete(doctor.id)}
             className="ml-2"
-            style={{ color: 'red'}}
+            style={{ color: "red" }}
           >
             <IconTrash />
           </Button>
         </CardFooter>
       </Card>
-      
     );
   });
 
   return (
     <>
-  <div className="dbBackground min-h-screen">
-  <div className="ml-5">{createButton}</div>  
-    {/* Container div with width calculated to account for sidebar width (282px), displaying cards in a grid */}
-    <div
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
- <div className="m-5 grid grid-cols-5 gap-6 items-stretch">{doctorsCards}</div>
-</div>
-</div>
+      <div className="dbBackground min-h-screen">
+        <div className="ml-5">{createButton}</div>
+        {/* Container div with width calculated to account for sidebar width (282px), displaying cards in a grid */}
+        <div style={{ width: "calc(100vw - 282px)" }}>
+          <div className="m-5 grid grid-cols-5 gap-6 items-stretch">
+            {doctorsCards}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

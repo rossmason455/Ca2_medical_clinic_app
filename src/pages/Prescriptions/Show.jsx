@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from 'react-router';
-import { Link } from 'react-router';
-import { Button } from '@/components/ui/button';
+import { useParams } from "react-router";
+import { Link } from "react-router";
+import { Button } from "@/components/ui/button";
 
 import {
   Card,
@@ -14,22 +14,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import {
-IconArrowNarrowLeft
-} from "@tabler/icons-react";
-
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 export default function Show() {
   const [prescription, setPrescriptions] = useState([]);
   const { id } = useParams();
 
-      // formatDate: converts Unix timestamp to localized date string in en-GB format
-      const formatDate = (timestamp) => {
+  // formatDate: converts Unix timestamp to localized date string in en-GB format
+  const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
-
-  let token = localStorage.getItem('token');
+  let token = localStorage.getItem("token");
 
   // useEffect: fetches individual prescription data by ID from API with authorization token on component mount
   useEffect(() => {
@@ -38,8 +34,8 @@ export default function Show() {
         method: "GET",
         url: `https://ca2-med-api.vercel.app/prescriptions/${id}`,
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       try {
@@ -54,27 +50,27 @@ export default function Show() {
     fetchPrescriptions();
   }, [id, token]);
 
-
-     // backButton: circular button linking back to the prescriptions list page
-     const backButton = (
-      <Button
-    asChild
-    variant="outline"
-    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
-  >
-    <Link to={`/prescriptions`}>
-    <IconArrowNarrowLeft className=" size-15" />
-    </Link>
-      </Button>
-);
-
+  // backButton: circular button linking back to the prescriptions list page
+  const backButton = (
+    <Button
+      asChild
+      variant="outline"
+      className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+    >
+      <Link to={`/prescriptions`}>
+        <IconArrowNarrowLeft className=" size-15" />
+      </Link>
+    </Button>
+  );
 
   const prescriptionDetails = (
     <>
-      <Card key={prescription.id}>  
+      <Card key={prescription.id}>
         <CardHeader>
           <CardTitle className="viewCardHeader">{`Medication: ${prescription.medication}`}</CardTitle>
-          <CardDescription className="viewCardSubHeader">{prescription.dosage}</CardDescription>
+          <CardDescription className="viewCardSubHeader">
+            {prescription.dosage}
+          </CardDescription>
           {/* <CardAction>Card Action</CardAction> */}
         </CardHeader>
         <CardContent className="viewCardBody">
@@ -84,39 +80,33 @@ export default function Show() {
           <p>{`Start Date: ${formatDate(prescription.start_date)}`}</p>
           <p>{`End Date: ${formatDate(prescription.end_date)}`}</p>
 
-        <CardFooter className="flex justify-end">
-          <Button className="mt-50"
-            asChild
-            variant='outline'
-          >    <Link size="sm" to={`/prescriptions/edit/${id}`}>
-    Modify Prescription Details
-    </Link></Button>
-
-        </CardFooter>
-
+          <CardFooter className="flex justify-end">
+            <Button className="mt-50" asChild variant="outline">
+              {" "}
+              <Link size="sm" to={`/prescriptions/edit/${id}`}>
+                Modify Prescription Details
+              </Link>
+            </Button>
+          </CardFooter>
         </CardContent>
-       
       </Card>
-
     </>
   );
- 
+
   // layout: main container with width calculation to account for sidebar, centering content with background
-  return <>
-
-
-    <div className="dbBackground"> {backButton} 
+  return (
+    <>
+      <div className="dbBackground">
+        {" "}
+        {backButton}
         <div className="dbBackground min-h-screen">
-
-
-
-    <div
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
-     <div className="w-full pl-150 pr-150 mt-40">{prescriptionDetails} </div>
-</div>
-</div>
-</div>
-  
-  </>;
+          <div style={{ width: "calc(100vw - 282px)" }}>
+            <div className="w-full pl-150 pr-150 mt-40">
+              {prescriptionDetails}{" "}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

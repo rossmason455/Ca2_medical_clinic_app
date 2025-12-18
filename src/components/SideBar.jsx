@@ -60,7 +60,6 @@ const data = {
       url: "/diagnoses",
       icon: IconFile,
     },
-
   ],
 };
 
@@ -75,7 +74,7 @@ export default function AppSidebar({ onLogin, user, ...props }) {
     <Sidebar collapsible="offcanvas" {...props}>
       {/* Header section containing the app logo */}
       <SidebarHeader className="!p-0">
-        <SidebarMenu >
+        <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
@@ -87,26 +86,20 @@ export default function AppSidebar({ onLogin, user, ...props }) {
                 <img
                   src="public/images/Gemini_Generated_Image_p6r1m0p6r1m0p6r1.png"
                   alt="Medi Direct+ Logo"
-                  className="w-60 h-60" 
+                  className="w-60 h-60"
                 />
-
               </a>
-
-              
             </SidebarMenuButton>
-            
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       {/* Main content area with navigation menu */}
       <SidebarContent>
         <NavMain items={data.navMain} />
-        
       </SidebarContent>
       {/* Footer section with user navigation, using provided user or default fallback */}
       <SidebarFooter>
-        
-        <NavUser user={user || data.user} onLogin={onLogin}  />
+        <NavUser user={user || data.user} onLogin={onLogin} />
       </SidebarFooter>
     </Sidebar>
   );

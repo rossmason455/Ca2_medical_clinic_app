@@ -1,17 +1,15 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Link } from 'react-router';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Link } from "react-router";
+import axios from "axios";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
-import {
-IconArrowNarrowLeft
-} from "@tabler/icons-react";
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 import {
   Card,
@@ -26,26 +24,29 @@ import {
 const diagnosisSchema = z.object({
   // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
-    (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
+    (value) =>
+      typeof value === "string" && value.trim() === ""
+        ? undefined
+        : Number(value),
     z.number().min(1, "Patient ID is required")
   ),
   condition: z.string().min(1, "Condition is required"),
   diagnosis_date: z.string().min(1, "Diagnosis Date is required"),
 });
 
-   export default function CreateDiagnosis() {
-    const navigate = useNavigate();
+export default function CreateDiagnosis() {
+  const navigate = useNavigate();
 
-      const  {
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(diagnosisSchema),
     defaultValues: {
-        condition: "",
-        patient_id: "",
-        diagnosis_date: ""
+      condition: "",
+      patient_id: "",
+      diagnosis_date: "",
     },
   });
 
@@ -62,53 +63,87 @@ const diagnosisSchema = z.object({
     }
   };
 
+  // Back button component: circular button linking back to the diagnoses list page
+  const backButton = (
+    <Button
+      asChild
+      variant="outline"
+      className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+    >
+      <Link to={`/diagnoses`}>
+        <IconArrowNarrowLeft className=" size-15" />
+      </Link>
+    </Button>
+  );
 
-     // Back button component: circular button linking back to the diagnoses list page
-     const backButton = (
-      <Button
-    asChild
-    variant="outline"
-    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
-  >
-    <Link to={`/diagnoses`}>
-    <IconArrowNarrowLeft className=" size-15" />
-    </Link>
-      </Button>
-);
-
-
-   const createForm =  (
+  const createForm = (
     <>
-          <Card className="w-full">
+      <Card className="w-full">
         <CardHeader>
-          <CardTitle className="viewCardHeader">Create a new Diagnosis</CardTitle>
-          <CardDescription className="viewCardDescription">Record a diagnosis for a patient</CardDescription>
+          <CardTitle className="viewCardHeader">
+            Create a new Diagnosis
+          </CardTitle>
+          <CardDescription className="viewCardDescription">
+            Record a diagnosis for a patient
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <div className="grid gap-2">
               <Label htmlFor="patient_id">Patient ID</Label>
-              <Input id="patient_id" type="number" placeholder="e.g. 1" {...register("patient_id")} />
-              {errors.patient_id && <p className="text-sm text-red-500">{errors.patient_id.message}</p>}
+              <Input
+                id="patient_id"
+                type="number"
+                placeholder="e.g. 1"
+                {...register("patient_id")}
+              />
+              {errors.patient_id && (
+                <p className="text-sm text-red-500">
+                  {errors.patient_id.message}
+                </p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="condition">Condition</Label>
-              <Input id="condition" placeholder="e.g. Hypertension" {...register("condition")} />
-              {errors.condition && <p className="text-sm text-red-500">{errors.condition.message}</p>}
+              <Input
+                id="condition"
+                placeholder="e.g. Hypertension"
+                {...register("condition")}
+              />
+              {errors.condition && (
+                <p className="text-sm text-red-500">
+                  {errors.condition.message}
+                </p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="diagnosis_date">Diagnosis Date</Label>
-              <Input id="diagnosis_date" placeholder="e.g. 2023-10-01" {...register("diagnosis_date")} />
-              {errors.diagnosis_date && <p className="text-sm text-red-500">{errors.diagnosis_date.message}</p>}
+              <Input
+                id="diagnosis_date"
+                placeholder="e.g. 2023-10-01"
+                {...register("diagnosis_date")}
+              />
+              {errors.diagnosis_date && (
+                <p className="text-sm text-red-500">
+                  {errors.diagnosis_date.message}
+                </p>
+              )}
             </div>
           </form>
         </CardContent>
 
         <CardFooter>
-          <Button variant="outline" onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
+          <Button
+            variant="outline"
+            onClick={handleSubmit(onSubmit)}
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Creating…" : "Submit"}
           </Button>
         </CardFooter>
@@ -116,28 +151,20 @@ const diagnosisSchema = z.object({
     </>
   );
 
-
-    return (
+  return (
     <>
-    <div className='dbBackground'>{backButton}
-    <div className="min-h-screen">
-
-
-
-    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
-    <div
-      className=" pl-150 pr-150 mt-40"
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
-{createForm}
-</div>
-</div>
-</div>
-
-
-  
-
-
+      <div className="dbBackground">
+        {backButton}
+        <div className="min-h-screen">
+          {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
+          <div
+            className=" pl-150 pr-150 mt-40"
+            style={{ width: "calc(100vw - 282px)" }}
+          >
+            {createForm}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

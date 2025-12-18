@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from 'react-router';
-import { Link } from 'react-router';
-import { Button } from '@/components/ui/button';
+import { useParams } from "react-router";
+import { Link } from "react-router";
+import { Button } from "@/components/ui/button";
 
 import {
   Card,
@@ -14,22 +14,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import {
-IconArrowNarrowLeft
-} from "@tabler/icons-react";
-
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 export default function Show() {
   const [diagnosis, setDiagnosis] = useState([]);
   const { id } = useParams();
 
-
-      // formatDate: converts Unix timestamp to localized date string in en-GB format
-      const formatDate = (timestamp) => {
+  // formatDate: converts Unix timestamp to localized date string in en-GB format
+  const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleDateString("en-GB");
   };
 
-  let token = localStorage.getItem('token');
+  let token = localStorage.getItem("token");
 
   // useEffect to fetch individual diagnosis data by ID from API with authorization token on component mount
   useEffect(() => {
@@ -38,8 +34,8 @@ export default function Show() {
         method: "GET",
         url: `https://ca2-med-api.vercel.app/diagnoses/${id}`,
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       };
 
       try {
@@ -54,35 +50,30 @@ export default function Show() {
     fetchDiagnosis();
   }, [id, token]);
 
-   const editButton = (
-  <Button
-    asChild
-    variant="outline"
-    className="mb-4 mr-auto block"
-  >
-    <Link size="sm" to={`/diagnoses/edit/${id}`}>
-    Modify Diagnosis Details
-    </Link>
-  </Button>
-);
-     // backButton: circular button linking back to the diagnoses list page     
-     
-     const backButton = (
-      <Button
-    asChild
-    variant="outline"
-    className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
-  >
-    <Link to={`/diagnoses`}>
-    <IconArrowNarrowLeft className=" size-15" />
-    </Link>
-      </Button>
-);
+  const editButton = (
+    <Button asChild variant="outline" className="mb-4 mr-auto block">
+      <Link size="sm" to={`/diagnoses/edit/${id}`}>
+        Modify Diagnosis Details
+      </Link>
+    </Button>
+  );
+  // backButton: circular button linking back to the diagnoses list page
 
+  const backButton = (
+    <Button
+      asChild
+      variant="outline"
+      className="!rounded-full w-20 h-20 flex items-center justify-center ml-10 border-3"
+    >
+      <Link to={`/diagnoses`}>
+        <IconArrowNarrowLeft className=" size-15" />
+      </Link>
+    </Button>
+  );
 
   const diagnosisDetails = (
     <>
-<Card key={diagnosis.id}>  
+      <Card key={diagnosis.id}>
         <CardHeader>
           <CardTitle className="viewCardHeader">{`Diagnosis: ${diagnosis.condition}`}</CardTitle>
           {/* <CardAction>Card Action</CardAction> */}
@@ -90,39 +81,33 @@ export default function Show() {
         <CardContent className="viewCardBody">
           <p>{`Patient ID: ${diagnosis.patient_id}`}</p>
           <p>{`Diagnosis Date: ${formatDate(diagnosis.diagnosis_date)}`}</p>
-
-
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button className="mt-50"
-            asChild
-            variant='outline'
-          >    <Link size="sm" to={`/diagnoses/edit/${id}`}>
-    Modify Diagnosis Details
-    </Link></Button>
-
+          <Button className="mt-50" asChild variant="outline">
+            {" "}
+            <Link size="sm" to={`/diagnoses/edit/${id}`}>
+              Modify Diagnosis Details
+            </Link>
+          </Button>
         </CardFooter>
       </Card>
-
     </>
   );
- 
+
   // layout: main container with width calculation to account for sidebar, centering content with background
-  return <>
-
-        <div className="dbBackground"> {backButton} 
+  return (
+    <>
+      <div className="dbBackground">
+        {" "}
+        {backButton}
         <div className=" min-h-screen">
-
-
-
-    <div
-
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
-     <div className="w-full pl-150 pr-150 mt-40">{diagnosisDetails} </div>
-</div>
-</div>
-</div>
-  
-  </>;
+          <div style={{ width: "calc(100vw - 282px)" }}>
+            <div className="w-full pl-150 pr-150 mt-40">
+              {diagnosisDetails}{" "}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }

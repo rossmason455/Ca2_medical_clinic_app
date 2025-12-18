@@ -1,17 +1,15 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Link } from 'react-router';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Link } from "react-router";
+import axios from "axios";
+import { useNavigate } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
-import {
-IconArrowNarrowLeft
-} from "@tabler/icons-react";
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 import {
   Card,
@@ -26,17 +24,26 @@ import {
 const prescriptionSchema = z.object({
   // patient_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   patient_id: z.preprocess(
-    (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
+    (value) =>
+      typeof value === "string" && value.trim() === ""
+        ? undefined
+        : Number(value),
     z.number().min(1, "Patient ID is required")
   ),
   // doctor_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   doctor_id: z.preprocess(
-    (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
+    (value) =>
+      typeof value === "string" && value.trim() === ""
+        ? undefined
+        : Number(value),
     z.number().min(1, "Doctor ID is required")
   ),
   // diagnosis_id: preprocess string to number, convert empty string to undefined, then validate as number >=1
   diagnosis_id: z.preprocess(
-    (value) => (typeof value === "string" && value.trim() === "" ? undefined : Number(value)),
+    (value) =>
+      typeof value === "string" && value.trim() === ""
+        ? undefined
+        : Number(value),
     z.number().min(1, "Diagnosis ID is required")
   ),
   medication: z.string().min(1, "Medication is required"),
@@ -45,23 +52,23 @@ const prescriptionSchema = z.object({
   end_date: z.string().min(1, "End Date is required"),
 });
 
-  export default function CreatePrescription() {
-    const navigate = useNavigate();
+export default function CreatePrescription() {
+  const navigate = useNavigate();
 
-      const  {
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(prescriptionSchema),
     defaultValues: {
-        patient_id: "",
-        doctor_id: "",
-        diagnosis_id: "",
-        medication: "",
-        dosage: "",
-        start_date: "",
-        end_date: ""
+      patient_id: "",
+      doctor_id: "",
+      diagnosis_id: "",
+      medication: "",
+      dosage: "",
+      start_date: "",
+      end_date: "",
     },
   });
 
@@ -78,104 +85,164 @@ const prescriptionSchema = z.object({
     }
   };
 
-     // Back button component: circular button linking back to the prescriptions list page
-     const backButton = (
-      <Button
-    asChild
-    variant="outline"
-    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
-  >
-    <Link to={`/prescriptions`}>
-    <IconArrowNarrowLeft className=" size-15" />
-    </Link>
-      </Button>
-);
+  // Back button component: circular button linking back to the prescriptions list page
+  const backButton = (
+    <Button
+      asChild
+      variant="outline"
+      className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+    >
+      <Link to={`/prescriptions`}>
+        <IconArrowNarrowLeft className=" size-15" />
+      </Link>
+    </Button>
+  );
 
-
-   const createForm = (
+  const createForm = (
     <>
-          <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="viewCardHeader">Create a new Prescription</CardTitle>
-        <CardDescription className="viewCardDescription">Record a prescription for a patient</CardDescription>
-      </CardHeader>
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="viewCardHeader">
+            Create a new Prescription
+          </CardTitle>
+          <CardDescription className="viewCardDescription">
+            Record a prescription for a patient
+          </CardDescription>
+        </CardHeader>
 
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="patient_id">Patient ID</Label>
-            <Input id="patient_id" type="number" placeholder="Enter patient ID" {...register("patient_id")} />
-            {errors.patient_id && <p className="text-sm text-red-500">{errors.patient_id.message}</p>}
-          </div>
+        <CardContent>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
+            <div className="grid gap-2">
+              <Label htmlFor="patient_id">Patient ID</Label>
+              <Input
+                id="patient_id"
+                type="number"
+                placeholder="Enter patient ID"
+                {...register("patient_id")}
+              />
+              {errors.patient_id && (
+                <p className="text-sm text-red-500">
+                  {errors.patient_id.message}
+                </p>
+              )}
+            </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="doctor_id">Doctor ID</Label>
-            <Input id="doctor_id" type="number" placeholder="Enter doctor ID" {...register("doctor_id")} />
-            {errors.doctor_id && <p className="text-sm text-red-500">{errors.doctor_id.message}</p>}
-          </div>
+            <div className="grid gap-2">
+              <Label htmlFor="doctor_id">Doctor ID</Label>
+              <Input
+                id="doctor_id"
+                type="number"
+                placeholder="Enter doctor ID"
+                {...register("doctor_id")}
+              />
+              {errors.doctor_id && (
+                <p className="text-sm text-red-500">
+                  {errors.doctor_id.message}
+                </p>
+              )}
+            </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="diagnosis_id">Diagnosis ID</Label>
-            <Input id="diagnosis_id" type="number" placeholder="Enter diagnosis ID" {...register("diagnosis_id")} />
-            {errors.diagnosis_id && <p className="text-sm text-red-500">{errors.diagnosis_id.message}</p>}
-          </div>
+            <div className="grid gap-2">
+              <Label htmlFor="diagnosis_id">Diagnosis ID</Label>
+              <Input
+                id="diagnosis_id"
+                type="number"
+                placeholder="Enter diagnosis ID"
+                {...register("diagnosis_id")}
+              />
+              {errors.diagnosis_id && (
+                <p className="text-sm text-red-500">
+                  {errors.diagnosis_id.message}
+                </p>
+              )}
+            </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="medication">Medication</Label>
-            <Input id="medication" placeholder="Enter medication name" {...register("medication")} />
-            {errors.medication && <p className="text-sm text-red-500">{errors.medication.message}</p>}
-          </div>
+            <div className="grid gap-2">
+              <Label htmlFor="medication">Medication</Label>
+              <Input
+                id="medication"
+                placeholder="Enter medication name"
+                {...register("medication")}
+              />
+              {errors.medication && (
+                <p className="text-sm text-red-500">
+                  {errors.medication.message}
+                </p>
+              )}
+            </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="dosage">Dosage</Label>
-            <Input id="dosage" placeholder="Enter dosage" {...register("dosage")} />
-            {errors.dosage && <p className="text-sm text-red-500">{errors.dosage.message}</p>}
-          </div>
+            <div className="grid gap-2">
+              <Label htmlFor="dosage">Dosage</Label>
+              <Input
+                id="dosage"
+                placeholder="Enter dosage"
+                {...register("dosage")}
+              />
+              {errors.dosage && (
+                <p className="text-sm text-red-500">{errors.dosage.message}</p>
+              )}
+            </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="start_date">Start Date</Label>
-            <Input id="start_date" placeholder="YYYY-MM-DD" {...register("start_date")} />
-            {errors.start_date && <p className="text-sm text-red-500">{errors.start_date.message}</p>}
-          </div>
+            <div className="grid gap-2">
+              <Label htmlFor="start_date">Start Date</Label>
+              <Input
+                id="start_date"
+                placeholder="YYYY-MM-DD"
+                {...register("start_date")}
+              />
+              {errors.start_date && (
+                <p className="text-sm text-red-500">
+                  {errors.start_date.message}
+                </p>
+              )}
+            </div>
 
-          <div className="grid gap-2">
-            <Label htmlFor="end_date">End Date</Label>
-            <Input id="end_date" placeholder="YYYY-MM-DD" {...register("end_date")} />
-            {errors.end_date && <p className="text-sm text-red-500">{errors.end_date.message}</p>}
-          </div>
-        </form>
-      </CardContent>
+            <div className="grid gap-2">
+              <Label htmlFor="end_date">End Date</Label>
+              <Input
+                id="end_date"
+                placeholder="YYYY-MM-DD"
+                {...register("end_date")}
+              />
+              {errors.end_date && (
+                <p className="text-sm text-red-500">
+                  {errors.end_date.message}
+                </p>
+              )}
+            </div>
+          </form>
+        </CardContent>
 
-      <CardFooter>
-        <Button variant="outline" onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
-          {isSubmitting ? "Creating…" : "Submit"}
-        </Button>
-      </CardFooter>
-    </Card>
+        <CardFooter>
+          <Button
+            variant="outline"
+            onClick={handleSubmit(onSubmit)}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating…" : "Submit"}
+          </Button>
+        </CardFooter>
+      </Card>
     </>
   );
 
-
-    return (
+  return (
     <>
-  <div className='dbBackground'>{backButton}
-    <div className=" min-h-screen">
-
-
-
-    {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
-    <div
-      className=" pl-150 pr-150 mt-40"
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
-{createForm}
-</div>
-</div>
-</div>
-
-  
-
-
+      <div className="dbBackground">
+        {backButton}
+        <div className=" min-h-screen">
+          {/* Container div with padding and margin, width calculated to account for sidebar width (282px) */}
+          <div
+            className=" pl-150 pr-150 mt-40"
+            style={{ width: "calc(100vw - 282px)" }}
+          >
+            {createForm}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

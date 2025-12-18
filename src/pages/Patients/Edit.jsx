@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Link } from 'react-router';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Link } from "react-router";
+import axios from "axios";
+import { useNavigate } from "react-router";
 import { useParams } from "react-router";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -20,9 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import {IconArrowNarrowLeft
-} from "@tabler/icons-react";
-
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 const patientSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
@@ -30,21 +28,20 @@ const patientSchema = z.object({
   email: z
     .string()
     .min(1, "Email is required")
-    .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
+    .refine((val) => /^\S+@\S+\.\S+$/.test(val), {
+      message: "Invalid email address",
+    }),
   // Phone requires at least 10 characters (basic length validation)
   phone: z.string().min(10, "Phone number is required"),
-    date_of_birth: z.string().min(1, "Date of Birth is required"),
-    address: z.string().min(1, "Address is required")
-
-    
+  date_of_birth: z.string().min(1, "Date of Birth is required"),
+  address: z.string().min(1, "Address is required"),
 });
 
+export default function EditPatient() {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    export default function EditPatient() {
-    const navigate = useNavigate();
-        const { id } = useParams();
-
-      const  {
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -52,25 +49,26 @@ const patientSchema = z.object({
   } = useForm({
     resolver: zodResolver(patientSchema),
     defaultValues: {
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        date_of_birth: "",
-        address: ""
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone: "",
+      date_of_birth: "",
+      address: "",
     },
   });
 
-
-      // useEffect to fetch existing patient data on component mount and reset the form with fetched values
-      useEffect(() => {
-
+  // useEffect to fetch existing patient data on component mount and reset the form with fetched values
+  useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchPatient = async () => {
       try {
-        const res = await axios.get(`https://ca2-med-api.vercel.app/patients/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `https://ca2-med-api.vercel.app/patients/${id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         reset({
           first_name: res.data.first_name ?? "",
           last_name: res.data.last_name ?? "",
@@ -99,68 +97,99 @@ const patientSchema = z.object({
     }
   };
 
-     const backButton = (
-      <Button
-    asChild
-    variant="outline"
-    className="!rounded-full w-20 h-20 items-center ml-10 border-3"
-  >
-    <Link to={`/patients/${id}`}>
-    <IconArrowNarrowLeft className=" size-15" />
-    </Link>
-      </Button>
-);
+  const backButton = (
+    <Button
+      asChild
+      variant="outline"
+      className="!rounded-full w-20 h-20 items-center ml-10 border-3"
+    >
+      <Link to={`/patients/${id}`}>
+        <IconArrowNarrowLeft className=" size-15" />
+      </Link>
+    </Button>
+  );
 
-   const editForm = (
+  const editForm = (
     <>
-          <Card className="w-full">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle className="viewCardTitle">Edit Patient</CardTitle>
-          <CardDescription className="viewCardDescription">Update the patient's details</CardDescription>
+          <CardDescription className="viewCardDescription">
+            Update the patient's details
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4"
+          >
             <div className="grid gap-2">
               <Label htmlFor="first_name">First Name</Label>
-              <Input id="first_name" placeholder="Enter first name" {...register("first_name")} />
-              {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
+              <Input
+                id="first_name"
+                placeholder="Enter first name"
+                {...register("first_name")}
+              />
+              {errors.first_name && (
+                <p className="text-sm text-red-500">
+                  {errors.first_name.message}
+                </p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="last_name">Last Name</Label>
               <Input id="last_name" {...register("last_name")} />
-              {errors.last_name && <p className="text-sm text-red-500">{errors.last_name.message}</p>}
+              {errors.last_name && (
+                <p className="text-sm text-red-500">
+                  {errors.last_name.message}
+                </p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" {...register("email")} />
-              {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="phone">Phone</Label>
               <Input id="phone" {...register("phone")} />
-              {errors.phone && <p className="text-sm text-red-500">{errors.phone.message}</p>}
+              {errors.phone && (
+                <p className="text-sm text-red-500">{errors.phone.message}</p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="date_of_birth">Date of Birth</Label>
               <Input id="date_of_birth" {...register("date_of_birth")} />
-              {errors.date_of_birth && <p className="text-sm text-red-500">{errors.date_of_birth.message}</p>}
+              {errors.date_of_birth && (
+                <p className="text-sm text-red-500">
+                  {errors.date_of_birth.message}
+                </p>
+              )}
             </div>
 
             <div className="grid gap-2">
               <Label htmlFor="address">Address</Label>
               <Input id="address" {...register("address")} />
-              {errors.address && <p className="text-sm text-red-500">{errors.address.message}</p>}
+              {errors.address && (
+                <p className="text-sm text-red-500">{errors.address.message}</p>
+              )}
             </div>
           </form>
         </CardContent>
 
         <CardFooter>
-          <Button variant="outline" onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
+          <Button
+            variant="outline"
+            onClick={handleSubmit(onSubmit)}
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Saving…" : "Save"}
           </Button>
         </CardFooter>
@@ -168,26 +197,20 @@ const patientSchema = z.object({
     </>
   );
 
-
-    return (
+  return (
     <>
-    <div className='dbBackground'>
+      <div className="dbBackground">
+        {backButton}
 
-      {backButton}
-
-    <div className=" min-h-screen">
-
-
-
-    <div
-      className=" pl-150 pr-150 mt-40"
-      style={{ width: 'calc(100vw - 282px)' }}
-    >
-{editForm}
-</div>
-</div>
-</div>
-
+        <div className=" min-h-screen">
+          <div
+            className=" pl-150 pr-150 mt-40"
+            style={{ width: "calc(100vw - 282px)" }}
+          >
+            {editForm}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

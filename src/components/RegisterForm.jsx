@@ -23,18 +23,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const registerSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-     email: z
+  email: z
     .string()
     .min(1, "Email is required")
-    .refine((val) => /^\S+@\S+\.\S+$/.test(val), { message: "Invalid email address" }),
+    .refine((val) => /^\S+@\S+\.\S+$/.test(val), {
+      message: "Invalid email address",
+    }),
   password: z.string().min(1, "Password is required"),
 });
 
-export default function RegisterForm({onRegister}) {
-    const navigate = useNavigate();
- 
- 
-    const {
+export default function RegisterForm({ onRegister }) {
+  const navigate = useNavigate();
+
+  const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -45,7 +46,10 @@ export default function RegisterForm({onRegister}) {
   const onSubmit = async (data) => {
     try {
       // Post registration data to API
-      const response = await axios.post("https://ca2-med-api.vercel.app/register", data);
+      const response = await axios.post(
+        "https://ca2-med-api.vercel.app/register",
+        data
+      );
       // On success: call onRegister with true and token, navigate to dashboard
       onRegister(true, response.data.token);
       navigate("/dashboard");
@@ -58,7 +62,9 @@ export default function RegisterForm({onRegister}) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="viewCardHeader">Register to create your account</CardTitle>
+        <CardTitle className="viewCardHeader">
+          Register to create your account
+        </CardTitle>
         <CardDescription className="viewCardSubHeader">
           Enter your details below to register a new account
         </CardDescription>
@@ -67,41 +73,71 @@ export default function RegisterForm({onRegister}) {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
           <div className="grid gap-2">
             <Label htmlFor="first_name">First Name</Label>
-            <Input id="first_name" {...register("first_name")} placeholder="John" />
-            {errors.first_name && <p className="text-sm text-red-500">{errors.first_name.message}</p>}
+            <Input
+              id="first_name"
+              {...register("first_name")}
+              placeholder="John"
+            />
+            {errors.first_name && (
+              <p className="text-sm text-red-500">
+                {errors.first_name.message}
+              </p>
+            )}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="last_name">Last Name</Label>
-            <Input id="last_name" {...register("last_name")} placeholder="Doe" />
-            {errors.last_name && <p className="text-sm text-red-500">{errors.last_name.message}</p>}
+            <Input
+              id="last_name"
+              {...register("last_name")}
+              placeholder="Doe"
+            />
+            {errors.last_name && (
+              <p className="text-sm text-red-500">{errors.last_name.message}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" {...register("email")} placeholder="m@example.com" />
-            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+            <Input
+              id="email"
+              type="email"
+              {...register("email")}
+              placeholder="m@example.com"
+            />
+            {errors.email && (
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" {...register("password")} />
-            {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+            {errors.password && (
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
           </div>
         </form>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <Button variant='outline' onClick={handleSubmit(onSubmit)} className="w-full" disabled={isSubmitting}>
+        <Button
+          variant="outline"
+          onClick={handleSubmit(onSubmit)}
+          className="w-full"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
-              <IconLoader className="mr-2 animate-spin" />  
+              <IconLoader className="mr-2 animate-spin" />
               Registering…
             </>
           ) : (
             "Register"
           )}
         </Button>
-        <p className="mt-5">Already have an account? <a href="/login">Login now.</a></p>
+        <p className="mt-5">
+          Already have an account? <a href="/login">Login now.</a>
+        </p>
       </CardFooter>
     </Card>
   );
